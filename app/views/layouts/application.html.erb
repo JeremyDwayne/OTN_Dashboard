@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for?(:title) ? yield(:title) + " - OTL Workshops" : "OTL Workshops" %></title>
+    <title><%= content_for?(:title) ? yield(:title) + " - Open Textbook Network Dashboard" : "Open Textbook Network Dashboard" %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
@@ -10,7 +10,39 @@
     <%= stylesheet_pack_tag 'application' %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="container">
+    <header class="main">
+      <div class="row">
+        <div class="col-sm-12">
+          <%= image_tag 'banner.png', class: "banner img-fluid" %>
+        </div>
+      </div>
+
+      <nav>
+
+      </nav>
+    </header>
+
+    <main>
+      <% if notice.present? %>
+        <aside class="alert alert-info">
+          <%= notice %>
+        </aside>
+      <% end %>
+      <% if alert.present? %>
+        <aside class="alert alert-danger">
+          <%= alert %>
+        </aside>
+      <% end %>
+
+      <%= yield %>
+    </main>
+
+    <footer>
+      <%= render 'layouts/footer' %>
+    </footer>
+
+
   </body>
+
 </html>

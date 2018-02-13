@@ -59,8 +59,17 @@ Rails.application.configure do
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
   # config.active_job.queue_adapter     = :resque
-  # config.active_job.queue_name_prefix = "OTL_Workshops_#{Rails.env}"
+  # config.active_job.queue_name_prefix = "OTN_Dashboard_#{Rails.env}"
   config.action_mailer.perform_caching = false
+
+  # TODO change SMTP settings to UMN mailer settings
+  config.action_mailer.default_url_options = { host: 'yourdomain' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: "127.0.0.1",
+    port: 25,
+    domain: 'yourdomain'
+  }
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.

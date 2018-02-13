@@ -1,5 +1,5 @@
 {
-  "name": "OTL_Workshops",
+  "name": "OTN_Dashboard",
   "private": true,
   "dependencies": {
     "@angular/common": "^5.2.4",

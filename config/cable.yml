@@ -7,4 +7,4 @@ test:
 production:
   adapter: redis
   url: redis://localhost:6379/1
-  channel_prefix: OTL_Workshops_production
+  channel_prefix: OTN_Dashboard_production
