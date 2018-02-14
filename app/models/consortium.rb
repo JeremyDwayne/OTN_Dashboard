@@ -1,0 +1,2 @@
+class Consortium < ApplicationRecord
+end

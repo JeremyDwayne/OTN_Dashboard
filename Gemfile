@@ -22,9 +22,13 @@ gem 'webpacker'
 gem 'foreman'
 gem 'devise'
 gem 'pundit'
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
+gem 'figaro'
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
@@ -38,6 +42,10 @@ gem 'jbuilder', '~> 2.5'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'database_cleaner'
+  gem 'rspec-rails', '~> 3.4'
+  gem 'poltergeist'
+  gem 'capybara'
 end
 
 group :development do

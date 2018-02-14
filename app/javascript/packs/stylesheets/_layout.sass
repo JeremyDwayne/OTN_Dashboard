@@ -1,0 +1,44 @@
+@import 'variables'
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+
+*
+  font-family: 'Nunitor Sans', sans-serif
+
+html
+  height: 100%
+
+body
+  display: flex;
+  flex-direction: column;
+
+header.main
+  margin-top: 2em
+  img.banner
+    max-height: 130px
+    min-width: 144px
+  nav
+    margin-top: 1em
+    margin-bottom: 2em
+    border-top: solid 1px silver
+
+footer
+  position: absolute
+  width: 100%
+  margin-bottom: 2em
+  bottom: 0
+  a
+    color: $otn-gray
+    cursor: pointer
+    text-decoration: none
+
+main
+  flex: 1 0 auto;
+
+nav
+  li
+    list-style-type: none
+    display: inline
+  a
+    color: $otn-gray
+    cursor: pointer
+    text-decoration: none
