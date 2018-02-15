@@ -20,6 +20,18 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/forms@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-5.2.5.tgz#2ad7a420c6ef6cd87a34071c5319ec83f7ed56aa"
+  dependencies:
+    tslib "^1.7.1"
+
+"@angular/http@^5.2.5":
+  version "5.2.5"
+  resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.2.5.tgz#1208256e36f0e486d96d10a733fdc8424ffa16bf"
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/platform-browser-dynamic@^5.2.4":
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-5.2.4.tgz#708457c9aafb1b812187c95d10365685521314d4"

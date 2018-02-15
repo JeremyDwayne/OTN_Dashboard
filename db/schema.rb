@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214021007) do
+ActiveRecord::Schema.define(version: 20180214180609) do
 
   create_table "consortia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "state"
-    t.integer "primary_contact"
+    t.bigint "primary_contact_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["name"], name: "index_consortia_on_name", unique: true
+    t.index ["primary_contact_id"], name: "index_consortia_on_primary_contact_id"
     t.index ["state"], name: "index_consortia_on_state"
   end
 
@@ -29,10 +30,10 @@ ActiveRecord::Schema.define(version: 20180214021007) do
     t.string "city"
     t.string "state"
     t.integer "zip"
-    t.bigint "consortia_id"
+    t.bigint "consortium_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["consortia_id"], name: "index_institutions_on_consortia_id"
+    t.index ["consortium_id"], name: "index_institutions_on_consortium_id"
     t.index ["name"], name: "index_institutions_on_name", unique: true
   end
 
@@ -49,19 +50,23 @@ ActiveRecord::Schema.define(version: 20180214021007) do
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
+    t.string "provider"
+    t.string "uid"
+    t.bigint "institution_id"
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "provider"
-    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["institution_id"], name: "index_users_on_institution_id"
+    t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   create_table "workshops", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "description"
-    t.bigint "institutions_id"
+    t.bigint "institution_id"
     t.string "additional_location_info"
     t.datetime "starts_at"
     t.float "duration", limit: 24
@@ -69,13 +74,15 @@ ActiveRecord::Schema.define(version: 20180214021007) do
     t.datetime "sign_up_deadline"
     t.integer "attendee_limit"
     t.string "review_deadline"
+    t.bigint "facilitator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["institutions_id"], name: "index_workshops_on_institutions_id"
+    t.index ["facilitator_id"], name: "index_workshops_on_facilitator_id"
+    t.index ["institution_id"], name: "index_workshops_on_institution_id"
     t.index ["name"], name: "index_workshops_on_name"
     t.index ["starts_at"], name: "index_workshops_on_starts_at"
   end
 
-  add_foreign_key "institutions", "consortia", column: "consortia_id"
-  add_foreign_key "workshops", "institutions", column: "institutions_id"
+  add_foreign_key "institutions", "consortia"
+  add_foreign_key "workshops", "institutions"
 end
