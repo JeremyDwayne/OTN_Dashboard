@@ -7,4 +7,13 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
+import "jquery/dist/jquery.min.js";
+import "popper/dist/popper.min.js";
+import "moment/min/moment.min.js";
+import "bootstrap/dist/js/bootstrap.min.js";
+import "tempusdominus-bootstrap-4/build/js/tempusdominus-bootstrap-4.min.js";
 import "./application.sass";
+
+$(function () {
+  $('#datetimepicker1').datetimepicker();
+});

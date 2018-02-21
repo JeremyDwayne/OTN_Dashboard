@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214180609) do
+ActiveRecord::Schema.define(version: 20180220223911) do
+
+  create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "faculty_id"
+    t.bigint "workshop_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["faculty_id"], name: "index_attendees_on_faculty_id"
+    t.index ["workshop_id"], name: "index_attendees_on_workshop_id"
+  end
 
   create_table "consortia", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.string "state"
-    t.bigint "primary_contact_id"
+    t.bigint "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_consortia_on_admin_id"
     t.index ["name"], name: "index_consortia_on_name", unique: true
-    t.index ["primary_contact_id"], name: "index_consortia_on_primary_contact_id"
     t.index ["state"], name: "index_consortia_on_state"
   end
 
@@ -54,6 +63,7 @@ ActiveRecord::Schema.define(version: 20180214180609) do
     t.string "uid"
     t.bigint "institution_id"
     t.integer "role", default: 0
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
@@ -83,6 +93,7 @@ ActiveRecord::Schema.define(version: 20180214180609) do
     t.index ["starts_at"], name: "index_workshops_on_starts_at"
   end
 
+  add_foreign_key "attendees", "workshops"
   add_foreign_key "institutions", "consortia"
   add_foreign_key "workshops", "institutions"
 end

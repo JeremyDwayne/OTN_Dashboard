@@ -3,7 +3,7 @@ class CreateConsortia < ActiveRecord::Migration[5.1]
     create_table :consortia do |t|
       t.string :name
       t.string :state
-      t.references :primary_contact
+      t.references :admin
 
       t.timestamps
     end

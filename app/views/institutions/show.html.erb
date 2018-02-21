@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="row">
+    <div class="col-5-md">
+      <h1><%= @institution.name %></h1>
+    </div>
+    <div class="offset-md-1 col-1-md ">
+      <%= link_to new_workshop_path, class: "btn btn-info btn-md" do %>
+        Workshop <i class="fas fa-plus"></i>
+      <% end %>
+    </div>
+  </div>
+  <h4>Workshops</h4>
+  <% @institution.workshops.each do |workshop| %>
+    <%= workshop.name %> - Facilitator: <%= workshop.facilitator.full_name %><br />
+  <% end %>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="ModalCenter" tabindex="-1" role="dialog" aria-labelledby="ModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

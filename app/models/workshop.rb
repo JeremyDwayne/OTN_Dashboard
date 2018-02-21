@@ -1,5 +1,7 @@
 class Workshop < ApplicationRecord
   belongs_to :institution
-  has_one :facilitator, class_name: "User"
-  has_many :attendees, class_name: "User"
+  belongs_to :facilitator
+  has_many :faculty, through: :attendees
+  has_many :attendees
+
 end

@@ -5,14 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :google, :twitter]
 
-  enum role: [:faculty, :facilitator, :admin, :super_admin]
-  after_initialize :set_default_role, if: :new_record?
+  enum role: [:Faculty, :Facilitator, :Admin, :SuperAdmin]
+  after_create :set_role
+  after_create :set_subclass
 
-  has_many :primary_contacts, class_name: "Consortium", foreign_key: "primary_contact_id"
-  has_many :facilitators, class_name: "Facilitator"
-  has_many :faculty, class_name: "Faculty"
-  has_many :attendees, class_name: "Attendee"
-  belongs_to :institution
+  # has_many :primary_contacts, class_name: "Consortium", foreign_key: "primary_contact_id"
+  # has_many :facilitators, class_name: "Facilitator", polymorphic: true
+  # has_many :faculty, class_name: "Faculty", polymorphic: true
+  # has_many :attendees, class_name: "Attendee", polymorphic: true
+  # belongs_to :institution
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -27,8 +28,25 @@ class User < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  private
-  def set_default_role
-    self.role ||= :faculty
+  def set_role(role = "Faculty")
+    self.role = role.to_s.to_sym
+    self.save
   end
+
+  def set_subclass
+    if self.class.name != User::roles[self.role]
+      self.becomes Object.const_get self.role
+      self.type = self.role
+      self.save
+    end
+  end
+
+end
+
+class SuperAdmin < Admin
+
+  def super_admin?
+    type == "SuperAdmin" && role == "SuperAdmin"
+  end
+
 end

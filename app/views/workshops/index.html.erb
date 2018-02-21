@@ -1,0 +1,6 @@
+<h4>Workshops</h4>
+<% @workshops.each do |workshop| %>
+  <h6><%= workshop.name %></h6>
+  Location: <%= workshop.institution.name %> | Facilitator: <%= workshop.facilitator.full_name %><br />
+  <%= workshop.description %>
+<% end %>

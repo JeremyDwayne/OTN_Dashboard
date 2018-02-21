@@ -1,0 +1,13 @@
+<%= form_for @user do |f| %>
+  <div class="form-group">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :role %><br />
+    <%= f.select :role, options_from_collection_for_select(@roles, :last, :first), autofocus: true, class: "form-control" %>
+  </div>
+
+  <%= f.submit "Send Invite", class: "btn btn-primary" %>
+<% end %>
