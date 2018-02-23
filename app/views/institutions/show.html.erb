@@ -11,7 +11,7 @@
   </div>
   <h4>Workshops</h4>
   <% @institution.workshops.each do |workshop| %>
-    <%= workshop.name %> - Facilitator: <%= workshop.facilitator.full_name %><br />
+    <%= link_to workshop.name, workshop %> - Facilitator: <%= workshop.facilitator.full_name %><br />
   <% end %>
 </div>
 

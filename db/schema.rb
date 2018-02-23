@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180220223911) do
+ActiveRecord::Schema.define(version: 20180223003756) do
 
   create_table "attendees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "faculty_id"
@@ -27,9 +27,22 @@ ActiveRecord::Schema.define(version: 20180220223911) do
     t.bigint "admin_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["admin_id"], name: "index_consortia_on_admin_id"
     t.index ["name"], name: "index_consortia_on_name", unique: true
     t.index ["state"], name: "index_consortia_on_state"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
   end
 
   create_table "institutions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -42,6 +55,7 @@ ActiveRecord::Schema.define(version: 20180220223911) do
     t.bigint "consortium_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["consortium_id"], name: "index_institutions_on_consortium_id"
     t.index ["name"], name: "index_institutions_on_name", unique: true
   end
@@ -87,6 +101,7 @@ ActiveRecord::Schema.define(version: 20180220223911) do
     t.bigint "facilitator_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["facilitator_id"], name: "index_workshops_on_facilitator_id"
     t.index ["institution_id"], name: "index_workshops_on_institution_id"
     t.index ["name"], name: "index_workshops_on_name"

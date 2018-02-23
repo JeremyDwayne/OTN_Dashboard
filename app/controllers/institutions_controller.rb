@@ -53,7 +53,7 @@ class InstitutionsController < ApplicationController
 
   private
     def set_institution
-      @institution = Institution.find(params[:id])
+      @institution = Institution.friendly.find(params[:id])
     end
 
     def institution_params

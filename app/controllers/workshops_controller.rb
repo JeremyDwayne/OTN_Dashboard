@@ -69,7 +69,7 @@ class WorkshopsController < ApplicationController
 
   private
     def set_workshop
-      @workshop = Workshop.find(params[:id])
+      @workshop = Workshop.friendly.find(params[:id])
     end
 
     def workshop_params

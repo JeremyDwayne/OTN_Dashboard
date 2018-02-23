@@ -51,7 +51,7 @@ class ConsortiaController < ApplicationController
 
   private
     def set_consortium
-      @consortium = Consortium.find(params[:id])
+      @consortium = Consortium.friendly.find(params[:id])
     end
 
     def consortium_params
