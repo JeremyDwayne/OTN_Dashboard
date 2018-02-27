@@ -1,4 +1,4 @@
-![Open Textbook Network Dashboard](Frontend/src/assets/banner.png =144x)
+![Open Textbook Network Dashboard](Frontend/src/assets/banner.png)
 ------
 ![Travis-CI Master Branch Build Status](https://travis-ci.org/JeremyDwayne/OTN_Dashboard.svg?branch=master)
 
