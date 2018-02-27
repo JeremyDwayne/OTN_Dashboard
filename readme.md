@@ -5,8 +5,8 @@
 This dashboard will be used to assist in the organization of workshops help to promote the
 use of open source text books.
 
-Rails 5.1.5 API backend
-Angular 5.2.0
+Backend:  Rails 5.1.5 API  
+Frontend: Angular 5.2.0  
 
 ------
 
