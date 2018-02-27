@@ -11,6 +11,6 @@ Frontend: Angular 5.2.0
 ------
 
 Center for Open Education | 330 Wulling Hall | 86 Pleasant St SE | Minneapolis, MN 55455 USA | open@umn.edu  
-College of Education and Human Development | University of Minnesota  
+[College of Education and Human Development](http://www.cehd.umn.edu/) | [University of Minnesota](http://www.umn.edu/)  
 
-Except where otherwise noted, content in this repository is licensed under a Creative Commons Attribution 4.0 License.
+[![CC 4.0 License](https://i.creativecommons.org/l/by/4.0/88x31.png)](http://creativecommons.org/licenses/by/4.0/) Except where otherwise noted, content in this repository is licensed under a Creative Commons Attribution 4.0 License.
