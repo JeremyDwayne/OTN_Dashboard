@@ -5,24 +5,69 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-/.bundle
+Backend/.bundle
 
 # Ignore all logfiles and tempfiles.
-/log/*
-/tmp/*
-!/log/.keep
-!/tmp/.keep
+Backend/log/*
+Backend/tmp/*
+!Backend/log/.keep
+!Backend/tmp/.keep
 
-/node_modules
-/yarn-error.log
+Backend/node_modules
+Backend/yarn-error.log
 
-.byebug_history
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-yarn-error.log*
-.yarn-integrity
+Backend/.byebug_history
+Backend/public/packs
+Backend/public/packs-test
+Backend/yarn-debug.log*
+Backend/yarn-error.log*
+Backend/.yarn-integrity
 
 # Ignore application configuration
-/config/application.yml
+Backend/config/application.yml
+
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+Frontend/dist
+Frontend/dist-server
+Frontend/tmp
+Frontend/out-tsc
+
+# dependencies
+Frontend/node_modules
+
+# IDEs and editors
+Frontend/.idea
+Frontend/.project
+Frontend/.classpath
+Frontend/.c9/
+Frontend/*.launch
+Frontend/.settings/
+Frontend/*.sublime-workspace
+
+# IDE - VSCode
+Frontend/.vscode/*
+!Frontend/.vscode/settings.json
+!Frontend/.vscode/tasks.json
+!Frontend/.vscode/launch.json
+!Frontend/.vscode/extensions.json
+
+# misc
+Frontend/.sass-cache
+Frontend/connect.lock
+Frontend/coverage
+Frontend/libpeerconnection.log
+Frontend/npm-debug.log
+Frontend/yarn-error.log
+Frontend/testem.log
+Frontend/typings
+
+# e2e
+Frontend/e2e/*.js
+Frontend/e2e/*.map
+
+# System Files
+.DS_Store
+Thumbs.db
