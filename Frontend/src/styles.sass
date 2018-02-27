@@ -1,0 +1,74 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css"
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+
+// Variables
+//-------------------------
+
+// Text Highlights/Callouts
+$otn-purple: #92278F
+$otn-magenta: #EC008C
+$otn-orange: #F1592A
+$otn-yellow: #FCB040
+
+// Body Copy
+$otn-gray: #404041
+$white: #FFFFFF
+$black: #000000
+
+// Layout
+//-------------------------
+
+*
+  font-family: 'Nunitor Sans', sans-serif
+
+html
+  height: 100%
+
+body
+  display: flex;
+  flex-direction: column;
+
+header.main
+  margin-top: 2em
+  img.banner
+    max-height: 130px
+    min-width: 144px
+  nav
+    margin-top: 1em
+    margin-bottom: 2em
+    border-top: solid 1px silver
+
+footer
+  position: absolute
+  width: 100%
+  margin-bottom: 2em
+  bottom: 0
+  a
+    color: $otn-gray
+    cursor: pointer
+    text-decoration: none
+
+main
+  flex: 1 0 auto;
+
+nav
+  li
+    list-style-type: none
+    display: inline
+  a
+    color: $otn-gray
+    cursor: pointer
+    text-decoration: none
+
+
+// Typography
+//-------------------------
+
+h1, h2, h3, h4, h5, h6
+  font-weight: 600
+  color: $otn-gray
+  text-transform: uppercase
+
+p
+  font-weight: 400
