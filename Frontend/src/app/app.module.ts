@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 import { WorkshopListComponent } from './workshop/workshop-list.component';
+import { WorkshopShowComponent } from './workshop/workshop-show.component';
 import { WorkshopService } from './workshop/workshop.service';
 import { UserComponent } from './user/user.component';
 import { AuthenticationService } from './authentication/authentication.service';
@@ -21,6 +22,7 @@ import { Angular2TokenService } from 'angular2-token';
   declarations: [
     AppComponent,
     WorkshopListComponent,
+    WorkshopShowComponent,
     UserComponent,
     AuthLinksComponent,
     DashboardComponent

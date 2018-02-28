@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { Workshop } from './workshop';
 import { WorkshopService } from './workshop.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-workshop-list',
@@ -11,7 +12,7 @@ import { WorkshopService } from './workshop.service';
 export class WorkshopListComponent implements OnInit {
   workshops: Workshop[];
 
-  constructor(private workshopService: WorkshopService) { }
+  constructor(private workshopService: WorkshopService, private router: Router) { }
 
   ngOnInit() {
     let timer = Observable.timer(0, 5000);
@@ -20,6 +21,11 @@ export class WorkshopListComponent implements OnInit {
 
   getWorkshops() {
     this.workshopService.getWorkshops().subscribe(workshops => this.workshops = workshops);
+  }
+
+  goToShow(workshop: Workshop): void {
+    let workshopLink = ['/workshops', workshop.id];
+    this.router.navigate(workshopLink);
   }
 
 }

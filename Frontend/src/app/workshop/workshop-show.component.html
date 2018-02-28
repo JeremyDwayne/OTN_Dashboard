@@ -1,5 +1,4 @@
-<div class="workshop-list" *ngFor="let workshop of workshops">
-  <a (click)="goToShow(workshop)">
+<div class="workshop-show">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{workshop.name}} | <i>{{workshop.starts_at | date:'short'}}</i></h5>
@@ -8,5 +7,4 @@
       </p>
     </div>
   </div>
-  </a>
 </div>

@@ -18,4 +18,8 @@ export class WorkshopService {
   getWorkshops(): Observable<Workshop[]> {
     return this.http.get(this.workshopsUrl).map(( response: Response) => <Workshop[]>response.json())
   }
+
+  getWorkshop(id: number) {
+    return this.http.get(this.workshopsUrl + '/' + id + '.json')
+  }
 }
