@@ -7,7 +7,6 @@ import { AuthenticationService } from './authentication.service';
   template: `
     <div class="form-group btn-group">
       <button class="form-control btn btn-outline-success" routerLink="/login" routerLinkActive="active" *ngIf="isLoggedOut()">Login</button>
-      <button class="form-control btn btn-outline-success" routerLink="/signup" routerLinkActive="active" *ngIf="isLoggedOut()">Sign Up</button>
       <button class="form-control btn btn-outline-warning" routerLink="/logout" (click)="logOut()" *ngIf="isLoggedIn()">Logout</button>
     </div>
   `

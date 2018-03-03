@@ -1,0 +1,12 @@
+<div class="form-group">
+  <label [attr.for]=attribute>{{label}}</label>
+  <div class="input-group">
+    <div class="input-group-prepend" *ngIf="icon">
+      <span class="input-group-text">
+        <i class={{icon}}></i>
+      </span>
+    </div>
+    <input id={{attribute}} type={{type}} [formControl]="control" name={{type}} placeholder={{placeholder}} class="form-control" minlength="{{minlength}}">
+  </div>
+  <app-error-label [control]="control" [submitted]="submitted"></app-error-label>
+</div>

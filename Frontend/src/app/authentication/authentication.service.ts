@@ -12,7 +12,11 @@ export class AuthenticationService {
   constructor(
     private _tokenService: Angular2TokenService,
     private router: Router
-  ) {}
+  ) {
+    this._tokenService.init({
+      apiPath: 'http://localhost:3000/api/v1/'
+    });
+  }
 
   logIn(email: string, password: string): Observable<Response> {
     return this._tokenService.signIn({
@@ -21,8 +25,10 @@ export class AuthenticationService {
     });
   }
 
-  signUp(email: string, password: string): Observable<Response> {
+  signUp(first_name: string, last_name: string, email: string, password: string): Observable<Response> {
     return this._tokenService.registerAccount({
+      first_name: first_name,
+      last_name: last_name,
       email: email,
       password: password,
       passwordConfirmation: password

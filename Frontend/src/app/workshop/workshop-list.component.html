@@ -1,12 +1,15 @@
+<a class="btn btn-primary btn-lg rounded-circle" routerLink="/workshop/new"><i class="fa fa-plus"></i></a>
+<br/><br/>
 <div class="workshop-list" *ngFor="let workshop of workshops">
   <a (click)="goToShow(workshop)">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{workshop.name}} | <i>{{workshop.starts_at | date:'short'}}</i></h5>
-      <p class="card-text">
-        {{workshop.description}}
-      </p>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{workshop.name}} | <i>{{workshop.starts_at | date:'short'}}</i></h5>
+        <p class="card-text">
+          {{workshop.slug}}
+          {{workshop.description}}
+        </p>
+      </div>
     </div>
-  </div>
   </a>
 </div>

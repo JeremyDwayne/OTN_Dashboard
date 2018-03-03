@@ -2,7 +2,7 @@ module Api
   module V1
     class WorkshopsController < ApplicationController
       before_action :set_workshop, only: [:show, :update, :destroy]
-      before_action :set_institution, only: [:show, :update, :destroy]
+      # before_action :set_institution, only: [:show, :update, :destroy]
 
       def index
         @workshops = Workshop.all
@@ -11,7 +11,11 @@ module Api
       end
 
       def show
-        render json: @workshop
+        @institution = @workshop.institution
+        @facilitator = @workshop.facilitator
+        @attendees = @workshop.faculty
+
+        render json: { workshop: @workshop, institution: @institution, facilitator: @facilitator, attendees: @attendees }
       end
 
       def create
@@ -46,7 +50,7 @@ module Api
       end
 
       def workshop_params
-        params.require(:workshop).permit(:name, :description, :institution_id, :additional_location_info, :starts_at, :facilitator_id)
+        params.require(:workshop).permit!
       end
     end
   end

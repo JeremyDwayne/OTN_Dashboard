@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-user',
@@ -18,33 +18,14 @@ export class UserComponent implements OnInit {
   ngOnInit() {
   }
 
-  signUp() {
-    this._tokenService.registerAccount({
-      email: 'example@example.org',
-      password: 'secretPassword',
-      passwordConfirmation: 'secretPassword'
-    }).subscribe(
-      res => console.log(res),
-      error => console.log(error)
-    );
-  }
-
-// Modal Stuff
-//   open(content) {
-//     this.modalService.open(content).result.then((result) => {
-//       this.closeResult = `Closed with: ${result}`;
-//     }, (reason) => {
-//       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-//     });
-//   }
-
-//   private getDismissReason(reason: any): string {
-//     if (reason === ModalDismissReasons.ESC) {
-//       return 'by pressing ESC';
-//     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-//       return 'by clicking on a backdrop';
-//     } else {
-//       return  `with: ${reason}`;
-//     }
-//   }
+  // signUp(email: string, password: string) {
+  //   this._tokenService.registerAccount({
+  //     email: email,
+  //     password: password,
+  //     passwordConfirmation: password
+  //   }).subscribe(
+  //     res => console.log(res),
+  //     error => console.log(error)
+  //   );
+  // }
 }

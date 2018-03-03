@@ -1,10 +1,19 @@
-<div class="workshop-show">
+<div *ngIf="workshop">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{workshop.name}} | <i>{{workshop.starts_at | date:'short'}}</i></h5>
+      <h5 class="card-title">{{workshop.workshop.name}} | <i>{{workshop.workshop.starts_at | date:'short'}}</i></h5>
       <p class="card-text">
-        {{workshop.description}}
+        {{workshop.workshop.description}}<br/>
+        Institution: {{workshop.institution.name}}<br/>
+        Facilitator: {{workshop.facilitator.first_name}} {{workshop.facilitator.last_name}}
       </p>
+        <hr>
+        <h6>Attendees</h6>
+        <div *ngIf="workshop.attendees">
+          <div *ngFor="let attendee of workshop.attendees">
+            {{ attendee.first_name }} {{ attendee.last_name }}
+          </div>
+        </div>
     </div>
   </div>
 </div>

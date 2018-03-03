@@ -1,0 +1,32 @@
+<div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="submit(loginForm.value)">
+    <app-error-label [control]="loginForm" [submitted]="submitted"></app-error-label>
+
+    <app-input-field [attribute]="'email'"
+      [label]="'Email'" 
+      [type]="'email'"
+      [placeholder]="'Email Address'"
+      [icon]="'fa fa-user'"
+      [control]="loginForm.controls['email']"
+      [submitted]="submitted">
+    </app-input-field>
+    
+    <app-input-field [attribute]="'password'"
+      [label]="'Password'" 
+      [type]="'password'"
+      [placeholder]="'Password'"
+      [icon]="'fa fa-lock'"
+      [control]="loginForm.controls['password']"
+      [minlength]="'8'"
+      [submitted]="submitted">
+    </app-input-field>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Login</button>
+    </div>
+
+    Need an account? <a routerLink="/signup">Sign Up</a>
+  </form>
+
+</div>

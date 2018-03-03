@@ -1,0 +1,50 @@
+<div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+  <h2>Create an account</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="submit(signupForm.value)">
+    <app-error-label [control]="signupForm" [submitted]="submitted"></app-error-label>
+
+    <app-input-field [attribute]="'first_name'"
+      [label]="'First Name'" 
+      [type]="'text'"
+      [placeholder]="'First Name'"
+      [icon]="''"
+      [control]="signupForm.controls['first_name']"
+      [submitted]="submitted">
+    </app-input-field>
+
+    <app-input-field [attribute]="'last_name'"
+      [label]="'Last Name'" 
+      [type]="'text'"
+      [placeholder]="'Last Name'"
+      [icon]="''"
+      [control]="signupForm.controls['last_name']"
+      [submitted]="submitted">
+    </app-input-field>
+
+    <app-input-field [attribute]="'email'"
+      [label]="'Email'" 
+      [type]="'email'"
+      [placeholder]="'Email Address'"
+      [icon]="'fa fa-user'"
+      [control]="signupForm.controls['email']"
+      [submitted]="submitted">
+    </app-input-field>
+    
+    <app-input-field [attribute]="'password'"
+      [label]="'Password'" 
+      [type]="'password'"
+      [placeholder]="'Password'"
+      [icon]="'fa fa-lock'"
+      [control]="signupForm.controls['password']"
+      [minlength]="'8'"
+      [submitted]="submitted">
+    </app-input-field>
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Sign Up</button>
+    </div>
+
+    Have an account? <a routerLink="/login">Login</a>
+  </form>
+
+</div>

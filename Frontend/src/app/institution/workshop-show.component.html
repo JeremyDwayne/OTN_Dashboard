@@ -1,0 +1,11 @@
+<a routerLink="/workshops">Back</a>
+<div *ngIf="workshop">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{workshop.name}} | <i>{{workshop.starts_at | date:'short'}}</i></h5>
+      <p class="card-text">
+        {{workshop.description}}
+      </p>
+    </div>
+  </div>
+</div>
