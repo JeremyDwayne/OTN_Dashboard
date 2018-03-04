@@ -19,6 +19,9 @@ import { WorkshopShowComponent } from './workshop/workshop-show.component';
 import { WorkshopNewComponent } from './workshop/workshop-new.component';
 import { WorkshopService } from './workshop/workshop.service';
 
+import { InstitutionListComponent } from './institution/institution-list.component';
+import { InstitutionShowComponent } from './institution/institution-show.component';
+import { InstitutionNewComponent } from './institution/institution-new.component';
 import { InstitutionService } from './institution/institution.service';
 
 import { UserComponent } from './user/user.component';
@@ -39,6 +42,9 @@ import { SharedModule } from './shared/shared.module';
     WorkshopListComponent,
     WorkshopShowComponent,
     WorkshopNewComponent,
+    InstitutionListComponent,
+    InstitutionShowComponent,
+    InstitutionNewComponent,
     UserComponent,
     AuthLinksComponent,
     DashboardComponent,

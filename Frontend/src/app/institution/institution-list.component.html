@@ -1,0 +1,13 @@
+<a class="nav-link" routerLink="/institution/new">New Institution</a>
+<div class="institution-list" *ngFor="let institution of institutions">
+  <a (click)="goToShow(institution)">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{institution.name}}</h5>
+      <p class="card-text">
+        {{institution.slug}}
+      </p>
+    </div>
+  </div>
+  </a>
+</div>
