@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Workshop } from './workshop';
 import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
@@ -19,17 +20,21 @@ export class WorkshopNewComponent implements OnInit {
   users: User[];
   submitted: boolean = false;
   starts_at_date: Date = new Date(Date.now()); 
+  institution_slug: string;
 
   constructor(
     private workshopService: WorkshopService, 
     private institutionService: InstitutionService,
     private userService: UserService,
-    private breadcrumbService: BreadcrumbService
+    private breadcrumbService: BreadcrumbService,
+    private route: ActivatedRoute,
   ) {
     breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
   }
   
   ngOnInit() {
+    this.institution_slug = this.route.params.value['slug'];
+
     this.starts_at_date.setMinutes(0);
 
     let timer = Observable.timer(0, 25000);

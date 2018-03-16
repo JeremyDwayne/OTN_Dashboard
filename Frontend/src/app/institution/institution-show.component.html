@@ -1,16 +1,28 @@
-<h5 [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data[0].id" (click)="institution?.data[0].isCollapsed = !institution?.data[0].isCollapsed" style="cursor: pointer;">- {{attributes?.name}}</h5>
-<div class="container" id="'institution-' + $institution?.data[0].id" [ngbCollapse]="!institution?.data[0].isCollapsed">
-  {{attributes?.address_line_1}}
-  {{attributes?.address_line_2}}
-  {{attributes?.city}}
-  {{attributes?.state}}
-  {{attributes?.zip}}
-  <hr>
-
-  <h6>Workshops</h6>
-    <!-- {{ institution.data[0].relationships.workshops.data | json }} -->
-  <div *ngFor="let workshop of institution?.included | Filter:{type: 'workshop'}">
-    <app-workshop-show [workshop]="workshop" [attendees]="workshop.relationships.faculty"></app-workshop-show>
+<h5 class="card-header" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data[0].id" (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
+  {{attributes?.name}}
+  <span *ngIf="!institution?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
+  <span *ngIf="institution?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
+  <br/>
+</h5>
+<div class="collapse" id="'institution-' + $institution?.data[0].id" [ngbCollapse]="!institution?.isCollapsed">
+  <div class="card-body">
+    <h6 class="card-subtitle mb-2 text-muted">
+      {{attributes?.address_line_1}}<br *ngIf="attributes?.address_line_1" />
+      {{attributes?.address_line_2}}<br *ngIf="attributes?.address_line_2" />
+      {{attributes?.city}}, {{attributes?.state}} {{attributes?.zip}}
+    </h6>
     <br/>
+
+    <h6>Workshops ({{ workshopCount }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
+    
+    <div *ngIf="workshopCount !== 0; else noWorkshops">
+      <div *ngFor="let workshop of institution?.included | Filter:{type: 'workshop'}">
+        <app-workshop-show [workshop]="workshop" [attendees]="workshop.relationships.faculty"></app-workshop-show>
+        <br/>
+      </div>
+    </div>
+    <ng-template #noWorkshops>
+      <small><b>No Workshops!</b></small>
+    </ng-template>
   </div>
 </div>

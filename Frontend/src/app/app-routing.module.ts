@@ -25,6 +25,7 @@ const routes: Routes = [
   { path: 'institution', redirectTo: '/institutions', pathMatch: 'full' },
   { path: 'institutions', component: InstitutionListComponent },
   { path: 'institutions/:slug', component: InstitutionShowComponent },
+  { path: 'institutions/:slug/workshops/new', component: WorkshopNewComponent },
   { path: 'institution/new', component: InstitutionNewComponent },
 
   { path: 'consortium', redirectTo: '/consortia', pathMatch: 'full' },

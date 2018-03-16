@@ -1,8 +1,8 @@
 <div *ngFor="let consortium of dashboard?.consortia.data"> 
-  <h4 [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'consortium-' + consortium.attributes.id" (click)="consortium.isCollapsed = !consortium.isCollapsed" style="cursor: pointer;">{{consortium.attributes.name}}</h4>
+  <h4>{{consortium.attributes.name}}</h4>
 
-  <div id="'consortium-' + $consortium.attributes.id" [ngbCollapse]="!consortium.isCollapsed">
-    <div class="dashboard container" *ngFor="let institution of consortium.relationships.institutions.data">
+  <div id="'consortium-' + $consortium.attributes.id">
+    <div class="dashboard" *ngFor="let institution of consortium.relationships.institutions.data">
       <app-institution-show [id]="institution.id"></app-institution-show>
     </div>
   </div>

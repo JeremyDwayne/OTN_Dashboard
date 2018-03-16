@@ -16,6 +16,7 @@ export class InstitutionShowComponent implements OnInit {
   slug: string;
   routeId: any;
   attributes: any;
+  workshopCount: number;
 
   constructor(
     private http: Http,
@@ -24,7 +25,7 @@ export class InstitutionShowComponent implements OnInit {
     private institutionService: InstitutionService
   ) { }
 
-  @Input() institution: Institution;
+  @Input() institution: any;
   @Input() id: number;
 
   ngOnInit() {
@@ -38,9 +39,8 @@ export class InstitutionShowComponent implements OnInit {
     institutionRequest.subscribe(response => {
         this.institution = response.json();
         this.attributes = this.institution.data[0].attributes;
+      this.workshopCount = this.institution.included.filter(item => item.type.indexOf('workshop') !== -1).length
     });
-
-
   }
 
   goToWorkshopShow(workshop: Workshop): void {

@@ -6,7 +6,7 @@ module Api
 
       def index
         @institutions = Institution.all
-        render json: InstitutionSerializer.new(@institutions, include: [:workshops]).serialized_json
+        render json: @institutions
       end
 
       def show
