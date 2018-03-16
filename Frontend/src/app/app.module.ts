@@ -16,22 +16,30 @@ import { AppComponent } from './app.component';
 
 import { WorkshopListComponent } from './workshop/workshop-list.component';
 import { WorkshopShowComponent } from './workshop/workshop-show.component';
-import { WorkshopNewComponent } from './workshop/workshop-new.component';
-import { WorkshopService } from './workshop/workshop.service';
+import { WorkshopNewComponent  } from './workshop/workshop-new.component';
+import { WorkshopService       } from './workshop/workshop.service';
 
 import { InstitutionListComponent } from './institution/institution-list.component';
 import { InstitutionShowComponent } from './institution/institution-show.component';
-import { InstitutionNewComponent } from './institution/institution-new.component';
-import { InstitutionService } from './institution/institution.service';
+import { InstitutionNewComponent  } from './institution/institution-new.component';
+import { InstitutionService       } from './institution/institution.service';
+
+import { ConsortiumListComponent } from './consortium/consortium-list.component';
+import { ConsortiumShowComponent } from './consortium/consortium-show.component';
+import { ConsortiumNewComponent  } from './consortium/consortium-new.component';
+import { ConsortiumService       } from './consortium/consortium.service';
+import { Filter } from './shared/filter.pipe';
 
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
+import { AttendeeShowComponent } from './user/attendee-show.component';
 
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationModule } from './authentication/authentication.module';
 import { AuthLinksComponent } from './authentication/auth-links.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardService } from './dashboard/dashboard.service';
 import { SharedModule } from './shared/shared.module';
 
 
@@ -45,9 +53,14 @@ import { SharedModule } from './shared/shared.module';
     InstitutionListComponent,
     InstitutionShowComponent,
     InstitutionNewComponent,
+    ConsortiumListComponent,
+    ConsortiumShowComponent,
+    ConsortiumNewComponent,
+    AttendeeShowComponent,
     UserComponent,
     AuthLinksComponent,
     DashboardComponent,
+    Filter
   ],
   imports: [
     BrowserModule,
@@ -64,8 +77,10 @@ import { SharedModule } from './shared/shared.module';
     AuthenticationModule
   ],
   providers: [ 
+    DashboardService,
     WorkshopService, 
     InstitutionService, 
+    ConsortiumService, 
     UserService,
     Angular2TokenService, 
     BreadcrumbService,

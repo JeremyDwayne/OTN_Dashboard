@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <form (ngSubmit)="createConsortium(consortium)" #consortiumForm='ngForm'>
+      <div class="form-group">
+        <label for="name">Name*</label>
+        <input type="text" id="name" class="form-control" required name="name" placeholder="Consortium Name" #name="ngModel" [(ngModel)]="consortium.name">
+      </div>
+      
+      <div class="form-group">
+        <label for="state">State</label>
+        <input type="text" id="state" class="form-control" required name="state" placeholder="State - Replace with dropdown" #name="ngModel" [(ngModel)]="consortium.state">
+      </div>
+
+      <div class="form-group">
+        <label for="admin">Admin</label>
+        <input type="text" id="admin" class="form-control" required name="admin" placeholder="Admin - Replace with dropdown" #name="ngModel" [(ngModel)]="consortium.admin">
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="!consortiumForm.form.valid">Create Consortium</button>
+
+    </form>
+    <small>* Required Field</small>
+  </div>
+</div>

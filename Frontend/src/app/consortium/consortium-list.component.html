@@ -1,0 +1,22 @@
+<a class="btn btn-primary btn-lg rounded-circle" routerLink="/consortia/new"><i class="fa fa-plus"></i></a>
+<br/><br/>
+<div class="consortia-list" *ngFor="let consortium of consortia?.data">
+  <a (click)="goToShow(consortium.attributes)">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title" style="margin-bottom: 0;">{{consortium.attributes.name}}</h5>
+        <div *ngFor="let admin of consortia?.included | Filter:{type: 'admin'}">
+          <small>Admin: {{admin.attributes.first_name + ' ' + admin.attributes.last_name}}</small><br/>
+        </div>
+        <br/>
+
+        <div *ngFor="let institution of consortia?.included | Filter:{type: 'institution'}">
+          <p>
+            {{institution.attributes.name}}<br/>
+            {{institution.attributes.city}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>

@@ -1,0 +1,11 @@
+<td>
+  <span *ngIf="!attendee?.editfirst" (click)="attendee.editfirst = true">{{attendee?.first_name}} {{attendee?.last_name}}</span>
+  <input *ngIf="attendee?.editfirst" [(ngModel)]="attendee.first_name" (submit)="attendee.editfirst = false"><input *ngIf="attendee?.editfirst" (submit)="attendee.editfirst = false" [(ngModel)]="attendee.last_name">
+</td>
+<td>
+  <span *ngIf="!attendee?.editemail" (click)="attendee.editemail = true">{{attendee?.email}}</span>
+  <input *ngIf="attendee?.editemail" [(ngModel)]="attendee.email" (submit)="attendee.editemail = false">
+</td>
+<td *ngIf="attendee?.editfirst || attendee?.editemail" >
+  <input type="submit"class="btn btn-primary btn-sm">
+</td>

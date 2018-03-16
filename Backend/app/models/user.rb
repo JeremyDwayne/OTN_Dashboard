@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  attr_accessor :skip_password_validation
+
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
@@ -37,6 +39,13 @@ class User < ApplicationRecord
       self.type = self.role
       self.save
     end
+  end
+
+  protected
+
+  def password_required?
+    return false if skip_password_validation
+    super
   end
 
 end

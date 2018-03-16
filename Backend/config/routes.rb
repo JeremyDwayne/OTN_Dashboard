@@ -12,7 +12,9 @@ Rails.application.routes.draw do
 
       resources :users
       resources :institutions
-      resources :workshops
+      resources :workshops do
+        get :attendees
+      end
     end
   end
 end

@@ -1,4 +1,14 @@
-<a class="nav-link" routerLink="/institution/new">New Institution</a>
+  <div class="float-left">
+    <h2>Institutions</h2>
+  </div>
+  <div class="float-right">
+    <a class="btn btn-primary btn-lg rounded-circle" routerLink="/institution/new"><i class="fa fa-plus"></i></a>
+  </div>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+
 <div class="institution-list" *ngFor="let institution of institutions">
   <a (click)="goToShow(institution)">
   <div class="card">

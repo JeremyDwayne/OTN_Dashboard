@@ -1,11 +1,16 @@
-<a routerLink="/institutions">Back</a>
-<div *ngIf="institution">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{institution.name}}</i></h5>
-      <p class="card-text">
-        Institution Card Text
-      </p>
-    </div>
+<h5 [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data[0].id" (click)="institution?.data[0].isCollapsed = !institution?.data[0].isCollapsed" style="cursor: pointer;">- {{attributes?.name}}</h5>
+<div class="container" id="'institution-' + $institution?.data[0].id" [ngbCollapse]="!institution?.data[0].isCollapsed">
+  {{attributes?.address_line_1}}
+  {{attributes?.address_line_2}}
+  {{attributes?.city}}
+  {{attributes?.state}}
+  {{attributes?.zip}}
+  <hr>
+
+  <h6>Workshops</h6>
+    <!-- {{ institution.data[0].relationships.workshops.data | json }} -->
+  <div *ngFor="let workshop of institution?.included | Filter:{type: 'workshop'}">
+    <app-workshop-show [workshop]="workshop" [attendees]="workshop.relationships.faculty"></app-workshop-show>
+    <br/>
   </div>
 </div>

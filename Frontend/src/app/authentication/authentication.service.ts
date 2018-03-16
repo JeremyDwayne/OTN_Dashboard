@@ -14,7 +14,7 @@ export class AuthenticationService {
     private router: Router
   ) {
     this._tokenService.init({
-      apiPath: 'http://localhost:3000/api/v1/'
+      apiPath: 'http://localhost:3000/api/v1'
     });
   }
 

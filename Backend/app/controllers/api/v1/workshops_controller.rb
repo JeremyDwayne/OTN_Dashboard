@@ -11,11 +11,13 @@ module Api
       end
 
       def show
-        @institution = @workshop.institution
-        @facilitator = @workshop.facilitator
-        @attendees = @workshop.faculty
+        render json: WorkshopSerializer.new([@workshop], include: [:institution, :attendees, :facilitator]).serialized_json
+      end
 
-        render json: { workshop: @workshop, institution: @institution, facilitator: @facilitator, attendees: @attendees }
+      def attendees
+        @workshop = Workshop.friendly.find(params[:workshop_id])
+        @attendees = User.where(id: @workshop.attendees.map{|a| a.faculty_id})
+        render json: @attendees
       end
 
       def create

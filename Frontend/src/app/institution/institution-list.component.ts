@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { Router } from '@angular/router';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-institution-list',
@@ -12,7 +12,10 @@ import { Router } from '@angular/router';
 export class InstitutionListComponent implements OnInit {
   institutions: Institution[];
 
-  constructor(private institutionService: InstitutionService, private router: Router) { }
+  constructor(
+    private institutionService: InstitutionService, 
+    private router: Router
+  ) { }
 
   ngOnInit() {
     let timer = Observable.timer(0, 5000);

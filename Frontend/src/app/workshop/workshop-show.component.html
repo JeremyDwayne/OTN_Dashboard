@@ -1,19 +1,26 @@
 <div *ngIf="workshop">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{workshop.workshop.name}} | <i>{{workshop.workshop.starts_at | date:'short'}}</i></h5>
+      <h5 class="card-title">{{workshop.attributes.name}} | <i>{{workshop.attributes.starts_at | date:'short'}}</i></h5>
       <p class="card-text">
-        {{workshop.workshop.description}}<br/>
-        Institution: {{workshop.institution.name}}<br/>
-        Facilitator: {{workshop.facilitator.first_name}} {{workshop.facilitator.last_name}}
+        {{workshop.attributes.description}}<br/>
       </p>
-        <hr>
-        <h6>Attendees</h6>
-        <div *ngIf="workshop.attendees">
-          <div *ngFor="let attendee of workshop.attendees">
-            {{ attendee.first_name }} {{ attendee.last_name }}
-          </div>
-        </div>
+      <hr>
+        <h6 class="card-title">Attendees</h6>
+      <div *ngIf="attendees.data.length !== 0; else noAttendees">
+        <button class="btn btn-primary" [attr.aria-expanded]="!AttendeeCollapsed" [attr.aria-controls]="'workshop-' + workshop.id" (click)="workshop.AttendeeCollapsed = !workshop.AttendeeCollapsed" style="cursor: pointer;">Show More</button>
+        <table class="table table-striped" id="'workshop-' + $workshop.id" [ngbCollapse]="!workshop.AttendeeCollapsed">
+          <tbody>
+            <tr *ngFor="let attendee of attendees.data">
+              <form>
+                <app-attendee-show [id]="attendee.id"></app-attendee-show>
+              </form>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <ng-template #noAttendees>No Attendees!</ng-template>
+
     </div>
   </div>
 </div>

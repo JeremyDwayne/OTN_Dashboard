@@ -1,6 +1,6 @@
 class Facilitator < Faculty
-  has_one :institution
-  has_many :workshops, foreign_key: "facilitator_id"
+  belongs_to :institution
+  has_many :workshops
 
   def facilitator?
     type == "Facilitator" && role == "Facilitator"

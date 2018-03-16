@@ -9,6 +9,7 @@ export class UserService {
   headers: Headers;
   options: RequestOptions;
   private usersUrl = "http://localhost:3000/api/v1/users";
+  private workshopsUrl = "http://localhost:3000/api/v1/workshops";
 
   constructor(private http: Http) {
     this.headers = new Headers({'Content-Type': 'application/json'});
@@ -17,6 +18,10 @@ export class UserService {
 
   getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl).map((response: Response) => <User[]>response.json())
+  }
+  
+  getAttendees(workshop_id: number): Observable<User[]> {
+    return this.http.get(this.workshopsUrl + '/' + workshop_id + '/attendees').map((response: Response) => <User[]>response.json())
   }
 
   getUser(id: number) {

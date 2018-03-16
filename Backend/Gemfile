@@ -25,6 +25,8 @@ gem 'rack-cors'
 
 # JSON Web Tokens with Devise
 gem 'devise_token_auth'
+gem 'pundit'
+gem 'fast_jsonapi'
 
 gem 'omniauth'
 gem 'omniauth-twitter'

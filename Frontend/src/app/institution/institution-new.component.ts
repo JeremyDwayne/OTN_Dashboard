@@ -10,14 +10,13 @@ import { InstitutionService } from './institution.service';
 })
 export class InstitutionNewComponent implements OnInit {
   institution = new Institution;
-  institutions: Institution[];
   submitted: boolean = false;
 
   constructor(private institutionService: InstitutionService) { }
   
   ngOnInit() {
-    let timer = Observable.timer(0, 25000);
-    timer.subscribe(() => this.getInstitutions());
+    // let timer = Observable.timer(0, 25000);
+    // timer.subscribe(() => this.getInstitutions());
   }
 
   createInstitution(institution: Institution) {
@@ -31,8 +30,8 @@ export class InstitutionNewComponent implements OnInit {
         });
   }
 
-  getInstitutions() {
-    this.institutionService.getInstitutions().subscribe(institutions => this.institutions = institutions);
-  }
+  // getInstitutions() {
+  //   this.institutionService.getInstitutions().subscribe(institutions => this.institutions = institutions);
+  // }
 
 }

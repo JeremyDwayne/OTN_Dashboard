@@ -3,6 +3,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
 import { Workshop } from './workshop';
 import { WorkshopService } from './workshop.service';
+import { User } from '../user/user';
+import { AttendeeShowComponent } from '../user/attendee-show.component';
 
 @Component({
   selector: 'app-workshop-show',
@@ -21,6 +23,7 @@ export class WorkshopShowComponent implements OnInit {
   ) { }
 
   @Input() workshop: Workshop;
+  @Input() attendees: User[];
 
   ngOnInit() {
     this.routeId = this.route.params.subscribe(

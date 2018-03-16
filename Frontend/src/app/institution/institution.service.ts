@@ -19,8 +19,9 @@ export class InstitutionService {
     return this.http.get(this.institutionsUrl).map((response: Response) => <Institution[]>response.json())
   }
 
-  getInstitution(id: number) {
-    return this.http.get(this.institutionsUrl + '/' + id + '.json')
+  getInstitution(slug: string, id: number) {
+    let inst_id = slug ? slug : id;
+    return this.http.get(this.institutionsUrl + '/' + inst_id + '.json')
   }
 
   createInstitution(institution: Institution): Observable<Institution> {

@@ -2,15 +2,19 @@ module Api
   module V1
     class InstitutionsController < ApplicationController
       before_action :set_institution, only: [:show, :update, :destroy]
-      before_action :set_consortium, only: [:show, :update, :destroy]
+      # before_action :set_consortium, only: [:show, :update, :destroy]
 
       def index
         @institutions = Institution.all
-        render json: @institutions
+        render json: InstitutionSerializer.new(@institutions, include: [:workshops]).serialized_json
       end
 
       def show
-        render json: { institution: @institution, consortium: @consortium }
+        @workshops = @institution.workshops
+        render json: InstitutionSerializer.new([@institution], include: [:consortium, :workshops, :faculty]).serialized_json
+          # { 
+          # institution: InstitutionSerializer.new(@institution, include: [:consortium]).serialized_json, 
+          # workshops: WorkshopSerializer.new(@workshops, include: [:faculty]).serialized_json }
       end
 
       def create

@@ -1,8 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
+import { Workshop } from '../workshop/workshop';
+import { WorkshopShowComponent } from '../workshop/workshop-show.component';
+import { AttendeeShowComponent } from '../user/attendee-show.component';
 
 @Component({
   selector: 'app-institution-show',
@@ -10,17 +13,19 @@ import { InstitutionService } from './institution.service';
   styleUrls: ['./institution.component.sass']
 })
 export class InstitutionShowComponent implements OnInit {
-  id: number;
   slug: string;
   routeId: any;
+  attributes: any;
 
   constructor(
     private http: Http,
     private route: ActivatedRoute,
+    private router: Router,
     private institutionService: InstitutionService
   ) { }
 
   @Input() institution: Institution;
+  @Input() id: number;
 
   ngOnInit() {
     this.routeId = this.route.params.subscribe(
@@ -29,8 +34,17 @@ export class InstitutionShowComponent implements OnInit {
       }
     )
     let institutionRequest = this.route.params.flatMap((params: Params) =>
-      this.institutionService.getInstitution(params['slug']));
-    institutionRequest.subscribe(response => this.institution = response.json());
+      this.institutionService.getInstitution(params['slug'], this.id));
+    institutionRequest.subscribe(response => {
+        this.institution = response.json();
+        this.attributes = this.institution.data[0].attributes;
+    });
+
+
   }
 
+  goToWorkshopShow(workshop: Workshop): void {
+    let workshopLink = ['/workshops', workshop.slug];
+    this.router.navigate(workshopLink);
+  }
 }
