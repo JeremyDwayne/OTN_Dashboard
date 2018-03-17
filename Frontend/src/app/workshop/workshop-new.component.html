@@ -51,7 +51,7 @@
         <!-- institution_id: integer -->
         <label for="institution_id">Institution</label><br/>
         <select class="form-control" id="institution_id" name="institution_id" #institution_id='ngModel' [(ngModel)]='workshop.institution_id'>
-          <option *ngFor="let institution of institutions" value="{{institution.id}}">{{institution.name}}</option>
+          <option *ngFor="let institution of institutions?.data" value="{{institution.id}}">{{institution.attributes.name}}</option>
         </select>
       </div>
 

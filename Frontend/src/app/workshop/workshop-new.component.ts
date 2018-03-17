@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Workshop } from './workshop';
 import { WorkshopService } from './workshop.service';
@@ -22,17 +23,37 @@ export class WorkshopNewComponent implements OnInit {
   starts_at_date: Date = new Date(Date.now()); 
   institution_slug: string;
 
+  workshopForm: FormGroup;
+
   constructor(
     private workshopService: WorkshopService, 
     private institutionService: InstitutionService,
     private userService: UserService,
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
+    private formBuilder: FormBuilder
   ) {
     breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
   }
   
   ngOnInit() {
+    this.submitted = false;
+    this.workshopForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      starts_at: ['', Validators.required],
+      sign_up_deadline: ['', Validators.required],
+      review_deadline: ['', Validators.required],
+      institution_id: ['', Validators.required],
+      facilitator_id: ['', Validators.required],
+      additional_location_info: ['', Validators.required],
+      duration: ['', Validators.required],
+      stipend_cents: ['', Validators.required],
+      stipend_currency: ['', Validators.required],
+      attendee_limit: ['', Validators.required],
+      slug: ['', Validators.required],
+    });
+
     this.institution_slug = this.route.params['value']['slug'];
 
     this.starts_at_date.setMinutes(0);
