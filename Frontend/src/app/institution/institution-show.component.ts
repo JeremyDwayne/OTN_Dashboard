@@ -37,9 +37,8 @@ export class InstitutionShowComponent implements OnInit {
     let institutionRequest = this.route.params.flatMap((params: Params) =>
       this.institutionService.getInstitution(params['slug'], this.id));
     institutionRequest.subscribe(response => {
-        this.institution = response.json();
-        this.attributes = this.institution.data[0].attributes;
-      this.workshopCount = this.institution.included.filter(item => item.type.indexOf('workshop') !== -1).length
+      this.institution = response.json();
+      this.attributes = this.institution.data.attributes;
     });
   }
 

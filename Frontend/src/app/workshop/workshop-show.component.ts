@@ -12,7 +12,6 @@ import { AttendeeShowComponent } from '../user/attendee-show.component';
   styleUrls: ['./workshop.component.sass']
 })
 export class WorkshopShowComponent implements OnInit {
-  id: number;
   slug: string;
   routeId: any;
   ends_at: number;
@@ -25,6 +24,7 @@ export class WorkshopShowComponent implements OnInit {
 
   @Input() workshop: any;
   @Input() attendees: any[];
+  @Input() id: number;
 
   ngOnInit() {
     this.routeId = this.route.params.subscribe(
@@ -33,10 +33,12 @@ export class WorkshopShowComponent implements OnInit {
       }
     )
     let workshopRequest = this.route.params.flatMap((params: Params) =>
-      this.workshopService.getWorkshop(params['slug']));
-    workshopRequest.subscribe(response => this.workshop = response.json());
-    let start = new Date(this.workshop.attributes.starts_at);
-    this.ends_at = start.setHours(start.getHours() + this.workshop.attributes.duration);
+      this.workshopService.getWorkshop(params['slug'], this.id));
+    workshopRequest.subscribe(response => {
+      this.workshop = response.json();
+      let start = new Date(this.workshop.data.attributes.starts_at);
+      this.ends_at = start.setHours(start.getHours() + this.workshop.data.attributes.duration);
+    });
   }
 
 }

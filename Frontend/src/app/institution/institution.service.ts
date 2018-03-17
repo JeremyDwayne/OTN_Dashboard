@@ -20,7 +20,7 @@ export class InstitutionService {
   }
 
   getInstitution(slug: string, id: number) {
-    let inst_id = slug ? slug : id;
+    let inst_id = id ? id : slug;
     return this.http.get(this.institutionsUrl + '/' + inst_id + '.json')
   }
 

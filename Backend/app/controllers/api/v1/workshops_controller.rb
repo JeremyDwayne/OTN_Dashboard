@@ -6,12 +6,11 @@ module Api
 
       def index
         @workshops = Workshop.all
-
-        render json: @workshops
+        render json: WorkshopSerializer.new(@workshops).serialized_json
       end
 
       def show
-        render json: WorkshopSerializer.new([@workshop], include: [:institution, :attendees, :facilitator]).serialized_json
+        render json: WorkshopSerializer.new(@workshop).serialized_json
       end
 
       def attendees

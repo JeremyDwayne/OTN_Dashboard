@@ -5,11 +5,11 @@ module Api
 
       def index
         @consortia = Consortium.all
-        render json: ConsortiumSerializer.new(@consortia, include: [:institutions, :admin]).serialized_json
+        render json: ConsortiumSerializer.new(@consortia).serialized_json
       end
 
       def show
-        render json: ConsortiumSerializer.new(@consortium, include: [:institutions, :admin]).serialized_json
+        render json: ConsortiumSerializer.new(@consortium).serialized_json
       end
 
       def create

@@ -33,7 +33,7 @@ export class WorkshopNewComponent implements OnInit {
   }
   
   ngOnInit() {
-    this.institution_slug = this.route.params.value['slug'];
+    this.institution_slug = this.route.params['value']['slug'];
 
     this.starts_at_date.setMinutes(0);
 

@@ -9,13 +9,13 @@
   <br/>
   <br/>
 
-<div class="institution-list" *ngFor="let institution of institutions">
-  <a (click)="goToShow(institution)">
+<div class="institution-list" *ngFor="let institution of institutions?.data">
+  <a (click)="goToShow(institution.attributes)">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{institution.name}}</h5>
+      <h5 class="card-title">{{institution.attributes.name}}</h5>
       <p class="card-text">
-        {{institution.slug}}
+        {{institution.attributes.slug}}
       </p>
     </div>
   </div>

@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
 import { Consortium } from './consortium';
 import { Institution } from '../institution/institution';
+import { InstitutionShowComponent } from '../institution/institution-show.component';
 import { ConsortiumService } from './consortium.service';
 
 @Component({

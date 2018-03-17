@@ -21,8 +21,9 @@ export class WorkshopService {
     return this.http.get(this.workshopsUrl).map((response: Response) => <Workshop[]>response.json())
   }
 
-  getWorkshop(id: number) {
-    return this.http.get(this.workshopsUrl + '/' + id + '.json')
+  getWorkshop(slug: string, id: number) {
+    let workshop_id = id ? id : slug;
+    return this.http.get(this.workshopsUrl + '/' + workshop_id + '.json')
   }
 
   createWorkshop(workshop: Workshop): Observable<Workshop> {

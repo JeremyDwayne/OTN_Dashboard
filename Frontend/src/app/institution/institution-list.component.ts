@@ -10,7 +10,7 @@ import { InstitutionService } from './institution.service';
   styleUrls: ['./institution.component.sass']
 })
 export class InstitutionListComponent implements OnInit {
-  institutions: Institution[];
+  institutions: any[];
 
   constructor(
     private institutionService: InstitutionService, 

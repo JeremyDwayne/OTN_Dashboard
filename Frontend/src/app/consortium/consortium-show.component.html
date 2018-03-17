@@ -1,17 +1,9 @@
 <div *ngIf="consortium">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">{{consortium.data.attributes.name}}</h5>
-        <div *ngFor="let admin of consortium?.included | Filter:{type: 'admin'}">
-          <p class="card-text">
-            Admin: {{admin.attributes.first_name}} {{admin.attributes.last_name}}<br/>
-          </p>
-        </div>
-      <hr>
-      <h6>Institutions</h6>
-        <div *ngFor="let institution of consortium?.included | Filter:{type: 'institution'}">
-          <a (click)="goToInstitutionShow(institution.attributes)">{{ institution.attributes.name }}</a><br/>
-        </div>
-      </div>
+  <h4>{{consortium.data.attributes.name}}</h4>
+
+  <div id="'consortium-' + $consortium.data.attributes.id">
+    <div class="dashboard" *ngFor="let institution of consortium.data.relationships.institutions.data">
+      <app-institution-show [id]="institution.id"></app-institution-show>
+    </div>
   </div>
 </div>

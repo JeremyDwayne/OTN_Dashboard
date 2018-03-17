@@ -1,31 +1,38 @@
 <div *ngIf="workshop">
   <div class="card">
     <div class="card-body">
-      <h5 class="card-title">{{workshop.attributes.name}}<i *ngIf="workshop.attributes?.starts_at"> [ {{workshop.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}} ]</i> </h5>
-      <p class="card-text">
-        {{workshop.attributes.description}}<br/>
-      </p>
+      <h5 class="card-title" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'workshop-' + workshop.data?.id" (click)="workshop.isCollapsed = !workshop.isCollapsed" style="cursor: pointer; margin-bottom: 0;">
+        {{workshop.data.attributes?.name}}
+        <span *ngIf="!workshop?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
+        <span *ngIf="workshop?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
+      </h5>
+      <div id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
+        <p class="card-text">
+          {{workshop.data.attributes?.description}}<br/>
+          <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i>
+        </p>
 
-      <div *ngIf="attendees.data.length !== 0; else noAttendees">
-        <h6 class="card-header" [attr.aria-expanded]="!AttendeeCollapsed" [attr.aria-controls]="'workshop-' + workshop.id" (click)="workshop.AttendeeCollapsed = !workshop.AttendeeCollapsed" style="cursor: pointer;">Attendees
-          <span *ngIf="!workshop.AttendeeCollapsed"><i class="float-right fas fa-caret-square-up"></i></span>
-          <span *ngIf="workshop.AttendeeCollapsed"><i class="float-right fas fa-caret-square-down"></i></span>
-        </h6>
-        <table class="table table-striped" id="'workshop-' + $workshop.id" [ngbCollapse]="!workshop.AttendeeCollapsed">
-          <tbody>
-            <tr *ngFor="let attendee of attendees.data">
-              <form>
-                <app-attendee-show [id]="attendee.id"></app-attendee-show>
-              </form>
-            </tr>
-          </tbody>
-        </table>
+        <div *ngIf="workshop.data.relationships.faculty?.data.length !== 0; else noAttendees">
+          <h6 class="card-header" [attr.aria-expanded]="!AttendeeCollapsed" [attr.aria-controls]="'workshop-' + workshop.id" (click)="workshop.AttendeeCollapsed = !workshop.AttendeeCollapsed" style="cursor: pointer;">Attendees
+            <span *ngIf="!workshop.AttendeeCollapsed"><i class="float-right fas fa-caret-square-up"></i></span>
+            <span *ngIf="workshop.AttendeeCollapsed"><i class="float-right fas fa-caret-square-down"></i></span>
+          </h6>
+          <table class="table table-striped" id="'workshop-' + $workshop.id" [ngbCollapse]="!workshop.AttendeeCollapsed">
+            <tbody>
+              <tr *ngFor="let attendee of workshop.data.relationships.faculty?.data">
+                <form>
+                  <app-attendee-show [id]="attendee.id"></app-attendee-show>
+                </form>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <ng-template #noAttendees>
+          <hr>
+          <small><b>No Attendees!</b></small>
+        </ng-template>
+
       </div>
-      <ng-template #noAttendees>
-        <hr>
-        <small><b>No Attendees!</b></small>
-      </ng-template>
-
     </div>
   </div>
 </div>

@@ -1,10 +1,10 @@
-<h5 class="card-header" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data[0].id" (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
+<h5 class="card-header" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data.id" (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
   {{attributes?.name}}
   <span *ngIf="!institution?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
   <span *ngIf="institution?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
   <br/>
 </h5>
-<div class="collapse" id="'institution-' + $institution?.data[0].id" [ngbCollapse]="!institution?.isCollapsed">
+<div class="collapse" id="'institution-' + $institution?.data.id" [ngbCollapse]="!institution?.isCollapsed">
   <div class="card-body">
     <h6 class="card-subtitle mb-2 text-muted">
       {{attributes?.address_line_1}}<br *ngIf="attributes?.address_line_1" />
@@ -13,11 +13,11 @@
     </h6>
     <br/>
 
-    <h6>Workshops ({{ workshopCount }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
+    <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
     
-    <div *ngIf="workshopCount !== 0; else noWorkshops">
-      <div *ngFor="let workshop of institution?.included | Filter:{type: 'workshop'}">
-        <app-workshop-show [workshop]="workshop" [attendees]="workshop.relationships.faculty"></app-workshop-show>
+    <div *ngIf="institution?.data.relationships.workshops.data.length !== 0; else noWorkshops">
+      <div *ngFor="let workshop of institution?.data.relationships.workshops.data">
+        <app-workshop-show [id]="workshop.id"></app-workshop-show>
         <br/>
       </div>
     </div>
