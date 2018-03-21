@@ -6,12 +6,6 @@
 </h5>
 <div class="collapse" id="'institution-' + $institution?.data.id" [ngbCollapse]="!institution?.isCollapsed">
   <div class="card-body">
-    <h6 class="card-subtitle mb-2 text-muted">
-      {{attributes?.address_line_1}}<br *ngIf="attributes?.address_line_1" />
-      {{attributes?.address_line_2}}<br *ngIf="attributes?.address_line_2" />
-      {{attributes?.city}}, {{attributes?.state}} {{attributes?.zip}}
-    </h6>
-    <br/>
 
     <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
     

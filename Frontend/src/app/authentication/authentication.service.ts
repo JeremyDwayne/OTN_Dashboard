@@ -14,7 +14,13 @@ export class AuthenticationService {
     private router: Router
   ) {
     this._tokenService.init({
-      apiPath: 'http://localhost:3000/api/v1'
+      apiPath: 'http://localhost:3000/api/v1',
+      globalOptions: {
+        headers: {
+          'Content-Type':     'application/json',
+          'Accept':           'application/json'
+        }
+      }
     });
   }
 
@@ -25,13 +31,14 @@ export class AuthenticationService {
     });
   }
 
-  signUp(first_name: string, last_name: string, email: string, password: string): Observable<Response> {
+  signUp(first_name: string, last_name: string, email: string, password: string, institution_id: string): Observable<Response> {
     return this._tokenService.registerAccount({
       first_name: first_name,
       last_name: last_name,
       email: email,
       password: password,
-      passwordConfirmation: password
+      passwordConfirmation: password,
+      institution_id: institution_id
     });
   }
 

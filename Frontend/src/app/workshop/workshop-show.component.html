@@ -7,6 +7,7 @@
         <span *ngIf="workshop?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
       </h5>
       <div id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
+        <a routerLink="workshops/{{workshop.data.attributes.slug}}">Event Page</a>
         <p class="card-text">
           {{workshop.data.attributes?.description}}<br/>
           <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i>

@@ -21,6 +21,13 @@
       [submitted]="submitted">
     </app-input-field>
 
+    <app-select-field [attribute]="'institution_id'"
+      [label]="'Institution'" 
+      [options]="institutions?.data"
+      [control]="signupForm.controls['institution_id']"
+      [submitted]="submitted">
+    </app-select-field>
+
     <app-input-field [attribute]="'email'"
       [label]="'Email'" 
       [type]="'email'"

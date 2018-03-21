@@ -1,0 +1,48 @@
+<div *ngIf="workshop">
+  <div class="card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-md-9 col-12">
+          <h5 class="card-title" style="margin-bottom: 0;">
+            {{workshop.data.attributes?.name}}
+          </h5>
+          <p class="card-text">
+            <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i>
+          </p>
+          <p class="lead">
+            {{workshop.data.attributes?.description}}
+          </p>
+        </div>
+
+        <div class="float-right text-right col-md-3 col-12">
+          <small>
+            <b>Address</b><br/>
+            {{institution?.data.attributes.name}}<br />
+            {{institution?.data.attributes.address_line_1}}<br *ngIf="institution?.data.attributes.address_line_1" />
+            {{institution?.data.attributes.address_line_2}}<br *ngIf="institution?.data.attributes.address_line_2" />
+            {{institution?.data.attributes?.city}}, {{institution?.data.attributes.state}} {{institution?.data.attributes.zip}}<br />
+            <div *ngIf="workshop.data.attributes?.additional_location_info">
+              <br/>
+              <b>Additional Details</b><br/>
+              {{ workshop.data.attributes?.additional_location_info }}
+            </div>
+          </small>
+        </div>
+
+      </div>
+
+      <button class="btn btn-primary">Register</button>
+      <br/> <br/> <hr> <br/>
+
+      <div id="otn-info">
+        <h5 class="card-title">About Open Textbooks</h5>
+        <h6 class="card-subtitle mb-2 text-muted">Textbooks every student can access and afford</h6>
+
+        <p class="lead">
+          Open textbooks are textbooks that have been funded, published, and licensed to be freely used, adapted, and distributed. These books have been reviewed by faculty from a variety of colleges and universities to assess their quality. These books can be downloaded for no cost, or printed at low cost. All textbooks are either used at multiple higher education institutions; or affiliated with an institution, scholarly society, or professional organization.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>

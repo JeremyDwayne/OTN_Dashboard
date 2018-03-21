@@ -2,7 +2,7 @@
 lock "~> 3.10.1"
 
 set :application, "otn-dashboard"
-set :repo_url, "git@github.com:jeremydwayne/OTN_Dashboard.git"
+set :repo_url, "git@github.com:JeremyDwayne/OTN_Dashboard.git"
 
 set :use_sudo, true
 
@@ -40,6 +40,5 @@ set :format, :airbrussh
 # Uncomment the following to require manually verifying the host key before first deploy.
 set :ssh_options, {
   forward_agent: true,
-  keys: %w(~/.ssh/id_rsa),
-  verify_host_key: :secure
+  keys: %w(~/.ssh/id_rsa)
 }

@@ -1,0 +1,14 @@
+<div class="form-group">
+  <label [attr.for]=attribute>{{label}}</label>
+  <div class="input-group">
+    <div class="input-group-prepend" *ngIf="icon">
+      <span class="input-group-text">
+        <i class={{icon}}></i>
+      </span>
+    </div>
+    <select id={{attribute}} [formControl]="control" name={{type}} class="form-control">
+      <option *ngFor="let option of options" value={{option.id}}>{{option?.attributes.name}}</option>
+    </select>
+  </div>
+  <app-error-label [control]="control" [submitted]="submitted"></app-error-label>
+</div>

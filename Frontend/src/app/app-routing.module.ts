@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { UserComponent } from './user/user.component';
 import { WorkshopListComponent } from './workshop/workshop-list.component';
-import { WorkshopShowComponent } from './workshop/workshop-show.component';
+import { WorkshopEventComponent } from './workshop/workshop-event.component';
 import { WorkshopNewComponent } from './workshop/workshop-new.component';
 
 import { InstitutionListComponent } from './institution/institution-list.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'workshop', redirectTo: '/workshops', pathMatch: 'full' },
   { path: 'workshops', component: WorkshopListComponent },
-  { path: 'workshops/:slug', component: WorkshopShowComponent },
+  { path: 'workshops/:slug', component: WorkshopEventComponent },
   { path: 'workshop/new', component: WorkshopNewComponent },
 
   { path: 'institution', redirectTo: '/institutions', pathMatch: 'full' },

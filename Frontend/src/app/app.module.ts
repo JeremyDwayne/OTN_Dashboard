@@ -16,6 +16,7 @@ import { AppComponent } from './app.component';
 
 import { WorkshopListComponent } from './workshop/workshop-list.component';
 import { WorkshopShowComponent } from './workshop/workshop-show.component';
+import { WorkshopEventComponent } from './workshop/workshop-event.component';
 import { WorkshopNewComponent  } from './workshop/workshop-new.component';
 import { WorkshopService       } from './workshop/workshop.service';
 
@@ -49,6 +50,7 @@ import { SharedModule } from './shared/shared.module';
     AppComponent,
     WorkshopListComponent,
     WorkshopShowComponent,
+    WorkshopEventComponent,
     WorkshopNewComponent,
     InstitutionListComponent,
     InstitutionShowComponent,

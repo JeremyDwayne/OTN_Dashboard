@@ -40,7 +40,7 @@ module Api
         end
 
         def user_params
-          devise_parameter_sanitizer.permit(:email, :first_name, :last_name, :password, :role)
+          devise_parameter_sanitizer.permit(:email, :first_name, :last_name, :password, :role, :institution_id)
         end
 
     end
