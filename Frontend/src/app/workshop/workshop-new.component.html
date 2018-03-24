@@ -1,107 +1,108 @@
 <div class="row">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <form (ngSubmit)="createWorkshop(workshop)" #workshopForm='ngForm'>
-      <div class="form-group">
-        <label for="name">Name*</label>
-        <input type="text" id="name" class="form-control" required name="name" placeholder="Workshop Name" #name="ngModel" [(ngModel)]="workshop.name">
-      </div>
+    <form [formGroup]="workshopForm" (ngSubmit)="createWorkshop($event)">
+    <app-error-label [control]="workshopForm" [submitted]="submitted"></app-error-label>
 
-      <div class="form-group">
-        <label for="description">Description*</label>
-        <textarea class="form-control" id="description" required name="description" #description='ngModel' [(ngModel)]='workshop.description' rows="3">
-        </textarea>
-      </div>
+    <h5>Workshop For {{institution?.data.attributes.name}}</h5>
+      <app-input-field [attribute]="'name'"
+        [label]="'Name'" 
+        [type]="'text'"
+        [placeholder]="'Name'"
+        [icon]="''"
+        [control]="workshopForm.controls['name']"
+        [submitted]="'submitted'">
+      </app-input-field>
+
+      <app-textarea-field [attribute]="'description'"
+        [label]="'Workshop Description'" 
+        [rows]="'2'"
+        [control]="workshopForm.controls['description']"
+        [submitted]="submitted">
+      </app-textarea-field>
+      
+      <app-textarea-field [attribute]="'additional_location_info'"
+        [label]="'Additional Location Information'" 
+        [rows]="'2'"
+        [control]="workshopForm.controls['additional_location_info']"
+        [submitted]="submitted">
+      </app-textarea-field>
+
+      <app-select-field [attribute]="'facilitator_id'"
+        [label]="'Facilitator'" 
+        [options]="facilitators?.data"
+        [control]="workshopForm.controls['facilitator_id']"
+        [submitted]="submitted">
+      </app-select-field>
+      <!-- Link will take you to form to create new facilitator if the one you want doesn't exist. -->
+      <!-- [append_icon]="'fa-plus'" -->
+      <!-- [class]="'fa'" -->
+      <!-- [link]="'/institutions/' + $institution?.data.attributes.slug +'/facilitators/new'" -->
 
       <div class="form-group">
         <!-- starts_at: datetime -->
-        <label for="starts_at">Starts At*</label>
+        <label for="starts_at">Starts At</label>
         <div class="input-group">
-          <input [owlDateTime]="starts_at" id="starts_at" class="form-control" required name="starts_at" [owlDateTimeTrigger]="starts_at" #starts_at="ngModel" [(ngModel)]="workshop.starts_at">
+          <input [owlDateTime]="starts_at" id="starts_at" class="form-control" required name="starts_at" [owlDateTimeTrigger]="starts_at" [formControl]="workshopForm.controls['starts_at']">
           <div class="input-group-append">
             <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="starts_at"><i class="fa fa-calendar"></i></span>
           </div>
           <owl-date-time #starts_at [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
         </div>
+        <app-error-label [control]="workshopForm.controls['starts_at']" [submitted]="submitted"></app-error-label>
       </div>
+
+      <app-input-field [attribute]="'duration'"
+        [label]="'Duration'" 
+        [type]="'number'"
+        [placeholder]="'2'"
+        [icon]="''"
+        [control]="workshopForm.controls['duration']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
       <div class="form-group">
         <!-- sign_up_deadline: datetime -->
-        <label for="sign_up_deadline">Sign Up Deadline*</label>
+        <label for="sign_up_deadline">Sign Up Deadline</label>
         <div class="input-group">
-          <input [owlDateTime]="sign_up_deadline" id="sign_up_deadline" class="form-control" required name="sign_up_deadline" [owlDateTimeTrigger]="sign_up_deadline" #sign_up_deadline="ngModel" [(ngModel)]="workshop.sign_up_deadline">
+          <input [owlDateTime]="sign_up_deadline" id="sign_up_deadline" class="form-control" name="sign_up_deadline" [owlDateTimeTrigger]="sign_up_deadline" [formControl]="workshopForm.controls['sign_up_deadline']">
           <div class="input-group-append">
             <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="sign_up_deadline"><i class="fa fa-calendar"></i></span>
           </div>
           <owl-date-time #sign_up_deadline [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
         </div>
+        <app-error-label [control]="workshopForm.controls['sign_up_deadline']" [submitted]="submitted"></app-error-label>
       </div>
 
       <div class="form-group">
         <!-- review_deadline: datetime -->
-        <label for="review_deadline">Review Deadline*</label>
+        <label for="review_deadline">Review Deadline</label>
         <div class="input-group">
-          <input [owlDateTime]="review_deadline" id="review_deadline" class="form-control" required name="review_deadline" [owlDateTimeTrigger]="review_deadline" #review_deadline="ngModel" [(ngModel)]="workshop.review_deadline">
+          <input [owlDateTime]="review_deadline" id="review_deadline" class="form-control" name="review_deadline" [owlDateTimeTrigger]="review_deadline" [formControl]="workshopForm.controls['review_deadline']">
           <div class="input-group-append">
             <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="review_deadline"><i class="fa fa-calendar"></i></span>
           </div>
           <owl-date-time #review_deadline [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
         </div>
-      </div>
-      <div class="form-group">
-        <!-- institution_id: integer -->
-        <label for="institution_id">Institution</label><br/>
-        <select class="form-control" id="institution_id" name="institution_id" #institution_id='ngModel' [(ngModel)]='workshop.institution_id'>
-          <option *ngFor="let institution of institutions?.data" value="{{institution.id}}">{{institution.attributes.name}}</option>
-        </select>
+        <app-error-label [control]="workshopForm.controls['review_deadline']" [submitted]="submitted"></app-error-label>
       </div>
 
-      <div class="form-group">
-        <!-- user_id: integer -->
-        <label for="facilitator_id">Facilitator</label><br/>
-        <select class="form-control" id="facilitator_id" name="facilitator_id" #user_id='ngModel' [(ngModel)]='workshop.facilitator_id'>
-          <option *ngFor="let user of users" value="{{user.id}}">{{user.first_name}} {{user.last_name}}</option>
-        </select>
-      </div>
+      <app-select-field [attribute]="'stipend_currency'"
+        [label]="'Stipend Currency'" 
+        [options]="currencies"
+        [control]="workshopForm.controls['stipend_currency']"
+        [submitted]="submitted">
+      </app-select-field>
 
+      <app-input-field [attribute]="'stipend_cents'"
+        [label]="'Stipend'" 
+        [type]="'number'"
+        [icon]="'fa fa-dollar-sign'"
+        [step]="'any'"
+        [control]="workshopForm.controls['stipend_cents']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
-      <div class="form-group">
-        <!-- additional_location_info: string -->
-        <label for="additional_location_info">Additional Location Info</label>
-        <textarea class="form-control" id="additional_location_info" name="additional_location_info" #additional_location_info='ngModel' [(ngModel)]='workshop.additional_location_info' rows="2">
-        </textarea>
-      </div>
-
-      <div class="form-group">
-        <!-- duration: float -->
-        <label for="duration">duration</label>
-        <input type="number" id="duration" class="form-control" name="duration" #duration="ngModel" [(ngModel)]="workshop.duration">
-      </div>
-
-      <div class="form-group">
-        <!-- stipend_cents: integer -->
-        <label for="stipend_cents">stipend_cents</label>
-        <input type="number" id="stipend_cents" class="form-control" value="200.00" placeholder="200.00" name="stipend_cents" #stipend_cents="ngModel" [(ngModel)]="workshop.stipend_cents">
-      </div>
-
-      <div class="form-group">
-        <!-- stipend_currency: string -->
-        <label for="stipend_currency">stipend_currency*</label>
-        <input type="text" id="stipend_currency" value="USD" placeholder="USD" class="form-control" name="stipend_currency" #stipend_currency="ngModel" [(ngModel)]="workshop.stipend_currency">
-      </div>
-
-      <div class="form-group">
-        <!-- attendee_limit: integer -->
-        <label for="attendee_limit">attendee_limit*</label>
-        <input type="text" id="attendee_limit" class="form-control" name="attendee_limit" #attendee_limit="ngModel" [(ngModel)]="workshop.attendee_limit">
-      </div>
-
-      <div class="form-group">
-        <!-- slug: string -->
-        <label for="slug">slug*</label>
-        <input type="text" id="slug" class="form-control" name="slug" #slug="ngModel" [(ngModel)]="workshop.slug">
-      </div>
-
-      <button type="submit" class="btn btn-primary" [disabled]="!workshopForm.form.valid">Create Workshop</button>
+      <button type="submit" class="btn btn-primary">Create Workshop</button>
 
     </form>
     <small>* Required Field</small>

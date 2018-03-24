@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
+import { ConsortiumService } from '../consortium/consortium.service';
 
 @Component({
   selector: 'app-institution-new',
@@ -11,23 +14,58 @@ import { InstitutionService } from './institution.service';
 export class InstitutionNewComponent implements OnInit {
   institution = new Institution;
   submitted: boolean = false;
+  consortium: any;
+  consortium_slug: string;
+  consortium_id: number;
+  institutionForm: FormGroup;
 
-  constructor(private institutionService: InstitutionService) { }
+  constructor(
+    private institutionService: InstitutionService,
+    private consortiumService: ConsortiumService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) { }
   
   ngOnInit() {
-    // let timer = Observable.timer(0, 25000);
-    // timer.subscribe(() => this.getInstitutions());
+    this.submitted = false;
+
+    this.institutionForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      address_line_1: [''],
+      address_line_2: [''],
+      city: ['', Validators.required],
+      state: ['', Validators.required],
+      zip: [''],
+      consortium_id: ['', Validators.required]
+    });
+
+    this.consortium_slug = this.route.params['value']['slug'];
+    this.consortium_id = this.route.params['value']['id'];
+    this.getConsortium();
   }
 
   createInstitution(institution: Institution) {
     this.submitted = true;
-    this.institutionService.createInstitution(institution)
+    console.log(this.consortium);
+    this.institutionForm.value.consortium_id = this.consortium.data.id;
+    this.institutionService.createInstitution(this.institutionForm.value)
       .subscribe(
-        data => { return true }, 
+        data => { this.redirectAfterCreate(data) }, 
         error => { 
           console.log("Error creating institution" + error);
           return Observable.throw(error);
         });
+  }
+
+
+  redirectAfterCreate(institution: Institution): void {
+    console.log(institution);
+    this.router.navigate(['/institutions/' + institution.slug]) ;
+  }
+
+  getConsortium() {
+    this.consortiumService.getConsortium(this.consortium_slug, this.consortium_id).subscribe(response => this.consortium = response.json());
   }
 
   // getInstitutions() {

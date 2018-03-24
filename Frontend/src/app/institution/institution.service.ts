@@ -3,6 +3,7 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { Institution } from './institution';
+import { User } from '../user/user';
 
 @Injectable()
 export class InstitutionService {
@@ -17,6 +18,10 @@ export class InstitutionService {
 
   getInstitutions(): Observable<Institution[]> {
     return this.http.get(this.institutionsUrl).map((response: Response) => <Institution[]>response.json())
+  }
+  
+  getFacilitators(slug: string): Observable<User[]>{
+    return this.http.get(this.institutionsUrl + '/' + slug + '/facilitators').map((response: Response) => <User[]>response.json())
   }
 
   getInstitution(slug: string, id: number) {

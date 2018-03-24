@@ -29,10 +29,11 @@ export class ConsortiumShowComponent implements OnInit {
     this.routeId = this.route.params.subscribe(
       params => {
         this.slug = params['slug'];
+        this.id = params['id'];
       }
     )
     let consortiumRequest = this.route.params.flatMap((params: Params) =>
-      this.consortiumService.getConsortium(params['slug']));
+      this.consortiumService.getConsortium(params['slug'], null));
     consortiumRequest.subscribe(response => this.consortium = response.json());
   }
 

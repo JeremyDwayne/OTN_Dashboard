@@ -21,8 +21,9 @@ export class ConsortiumService {
     return this.http.get(this.consortiaUrl).map((response: Response) => <Consortium[]>response.json())
   }
 
-  getConsortium(id: number) {
-    return this.http.get(this.consortiaUrl + '/' + id + '.json')
+  getConsortium(slug: string, id: number) {
+    let cons_id = id ? id : slug;
+    return this.http.get(this.consortiaUrl + '/' + cons_id + '.json')
   }
 
   createConsortium(consortium: Consortium): Observable<Consortium> {

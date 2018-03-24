@@ -9,6 +9,18 @@
     <select id={{attribute}} [formControl]="control" name={{type}} class="form-control">
       <option *ngFor="let option of options" value={{option.id}}>{{option?.attributes.name}}</option>
     </select>
+    <div class="input-group-append" *ngIf="append_icon">
+      <div *ngIf="link; else spanBlock">
+        <a routerLink="{{link}}">
+          <i class="{{class}} {{append_icon}}"></i>
+        </a>
+      </div>
+      <ng-template  #spanBlock>
+        <span class="input-group-text" >
+          <i class="{{class}} {{append_icon}}"></i>
+        </span>
+      </ng-template>
+    </div>
   </div>
   <app-error-label [control]="control" [submitted]="submitted"></app-error-label>
 </div>

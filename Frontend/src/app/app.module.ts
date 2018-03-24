@@ -14,16 +14,8 @@ import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
 
 import { AppComponent } from './app.component';
 
-import { WorkshopListComponent } from './workshop/workshop-list.component';
-import { WorkshopShowComponent } from './workshop/workshop-show.component';
-import { WorkshopEventComponent } from './workshop/workshop-event.component';
-import { WorkshopNewComponent  } from './workshop/workshop-new.component';
-import { WorkshopService       } from './workshop/workshop.service';
-
-import { InstitutionListComponent } from './institution/institution-list.component';
-import { InstitutionShowComponent } from './institution/institution-show.component';
-import { InstitutionNewComponent  } from './institution/institution-new.component';
-import { InstitutionService       } from './institution/institution.service';
+import { WorkshopModule } from './workshop/workshop.module';
+import { InstitutionModule } from './institution/institution.module';
 
 import { ConsortiumListComponent } from './consortium/consortium-list.component';
 import { ConsortiumShowComponent } from './consortium/consortium-show.component';
@@ -33,7 +25,6 @@ import { Filter } from './shared/filter.pipe';
 
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
-import { AttendeeShowComponent } from './user/attendee-show.component';
 
 import { AuthenticationService } from './authentication/authentication.service';
 import { AuthenticationModule } from './authentication/authentication.module';
@@ -44,21 +35,12 @@ import { DashboardService } from './dashboard/dashboard.service';
 import { SharedModule } from './shared/shared.module';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
-    WorkshopListComponent,
-    WorkshopShowComponent,
-    WorkshopEventComponent,
-    WorkshopNewComponent,
-    InstitutionListComponent,
-    InstitutionShowComponent,
-    InstitutionNewComponent,
     ConsortiumListComponent,
     ConsortiumShowComponent,
     ConsortiumNewComponent,
-    AttendeeShowComponent,
     UserComponent,
     AuthLinksComponent,
     DashboardComponent,
@@ -76,12 +58,12 @@ import { SharedModule } from './shared/shared.module';
     Ng5BreadcrumbModule.forRoot(),
     NgbModule.forRoot(),
     SharedModule,
-    AuthenticationModule
+    AuthenticationModule,
+    WorkshopModule,
+    InstitutionModule
   ],
   providers: [ 
     DashboardService,
-    WorkshopService, 
-    InstitutionService, 
     ConsortiumService, 
     UserService,
     Angular2TokenService, 

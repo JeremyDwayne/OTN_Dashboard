@@ -3,10 +3,10 @@
   <div class="input-group">
     <div class="input-group-prepend" *ngIf="icon">
       <span class="input-group-text">
-        <i class={{icon}}></i>
+        <i class="{{class}} {{icon}}"></i>
       </span>
     </div>
-    <input id={{attribute}} type={{type}} [formControl]="control" name={{type}} placeholder={{placeholder}} class="form-control" minlength="{{minlength}}">
+    <input id={{attribute}} type={{type}} [formControl]="control" name={{attribute}} placeholder={{placeholder}} class="form-control" step={{step}} minlength={{minlength}}>
   </div>
   <app-error-label [control]="control" [submitted]="submitted"></app-error-label>
 </div>

@@ -1,29 +1,58 @@
 <div class="row">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <form (ngSubmit)="createInstitution(institution)" #institutionForm='ngForm'>
-      <div class="form-group">
-        <label for="name">Name*</label>
-        <input type="text" id="name" class="form-control" required name="name" placeholder="Institution Name" #name="ngModel" [(ngModel)]="institution.name">
-      </div>
+    <h5>Institution for {{consortium?.data.attributes.name}}</h5>
+    <form [formGroup]="institutionForm" (ngSubmit)="createInstitution($event)">
+      <app-input-field [attribute]="'name'"
+        [label]="'Name'" 
+        [type]="'text'"
+        [icon]="''"
+        [control]="institutionForm.controls['name']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
-      <div class="form-group">
-        <label for="city">City</label>
-        <input type="text" id="city" class="form-control" required name="city" placeholder="City" #name="ngModel" [(ngModel)]="institution.city">
-      </div>
+      <app-input-field [attribute]="'address_line_1'"
+        [label]="'Address Line 1'" 
+        [type]="'text'"
+        [icon]="''"
+        [placeholder]="'123 Example Rd.'"
+        [control]="institutionForm.controls['address_line_1']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
-      <div class="form-group">
-        <label for="state">State</label>
-        <input type="text" id="state" class="form-control" required name="state" placeholder="State" #name="ngModel" [(ngModel)]="institution.state">
-      </div>
+      <app-input-field [attribute]="'address_line_2'"
+        [label]="'Address Line 2'" 
+        [type]="'text'"
+        [icon]="''"
+        [control]="institutionForm.controls['address_line_2']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
-      <!-- t.string "address_line_1" -->
-      <!-- t.string "address_line_2" -->
-      <!-- t.integer "zip" -->
-      <!-- t.bigint "consortium_id" -->
+      <app-input-field [attribute]="'city'"
+        [label]="'City'" 
+        [type]="'text'"
+        [icon]="''"
+        [control]="institutionForm.controls['city']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
-      <button type="submit" class="btn btn-primary" [disabled]="!institutionForm.form.valid">Create Institution</button>
+      <app-input-field [attribute]="'state'"
+        [label]="'State'" 
+        [type]="'text'"
+        [icon]="''"
+        [control]="institutionForm.controls['state']"
+        [submitted]="'submitted'">
+      </app-input-field>
+
+      <app-input-field [attribute]="'zip'"
+        [label]="'Zip'" 
+        [type]="'number'"
+        [icon]="''"
+        [control]="institutionForm.controls['zip']"
+        [submitted]="'submitted'">
+      </app-input-field>
+
+      <button type="submit" class="btn btn-primary">Create Institution</button>
 
     </form>
-    <small>* Required Field</small>
   </div>
 </div>

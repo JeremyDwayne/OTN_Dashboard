@@ -7,7 +7,7 @@
 <div class="collapse" id="'institution-' + $institution?.data.id" [ngbCollapse]="!institution?.isCollapsed">
   <div class="card-body">
 
-    <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
+    <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) <a routerLink="/institutions/{{attributes.slug}}/workshops/new"><i class="fa fa-plus-circle"></i></a></h6>
     
     <div *ngIf="institution?.data.relationships.workshops.data.length !== 0; else noWorkshops">
       <div *ngFor="let workshop of institution?.data.relationships.workshops.data">

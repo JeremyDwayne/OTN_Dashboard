@@ -5,7 +5,6 @@ import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
 import { Workshop } from '../workshop/workshop';
 import { WorkshopShowComponent } from '../workshop/workshop-show.component';
-import { AttendeeShowComponent } from '../user/attendee-show.component';
 
 @Component({
   selector: 'app-institution-show',

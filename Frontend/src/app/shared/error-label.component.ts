@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-error-label',
   template: `
-    <div *ngIf="control.errors && (submitted || control.dirty || control.touched)">
+    <div *ngIf="control.errors && (submitted || control.dirty)">
       <div *ngFor="let error of (control.errors | errorMessages)">
         <small class="text-danger">{{ error }}</small>
       </div>

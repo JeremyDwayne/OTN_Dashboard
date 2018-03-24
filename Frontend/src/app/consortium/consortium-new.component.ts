@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Consortium } from './consortium';
 import { ConsortiumService } from './consortium.service';
-import { Institution } from '../institution/institution';
-import { InstitutionService } from '../institution/institution.service';
-import { User } from '../user/user';
 import { UserService } from '../user/user.service';
-import { BreadcrumbService } from 'ng5-breadcrumb';
 
 @Component({
   selector: 'app-consortium-new',
@@ -14,46 +12,51 @@ import { BreadcrumbService } from 'ng5-breadcrumb';
   styleUrls: ['./consortium.component.sass']
 })
 export class ConsortiumNewComponent implements OnInit {
-  consortium = new Consortium;
-  institutions: Institution[];
-  users: User[];
   submitted: boolean = false;
-  starts_at_date: Date = new Date(Date.now()); 
+  consortium: any;
+  admins: any[];
+  consortiumForm: FormGroup;
 
   constructor(
-    private consortiumService: ConsortiumService, 
-    private institutionService: InstitutionService,
+    private consortiumService: ConsortiumService,
     private userService: UserService,
-    private breadcrumbService: BreadcrumbService
-  ) {
-    breadcrumbService.addFriendlyNameForRoute('/consortium', 'consortia');
-  }
+    private route: ActivatedRoute,
+    private router: Router,
+    private formBuilder: FormBuilder
+  ) { }
   
   ngOnInit() {
-    this.starts_at_date.setMinutes(0);
+    this.submitted = false;
 
-    let timer = Observable.timer(0, 25000);
-    timer.subscribe(() => this.getInstitutions());
-    timer.subscribe(() => this.getUsers());
+    this.consortiumForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      state: ['', Validators.required],
+      admin_id: ['', Validators.required]
+    });
+    this.getAdmins();
   }
 
   createConsortium(consortium: Consortium) {
     this.submitted = true;
-    this.consortiumService.createConsortium(consortium)
+    console.log(this.consortium);
+    this.consortiumForm.value.consortium_id = this.consortium.data.id;
+    this.consortiumService.createConsortium(this.consortiumForm.value)
       .subscribe(
-        data => { return true }, 
+        data => { this.redirectAfterCreate(data) }, 
         error => { 
           console.log("Error creating consortium" + error);
           return Observable.throw(error);
         });
   }
 
-  getInstitutions() {
-    this.institutionService.getInstitutions().subscribe(institutions => this.institutions = institutions);
+
+  redirectAfterCreate(consortium: Consortium): void {
+    console.log(consortium);
+    this.router.navigate(['/consortiums/' + consortium.slug]) ;
   }
-  
-  getUsers() {
-    this.userService.getUsers().subscribe(users => this.users = users);
+
+  getAdmins() {
+    this.userService.getAdmins().subscribe(admins => this.admins = admins);
   }
 
 }

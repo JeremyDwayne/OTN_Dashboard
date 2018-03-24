@@ -19,7 +19,11 @@ export class UserService {
   getUsers(): Observable<User[]> {
     return this.http.get(this.usersUrl).map((response: Response) => <User[]>response.json())
   }
-  
+
+  getAdmins(): Observable<User[]> {
+    return this.http.get(this.usersUrl + '/admins').map((response: Response) => <User[]>response.json())
+  }
+
   getAttendees(workshop_id: number): Observable<User[]> {
     return this.http.get(this.workshopsUrl + '/' + workshop_id + '/attendees').map((response: Response) => <User[]>response.json())
   }

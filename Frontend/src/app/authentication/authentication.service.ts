@@ -12,17 +12,7 @@ export class AuthenticationService {
   constructor(
     private _tokenService: Angular2TokenService,
     private router: Router
-  ) {
-    this._tokenService.init({
-      apiPath: 'http://localhost:3000/api/v1',
-      globalOptions: {
-        headers: {
-          'Content-Type':     'application/json',
-          'Accept':           'application/json'
-        }
-      }
-    });
-  }
+  ) { }
 
   logIn(email: string, password: string): Observable<Response> {
     return this._tokenService.signIn({
@@ -45,7 +35,7 @@ export class AuthenticationService {
   logOut(): void {
     this.redirectUrl = undefined;
     this._tokenService.signOut();
-    this.router.navigate(['/']);
+    this.router.navigate(['/workshops']);
   }
 
   isLoggedIn(): boolean {
@@ -53,7 +43,7 @@ export class AuthenticationService {
   }
 
   redirectAfterLogin(): void {
-    let redirectTo = this.redirectUrl ? this.redirectUrl : '/';
+    let redirectTo = this.redirectUrl ? this.redirectUrl : '/workshops';
     this.redirectUrl = undefined;
     this.router.navigate([redirectTo]);
   }
