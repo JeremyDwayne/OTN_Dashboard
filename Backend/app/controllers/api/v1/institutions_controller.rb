@@ -1,7 +1,7 @@
 class Api::V1::InstitutionsController < ApplicationController
   before_action :set_institution, only: [:show, :update, :destroy]
   # before_action :set_consortium, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:create, :update, :destroy]
 
   def index
     @institutions = Institution.all

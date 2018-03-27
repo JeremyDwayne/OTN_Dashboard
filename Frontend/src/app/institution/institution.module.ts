@@ -13,6 +13,8 @@ import { InstitutionListComponent } from './institution-list.component';
 import { InstitutionShowComponent } from './institution-show.component';
 import { InstitutionNewComponent  } from './institution-new.component';
 import { InstitutionService       } from './institution.service';
+import { InstitutionFormComponent } from './institution-form.component';
+import { InstitutionEditComponent } from './institution-edit.component';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -33,6 +35,8 @@ import { SharedModule } from '../shared/shared.module';
     InstitutionListComponent,
     InstitutionShowComponent,
     InstitutionNewComponent,
+    InstitutionEditComponent,
+    InstitutionFormComponent
   ],
   providers: [
     InstitutionService

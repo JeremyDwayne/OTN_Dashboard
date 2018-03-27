@@ -7,13 +7,17 @@
         <span *ngIf="workshop?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
       </h5>
       <div id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
-        <a *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}">Event Page</a>
-        <ng-template #idLink>
-          <a routerLink="/workshops/{{workshop.data.id}}">Event Page</a>
-        </ng-template>
         <p class="card-text">
+          <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i><br/>
           {{workshop.data.attributes?.description}}<br/>
-          <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i>
+          <a class="btn btn-outline-primary" *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}">Event Page</a>
+          <ng-template #idLink>
+            <a class="btn btn-outline-primary" routerLink="/workshops/{{workshop.data.id}}">Event Page</a>
+          </ng-template>
+          <a class="btn btn-outline-success" *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}/edit">Edit Workshop</a>
+          <ng-template #idLink>
+            <a class="btn btn-outline-success" routerLink="/workshops/{{workshop.data.id}}/edit">Edit Workshop</a>
+          </ng-template>
         </p>
 
         <div *ngIf="workshop.data.relationships.faculty?.data.length !== 0; else noAttendees">

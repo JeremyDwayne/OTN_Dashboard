@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <form [formGroup]="workshopForm" (ngSubmit)="updateWorkshop(workshop)">
+    <app-error-label [control]="workshopForm" [submitted]="submitted"></app-error-label>
+
+      <h5>Edit Workshop</h5>
+
+      <app-workshop-form [workshopForm]="workshopForm" [facilitators]="facilitators"></app-workshop-form>
+
+      <button type="submit" class="btn btn-primary">Update Workshop</button>
+
+    </form>
+    <small>* Required Field</small>
+  </div>
+</div>

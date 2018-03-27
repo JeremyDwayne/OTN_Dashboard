@@ -4,24 +4,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
-import { ConsortiumService } from '../consortium/consortium.service';
 
 @Component({
-  selector: 'app-institution-new',
-  templateUrl: './institution-new.component.html',
+  selector: 'app-institution-edit',
+  templateUrl: './institution-edit.component.html',
   styleUrls: ['./institution.component.sass']
 })
-export class InstitutionNewComponent implements OnInit {
-  institution = new Institution;
+export class InstitutionEditComponent implements OnInit {
+  institution: any;
   submitted: boolean = false;
-  consortium: any;
-  consortium_slug: string;
-  consortium_id: number;
   institutionForm: FormGroup;
+  id: number;
 
   constructor(
     private institutionService: InstitutionService,
-    private consortiumService: ConsortiumService,
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder
@@ -40,22 +36,25 @@ export class InstitutionNewComponent implements OnInit {
       consortium_id: ['', Validators.required]
     });
 
-    this.consortium_slug = this.route.params['value']['slug'];
-    this.consortium_id = this.route.params['value']['id'];
-    this.getConsortium();
+    let institutionRequest = this.route.params.flatMap((params: Params) =>
+      this.institutionService.getInstitution(params['slug'], this.id));
+    institutionRequest.subscribe(response => {
+      this.institution = response.json().data;
+      console.log(this.institution);
+      this.id = this.institution.id
+      this.institutionForm.patchValue(this.institution.attributes);
+    });
   }
 
-  createInstitution(event) {
+  updateInstitution(event) {
     this.submitted = true;
-    // console.log(this.consortium);
-    this.institutionForm.value.consortium_id = this.consortium.data.id;
-    this.institution = this.institutionForm.value
-    console.log(this.institution)
-    this.institutionService.createInstitution(this.institution)
+
+    this.institutionForm.value.id = this.id;
+    this.institutionService.updateInstitution(this.institutionForm.value)
       .subscribe(
         data => { this.redirectAfterCreate(data) }, 
         error => { 
-          console.log("Error creating institution" + error);
+          console.log("Error updating institution" + error);
           return Observable.throw(error);
         });
   }
@@ -66,8 +65,5 @@ export class InstitutionNewComponent implements OnInit {
     this.router.navigate(['/institutions/' + institution.slug]) ;
   }
 
-  getConsortium() {
-    this.consortiumService.getConsortium(this.consortium_slug, this.consortium_id).subscribe(response => this.consortium = response.json());
-  }
-
+  
 }

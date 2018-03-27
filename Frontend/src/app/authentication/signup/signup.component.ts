@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
 import { InstitutionService } from '../../institution/institution.service';
+import { Institution } from '../../institution/institution';
 
 @Component({
   templateUrl: './signup.component.html',

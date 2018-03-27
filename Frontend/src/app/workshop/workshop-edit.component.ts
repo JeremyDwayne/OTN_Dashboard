@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
+import { tap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Workshop } from './workshop';
@@ -10,17 +11,18 @@ import { BreadcrumbService } from 'ng5-breadcrumb';
 import { WorkshopFormComponent } from './workshop-form.component';
 
 @Component({
-  selector: 'app-workshop-new',
-  templateUrl: './workshop-new.component.html',
+  selector: 'app-workshop-edit',
+  templateUrl: './workshop-edit.component.html',
   styleUrls: ['./workshop.component.sass']
 })
-export class WorkshopNewComponent implements OnInit {
-  workshop = new Workshop;
+export class WorkshopEditComponent implements OnInit {
+  workshop: any;
   institution: any;
+  facilitators: any[];
   submitted: boolean = false;
   starts_at_date: Date = new Date(Date.now()); 
-  institution_slug: string;
-  facilitators: any[];
+  institution_id: number;
+  @Input() id: number;
 
   workshopForm: FormGroup;
 
@@ -30,7 +32,7 @@ export class WorkshopNewComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {
     breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
   }
@@ -39,6 +41,7 @@ export class WorkshopNewComponent implements OnInit {
     this.submitted = false;
 
     this.workshopForm = this.formBuilder.group({
+      id: [''],
       name: ['', Validators.required],
       description: ['', Validators.required],
       institution_id: ['', Validators.required],
@@ -46,29 +49,37 @@ export class WorkshopNewComponent implements OnInit {
       starts_at: ['', Validators.required],
       additional_location_info: [''],
       duration: [''],
-      stipend_cents: ['200.00'],
-      stipend_currency: ['USD'],
+      stipend_cents: [''],
+      stipend_currency: [''],
       sign_up_deadline: [''],
       attendee_limit: [''],
       review_deadline: [''],
     });
 
-    this.institution_slug = this.route.params['value']['slug'];
-    this.getInstitution();
-    this.getFacilitators();
+    let workshopRequest = this.route.params.flatMap((params: Params) =>
+      this.workshopService.getWorkshop(params['slug'], this.id));
+    workshopRequest.subscribe(response => {
+      this.workshop = response.json().data;
+      this.id = this.workshop.id
+      console.log(this.workshop);
+      this.institution_id = this.workshop.attributes.institution_id;
+      this.getFacilitators();
+      this.workshopForm.patchValue(this.workshop.attributes);
+    });
+
 
     this.starts_at_date.setMinutes(0);
   }
 
-  createWorkshop(workshop: Workshop) {
-    // console.log(event);
+  updateWorkshop(workshop: Workshop) {
+    console.log(this.workshopForm);
     this.submitted = true;
-    this.workshopForm.value.institution_id = this.institution.data.id;
-    this.workshopService.createWorkshop(this.workshopForm.value)
+    this.workshopForm.value.id = this.id;
+    this.workshopService.updateWorkshop(this.workshopForm.value)
       .subscribe(
         data => { this.redirectAfterCreate(data)}, 
         error => { 
-          console.log("Error creating workshop" + error);
+          console.log("Error updating workshop" + error);
           return Observable.throw(error);
         });
   }
@@ -78,11 +89,7 @@ export class WorkshopNewComponent implements OnInit {
     this.router.navigate(['/workshops/' + workshop.slug]) ;
   }
 
-  getInstitution() {
-    this.institutionService.getInstitution(this.institution_slug, null).subscribe(response => this.institution = response.json());
-  }
-
   getFacilitators() {
-    this.institutionService.getFacilitators(this.institution_slug, null).subscribe(facilitators => this.facilitators = facilitators);
+    this.institutionService.getFacilitators(null, this.institution_id).subscribe(facilitators => this.facilitators = facilitators);
   }
 }

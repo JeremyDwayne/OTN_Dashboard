@@ -1,0 +1,13 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <form [formGroup]="institutionForm" (ngSubmit)="updateInstitution(institution)">
+    <app-error-label [control]="institutionForm" [submitted]="submitted"></app-error-label>
+
+      <h5>Edit Workshop</h5>
+      <app-institution-form [institutionForm]="institutionForm"></app-institution-form>
+
+      <button type="submit" class="btn btn-primary">Update Institution</button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <form [formGroup]="consortiumForm" (ngSubmit)="updateConsortium(consortium)">
+    <app-error-label [control]="consortiumForm" [submitted]="submitted"></app-error-label>
+
+    <h5>Edit Consortium</h5>
+      
+      <app-consortium-form [consortiumForm]="consortiumForm" [admins]="admins"></app-consortium-form>
+
+      <button type="submit" class="btn btn-primary">Update Consortium</button>
+
+    </form>
+  </div>
+</div>

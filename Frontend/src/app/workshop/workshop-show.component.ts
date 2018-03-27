@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
 import { Workshop } from './workshop';
+import { WorkshopEditComponent } from './workshop-edit.component';
 import { WorkshopService } from './workshop.service';
 import { User } from '../user/user';
 import { AttendeeShowComponent } from '../user/attendee-show.component';
@@ -40,5 +41,11 @@ export class WorkshopShowComponent implements OnInit {
       this.ends_at = start.setHours(start.getHours() + this.workshop.data.attributes.duration);
     });
   }
+
+  // openEditModal() {
+  //   const modal = this.modalService.open(WorkshopEditComponent);
+  //   modal.componentInstance.id = this.id;
+  //   modal.componentInstance.selector = "app-workshop-edit";
+  // }
 
 }

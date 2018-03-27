@@ -27,12 +27,14 @@ export class InstitutionService {
     this.options = new RequestOptions({headers: this.headers});
   }
 
-  getInstitutions(): Observable<Institution[]> {
-    return this.http.get(this.institutionsUrl, this.options).map((response: Response) => <Institution[]>response.json())
+  getInstitutions(): Observable<any[]> {
+    return this.http.get(this.institutionsUrl, this.options).map((response: Response) => <any[]>response.json())
   }
   
-  getFacilitators(slug: string): Observable<User[]>{
-    return this.http.get(this.institutionsUrl + '/' + slug + '/facilitators', this.options).map((response: Response) => <User[]>response.json())
+  getFacilitators(slug: string, id: number): Observable<User[]>{
+    let inst_id = id ? id : slug;
+    console.log(inst_id);
+    return this.http.get(this.institutionsUrl + '/' + inst_id + '/facilitators', this.options).map((response: Response) => <User[]>response.json())
   }
 
   getInstitution(slug: string, id: number) {
@@ -41,7 +43,10 @@ export class InstitutionService {
   }
 
   createInstitution(institution: Institution): Observable<Institution> {
-    console.log(institution)
     return this.http.post(this.institutionsUrl, institution, this.options).map((res: Response) => res.json());
+  }
+
+  updateInstitution(institution: Institution): Observable<Institution> {
+    return this.http.put(this.institutionsUrl + '/' + institution.id + '.json', institution, this.options).map((res: Response) => res.json());
   }
 }

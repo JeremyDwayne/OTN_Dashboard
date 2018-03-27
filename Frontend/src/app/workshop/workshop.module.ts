@@ -14,6 +14,8 @@ import { WorkshopListComponent } from './workshop-list.component';
 import { WorkshopShowComponent } from './workshop-show.component';
 import { WorkshopEventComponent } from './workshop-event.component';
 import { WorkshopNewComponent  } from './workshop-new.component';
+import { WorkshopEditComponent  } from './workshop-edit.component';
+import { WorkshopFormComponent  } from './workshop-form.component';
 import { WorkshopService       } from './workshop.service';
 
 import { SharedModule } from '../shared/shared.module';
@@ -35,6 +37,8 @@ import { SharedModule } from '../shared/shared.module';
     WorkshopShowComponent,
     WorkshopEventComponent,
     WorkshopNewComponent,
+    WorkshopEditComponent,
+    WorkshopFormComponent,
     AttendeeShowComponent
   ],
   providers: [
