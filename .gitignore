@@ -5,26 +5,26 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
-Backend/.bundle
+.bundle
 
 # Ignore all logfiles and tempfiles.
-Backend/log/*
-Backend/tmp/*
-!Backend/log/.keep
-!Backend/tmp/.keep
+log/*
+tmp/*
+!log/.keep
+!tmp/.keep
 
-Backend/node_modules
-Backend/yarn-error.log
+node_modules
+yarn-error.log
 
-Backend/.byebug_history
-Backend/public/packs
-Backend/public/packs-test
-Backend/yarn-debug.log*
-Backend/yarn-error.log*
-Backend/.yarn-integrity
+.byebug_history
+public/packs
+public/packs-test
+yarn-debug.log*
+yarn-error.log*
+.yarn-integrity
 
 # Ignore application configuration
-Backend/config/application.yml
+config/application.yml
 
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
