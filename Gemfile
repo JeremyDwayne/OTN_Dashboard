@@ -47,6 +47,7 @@ group :development, :test do
 
   gem "capistrano", "~> 3.10", require: false
   gem 'rvm1-capistrano3', require: false
+  gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails'
   gem 'sshkit-sudo'
   gem 'capistrano-figaro-yml', '~> 1.0.2'
