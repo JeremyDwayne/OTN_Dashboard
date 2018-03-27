@@ -10,9 +10,9 @@ import { InstitutionService       } from './institution.service';
 
 const routes: Routes = [
   { path: 'institution', redirectTo: '/institutions', pathMatch: 'full' },
-  { path: 'institutions', component: InstitutionListComponent },
+  // { path: 'institutions', component: InstitutionListComponent },
   { path: 'institutions/:slug', component: InstitutionShowComponent },
-  { path: 'consortia/:slug/institutions/new', component: InstitutionNewComponent },
+  { path: 'consortia/:slug/institutions/new', component: InstitutionNewComponent, pathMatch: 'full' },
 ]
 
 @NgModule({

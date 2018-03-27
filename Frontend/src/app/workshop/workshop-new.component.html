@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <form [formGroup]="workshopForm" (ngSubmit)="createWorkshop($event)">
+    <form [formGroup]="workshopForm" (ngSubmit)="createWorkshop(workshop)">
     <app-error-label [control]="workshopForm" [submitted]="submitted"></app-error-label>
 
     <h5>Workshop For {{institution?.data.attributes.name}}</h5>

@@ -1,9 +1,12 @@
 class Api::V1::WorkshopsController < ApplicationController
+  include Devise::Controllers::Helpers
   before_action :set_workshop, only: [:show, :update, :destroy]
   # before_action :set_institution, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :create, :update, :destroy]
 
   def index
-    @workshops = Workshop.all
+    puts @current_user.inspect
+    @workshops = @current_user.workshops
     render json: WorkshopSerializer.new(@workshops).serialized_json
   end
 
@@ -49,6 +52,8 @@ class Api::V1::WorkshopsController < ApplicationController
   end
 
   def workshop_params
-    params.require(:workshop).permit!
+    puts "PARAMS"
+    puts params.inspect
+    params.require(:workshop).permit(:name, :duration, :additional_location_info, :facilitator_id, :starts_at, :description, :sign_up_deadline, :review_deadline, :institution_id, :stipend_cents, :stipend_currency, :attendee_limit)
   end
 end

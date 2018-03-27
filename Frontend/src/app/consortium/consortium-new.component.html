@@ -1,37 +1,12 @@
 <div class="row">
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-    <h5>Institution for {{consortium?.data.attributes.name}}</h5>
-    <form [formGroup]="institutionForm" (ngSubmit)="createInstitution($event)">
+    <h5>Create New Consortium</h5>
+    <form [formGroup]="consortiumForm" (ngSubmit)="createConsortium($event)">
       <app-input-field [attribute]="'name'"
         [label]="'Name'" 
         [type]="'text'"
         [icon]="''"
-        [control]="institutionForm.controls['name']"
-        [submitted]="'submitted'">
-      </app-input-field>
-
-      <app-input-field [attribute]="'address_line_1'"
-        [label]="'Address Line 1'" 
-        [type]="'text'"
-        [icon]="''"
-        [placeholder]="'123 Example Rd.'"
-        [control]="institutionForm.controls['address_line_1']"
-        [submitted]="'submitted'">
-      </app-input-field>
-
-      <app-input-field [attribute]="'address_line_2'"
-        [label]="'Address Line 2'" 
-        [type]="'text'"
-        [icon]="''"
-        [control]="institutionForm.controls['address_line_2']"
-        [submitted]="'submitted'">
-      </app-input-field>
-
-      <app-input-field [attribute]="'city'"
-        [label]="'City'" 
-        [type]="'text'"
-        [icon]="''"
-        [control]="institutionForm.controls['city']"
+        [control]="consortiumForm.controls['name']"
         [submitted]="'submitted'">
       </app-input-field>
 
@@ -39,19 +14,18 @@
         [label]="'State'" 
         [type]="'text'"
         [icon]="''"
-        [control]="institutionForm.controls['state']"
+        [control]="consortiumForm.controls['state']"
         [submitted]="'submitted'">
       </app-input-field>
 
-      <app-input-field [attribute]="'zip'"
-        [label]="'Zip'" 
-        [type]="'number'"
-        [icon]="''"
-        [control]="institutionForm.controls['zip']"
-        [submitted]="'submitted'">
-      </app-input-field>
+      <app-select-field [attribute]="'admin_id'"
+       [label]="'Admin'"
+       [options]="admins?.data"
+       [control]="consortiumForm.controls['admin_id']"
+       [submitted]="'submitted'">
+      </app-select-field>
 
-      <button type="submit" class="btn btn-primary">Create Institution</button>
+      <button type="submit" class="btn btn-primary">Create Consortium</button>
 
     </form>
   </div>

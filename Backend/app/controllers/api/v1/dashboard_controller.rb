@@ -1,9 +1,9 @@
 class Api::V1::DashboardController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
     # TODO: devise_token_auth current_user and authenticate_user!
-    @consortia = User.first.consortia
+    @consortia = current_user.consortia
     render json: ConsortiumSerializer.new(@consortia).serialized_json
   end
 end

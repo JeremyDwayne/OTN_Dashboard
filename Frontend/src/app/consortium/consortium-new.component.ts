@@ -13,7 +13,6 @@ import { UserService } from '../user/user.service';
 })
 export class ConsortiumNewComponent implements OnInit {
   submitted: boolean = false;
-  consortium: any;
   admins: any[];
   consortiumForm: FormGroup;
 
@@ -28,18 +27,17 @@ export class ConsortiumNewComponent implements OnInit {
   ngOnInit() {
     this.submitted = false;
 
+    this.getAdmins();
     this.consortiumForm = this.formBuilder.group({
       name: ['', Validators.required],
       state: ['', Validators.required],
       admin_id: ['', Validators.required]
     });
-    this.getAdmins();
   }
 
   createConsortium(consortium: Consortium) {
     this.submitted = true;
-    console.log(this.consortium);
-    this.consortiumForm.value.consortium_id = this.consortium.data.id;
+    console.log(consortium);
     this.consortiumService.createConsortium(this.consortiumForm.value)
       .subscribe(
         data => { this.redirectAfterCreate(data) }, 
@@ -52,7 +50,7 @@ export class ConsortiumNewComponent implements OnInit {
 
   redirectAfterCreate(consortium: Consortium): void {
     console.log(consortium);
-    this.router.navigate(['/consortiums/' + consortium.slug]) ;
+    this.router.navigate(['/consortia/' + consortium.slug]) ;
   }
 
   getAdmins() {

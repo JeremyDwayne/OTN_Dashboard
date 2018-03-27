@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Response } from '@angular/http';
+import { Response} from '@angular/http';
 
 import { Angular2TokenService } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';

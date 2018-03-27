@@ -1,48 +1,41 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
-
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
 
 import { WorkshopModule } from './workshop/workshop.module';
 import { InstitutionModule } from './institution/institution.module';
+import { ConsortiumModule } from './consortium/consortium.module';
 
-import { ConsortiumListComponent } from './consortium/consortium-list.component';
-import { ConsortiumShowComponent } from './consortium/consortium-show.component';
-import { ConsortiumNewComponent  } from './consortium/consortium-new.component';
-import { ConsortiumService       } from './consortium/consortium.service';
-import { Filter } from './shared/filter.pipe';
+import { AuthenticationService } from './authentication/authentication.service';
+import { AuthenticationLinksComponent } from './authentication/authentication-links.component';
+import { AuthenticationModule } from './authentication/authentication.module';
+
 
 import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
 
-import { AuthenticationService } from './authentication/authentication.service';
-import { AuthenticationModule } from './authentication/authentication.module';
-import { AuthLinksComponent } from './authentication/auth-links.component';
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardService } from './dashboard/dashboard.service';
+
 import { SharedModule } from './shared/shared.module';
+import { Filter } from './shared/filter.pipe';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    ConsortiumListComponent,
-    ConsortiumShowComponent,
-    ConsortiumNewComponent,
     UserComponent,
-    AuthLinksComponent,
+    AuthenticationLinksComponent,
     DashboardComponent,
     Filter
   ],
@@ -60,11 +53,11 @@ import { SharedModule } from './shared/shared.module';
     SharedModule,
     AuthenticationModule,
     WorkshopModule,
-    InstitutionModule
+    InstitutionModule,
+    ConsortiumModule
   ],
   providers: [ 
     DashboardService,
-    ConsortiumService, 
     UserService,
     Angular2TokenService, 
     BreadcrumbService,

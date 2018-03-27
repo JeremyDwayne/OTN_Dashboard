@@ -1,5 +1,6 @@
 class Api::V1::ConsortiaController < ApplicationController
   before_action :set_consortium, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!
 
   def index
     @consortia = Consortium.all
@@ -38,6 +39,6 @@ class Api::V1::ConsortiaController < ApplicationController
   end
 
   def consortium_params
-    params.require(:consortium).permit(:name, :state)
+    params.require(:consortium).permit(:name, :state, :admin_id)
   end
 end

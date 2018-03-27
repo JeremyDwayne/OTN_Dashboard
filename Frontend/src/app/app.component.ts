@@ -10,7 +10,13 @@ export class AppComponent {
   constructor(private _tokenService: Angular2TokenService){
     this._tokenService.init({
       apiBase: 'http://localhost:3000',
-      apiPath: 'api/v1'
+      globalOptions: {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Api-Version': '1'
+        }
+      }
     });
   }
 }

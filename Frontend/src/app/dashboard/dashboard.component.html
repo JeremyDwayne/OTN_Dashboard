@@ -1,9 +1,10 @@
 <div *ngFor="let consortium of dashboard?.data"> 
-  <h4>{{consortium.attributes.name}}</h4>
+  <h4>{{consortium?.attributes.name}} <a routerLink="/consortia/{{consortium?.attributes.slug}}/institutions/new" placement="top" ngbTooltip="Add Institution"><i class="fa fa-plus-circle"></i></a></h4>
 
   <div id="'consortium-' + $consortium.attributes.id">
     <div class="dashboard" *ngFor="let institution of consortium.relationships.institutions.data">
       <app-institution-show [id]="institution.id"></app-institution-show>
     </div>
   </div>
+  <br/>
 </div>

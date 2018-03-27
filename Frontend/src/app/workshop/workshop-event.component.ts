@@ -37,6 +37,7 @@ export class WorkshopEventComponent implements OnInit {
     )
     let workshopRequest = this.route.params.flatMap((params: Params) =>
       this.workshopService.getWorkshop(params['slug'], this.id));
+
     workshopRequest.subscribe(response => {
       this.workshop = response.json();
       let start = new Date(this.workshop.data.attributes.starts_at);

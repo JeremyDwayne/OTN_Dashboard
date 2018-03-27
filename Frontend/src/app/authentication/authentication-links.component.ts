@@ -7,11 +7,11 @@ import { AuthenticationService } from './authentication.service';
   template: `
     <div class="form-group btn-group">
       <button class="form-control btn btn-outline-success" routerLink="/login" routerLinkActive="active" *ngIf="isLoggedOut()">Login</button>
-      <button class="form-control btn btn-outline-warning" (click)="logOut()" >Logout</button>
+      <button class="form-control btn btn-outline-warning" *ngIf="isLoggedIn()" (click)="logOut()" >Logout</button>
     </div>
   `
 })
-export class AuthLinksComponent {
+export class AuthenticationLinksComponent {
   constructor(private authService: AuthenticationService){}
 
   isLoggedIn(): boolean {

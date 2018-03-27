@@ -21,7 +21,11 @@ export class WorkshopNewComponent implements OnInit {
   submitted: boolean = false;
   starts_at_date: Date = new Date(Date.now()); 
   institution_slug: string;
-  currencies = [{id: 'USD', attributes: {name: 'USD', icon: 'fa-dollar-sign'}}, { id: 'Euro', attributes: {name: 'Euro', icon: 'fa-euro-sign'}}]
+  currencies = [
+    { id: 'USD',  attributes: { name: 'USD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'CAD',  attributes: { name: 'CAD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'Euro', attributes: { name: 'Euro', icon: 'fa-euro-sign'   }}
+  ]
 
   workshopForm: FormGroup;
 
@@ -61,7 +65,8 @@ export class WorkshopNewComponent implements OnInit {
     this.getFacilitators();
   }
 
-  createWorkshop(event) {
+  createWorkshop(workshop: Workshop) {
+    // console.log(event);
     this.submitted = true;
     this.workshopForm.value.institution_id = this.institution.data.id;
     this.workshopService.createWorkshop(this.workshopForm.value)

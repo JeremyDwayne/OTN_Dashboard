@@ -45,11 +45,13 @@ export class InstitutionNewComponent implements OnInit {
     this.getConsortium();
   }
 
-  createInstitution(institution: Institution) {
+  createInstitution(event) {
     this.submitted = true;
-    console.log(this.consortium);
+    // console.log(this.consortium);
     this.institutionForm.value.consortium_id = this.consortium.data.id;
-    this.institutionService.createInstitution(this.institutionForm.value)
+    this.institution = this.institutionForm.value
+    console.log(this.institution)
+    this.institutionService.createInstitution(this.institution)
       .subscribe(
         data => { this.redirectAfterCreate(data) }, 
         error => { 

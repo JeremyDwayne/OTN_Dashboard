@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'workshops', component: WorkshopListComponent },
   { path: 'workshops/:slug', component: WorkshopEventComponent },
   // { path: 'workshop/new', component: WorkshopNewComponent },
-  { path: 'institutions/:slug/workshops/new', component: WorkshopNewComponent }
+  { path: 'institutions/:slug/workshops/new', component: WorkshopNewComponent, pathMatch: 'full' }
 ]
 
 @NgModule({
