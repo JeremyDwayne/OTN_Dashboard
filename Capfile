@@ -7,7 +7,6 @@ require "capistrano/deploy"
 require "capistrano/scm/git"
 install_plugin Capistrano::SCM::Git
 
-require 'capistrano/bundler'
 require 'rvm1/capistrano3'
 require 'capistrano/rails'
 require 'capistrano/figaro_yml'

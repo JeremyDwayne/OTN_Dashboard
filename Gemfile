@@ -10,8 +10,6 @@ end
 gem 'rails', '~> 5.1.5'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
-# Use Puma as the app server
-gem 'puma', '~> 3.7'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
@@ -47,7 +45,6 @@ group :development, :test do
 
   gem "capistrano", "~> 3.10", require: false
   gem 'rvm1-capistrano3', require: false
-  gem 'capistrano-bundler', '~> 1.3'
   gem 'capistrano-rails'
   gem 'sshkit-sudo'
   gem 'capistrano-figaro-yml', '~> 1.0.2'
@@ -56,6 +53,12 @@ end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  # Use Puma as the app server
+  gem 'puma', '~> 3.7'
+end
+
+group :production do
+  gem 'passenger'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
