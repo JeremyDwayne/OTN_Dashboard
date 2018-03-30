@@ -102,6 +102,17 @@ after "deploy:starting", "figaro:setup"
 
 set :bundle_bins, fetch(:bundle_bins, [])
 namespace :deploy do
+  namespace :assets do
+    Rake::Task["precompile"].clear_actions
+    task :precompile do
+        puts "DON'T PRECOMPILE ======================================================="
+    end
+    Rake::Task["backup_manifest"].clear_actions
+    task :backup_manifest do
+        puts "DON'T BACKUP MANIFEST ======================================================="
+    end
+  end
+
   desc 'Restart application'
   task :restart do
     on roles(:app), :except => { :no_release => true } do
