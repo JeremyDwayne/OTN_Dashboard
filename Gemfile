@@ -8,8 +8,9 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
+gem 'sqlite3'
 # Use mysql as the database for Active Record
-gem 'mysql2', '>= 0.3.18', '< 0.5'
+# gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
@@ -49,7 +50,7 @@ group :development, :test do
   gem 'sshkit-sudo'
   gem 'capistrano-figaro-yml', '~> 1.0.2'
   gem 'capistrano-rails-console', require: false
-  gem 'capistrano-bundler', '~> 1.3'
+  # gem 'capistrano-bundler', '~> 1.3'
 end
 
 group :development do

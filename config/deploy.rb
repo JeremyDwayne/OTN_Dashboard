@@ -2,14 +2,16 @@
 lock "~> 3.10.1"
 
 set :application, "otn-dashboard"
+set :ruby_version, "ruby-2.5.0"
 set :repo_url, "git@github.com:JeremyDwayne/OTN_Dashboard.git"
 
-set :use_sudo, true
+set :use_sudo, false
 
-set :ruby_version, "ruby-2.5.0"
-set :rvm_ruby_version, "ruby-2.5.0"
+set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
 set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
 set :rvm1_map_bins, %w{rake gem bundle ruby}
+set :rvm1_type, :user
+set :rvm1_binary, '~/.rvm/bin/rvm'
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -22,12 +24,16 @@ set :format, :airbrussh
 set :repository_cache, "git_cache"
 set :deploy_via, :remote_cache
 
+# Skip migration if files in db/migrate were not modified
+set :conditionally_migrate, true
+set :migration_role, :app
+
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto
 
 # Default value for :pty is false
-# set :pty, true
+set :pty, true
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml"
@@ -35,7 +41,7 @@ append :linked_files, "config/database.yml", "config/secrets.yml"
 # Default value for linked_dirs is []
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
 
-append :linked_dirs, '.bundle'
+# append :linked_dirs, '.bundle'
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -60,7 +66,7 @@ namespace :app do
 end
 before 'deploy', 'rvm1:install:ruby'
 before "rvm1:install:rvm", "app:update_rvm_key"
-after "rvm1:install:rvm", "deploy:install_bundler"
+# after "rvm1:install:rvm", "deploy:install_bundler"
 
 namespace :figaro do
   desc "SCP transfer figaro configuration to the shared folder"
@@ -94,8 +100,7 @@ end
 after "deploy:starting", "figaro:setup"
 
 
-
-set :bundle_bins, fetch(:bundle_bins, []).push %w(compass)
+set :bundle_bins, fetch(:bundle_bins, [])
 namespace :deploy do
   desc 'Restart application'
   task :restart do
@@ -115,6 +120,7 @@ namespace :deploy do
     end
   end
 
+  before :starting,     :install_bundler
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
