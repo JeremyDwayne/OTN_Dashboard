@@ -146,6 +146,9 @@ GEM
       omniauth-oauth (~> 1.1)
       rack
     orm_adapter (0.5.0)
+    passenger (5.2.2)
+      rack
+      rake (>= 0.8.1)
     puma (3.11.3)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
@@ -233,6 +236,7 @@ DEPENDENCIES
   omniauth-google
   omniauth-oauth2 (~> 1.5.0)
   omniauth-twitter
+  passenger
   puma (~> 3.7)
   pundit
   rack-cors

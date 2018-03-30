@@ -49,6 +49,7 @@ group :development, :test do
   gem 'sshkit-sudo'
   gem 'capistrano-figaro-yml', '~> 1.0.2'
   gem 'capistrano-rails-console', require: false
+  gem 'capistrano-bundler', '~> 1.3'
 end
 
 group :development do
