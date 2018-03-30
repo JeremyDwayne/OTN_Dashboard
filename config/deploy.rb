@@ -57,16 +57,10 @@ namespace :app do
   task :update_rvm_key do
     execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
   end
-
-  task :install_bundler do
-    on roles :all do
-      execute :rvm, "all do gem install bundler"
-    end
-  end
 end
 before 'deploy', 'rvm1:install:ruby'
 before "rvm1:install:rvm", "app:update_rvm_key"
-after "rvm1:install:rvm", "app:install_bundler"
+after "rvm1:install:rvm", "deploy:install_bundler"
 
 namespace :figaro do
   desc "SCP transfer figaro configuration to the shared folder"
@@ -100,16 +94,27 @@ end
 after "deploy:starting", "figaro:setup"
 
 
+
+set :bundle_bins, fetch(:bundle_bins, []).push %w(compass)
 namespace :deploy do
-	namespace :assets do
-    desc 'Restart application'
-    task :restart do
-      on roles(:app), in: :sequence, wait: 5 do
+  desc 'Restart application'
+  task :restart do
+    on roles(:app), :except => { :no_release => true } do
+      within "#{fetch(:deploy_to)}/current/" do
+        with RAILS_ENV: fetch(:environment) do
+          execute :rake, "db:migrate"
+        end
         execute "touch #{current_path}/tmp/restart.txt"
       end
     end
-
-    after  :finishing,    :cleanup
-    after  :finishing,    :restart
   end
+
+  task :install_bundler do
+    on roles :all do
+      execute :rvm, "all do gem install bundler"
+    end
+  end
+
+  after  :finishing,    :cleanup
+  after  :finishing,    :restart
 end
