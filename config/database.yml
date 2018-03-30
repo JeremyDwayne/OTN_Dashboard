@@ -13,8 +13,6 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: root
-  password:
   socket: /tmp/mysql.sock
 
 development:
@@ -49,6 +47,12 @@ test:
 #
 production:
   <<: *default
-  database: Dashboard_production
-  username: Dashboard
-  password: <%= ENV['DASHBOARD_DATABASE_PASSWORD'] %>
+  database: otn_dashboard_production
+  username: otn_dashboard
+  password: <%= ENV['DASHBOARD_PRODUCTION_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: otn_dashboard_staging
+  username: otn_dashboard
+  password: <%= ENV['DASHBOARD_STAGING_DATABASE_PASSWORD'] %>
