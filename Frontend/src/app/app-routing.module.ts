@@ -11,10 +11,6 @@ const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'dashboard', component: DashboardComponent },
 
-  { path: 'consortium', redirectTo: '/consortia', pathMatch: 'full' },
-  { path: 'consortia', component: ConsortiumListComponent, pathMatch: 'full' },
-  { path: 'consortia/:slug', component: ConsortiumShowComponent, pathMatch: 'full' },
-  { path: 'consortia/new', component: ConsortiumNewComponent, pathMatch: 'full' },
   { path: 'profile', component: UserComponent }
 ];
 

@@ -28,6 +28,7 @@ gem 'rack-cors', :require => 'rack/cors'
 gem 'devise_token_auth'
 gem 'pundit'
 gem 'fast_jsonapi'
+gem 'batch_request_api'
 
 gem 'omniauth'
 gem 'omniauth-twitter'

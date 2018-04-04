@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {return;}
     this.authService.logIn(value.email, value.password).subscribe(
       this.authService.redirectAfterLogin.bind(this.authService),
-      this.afterFailedLogin.bind(this)
+      // this.afterFailedLogin.bind(this)
     );
   }
 

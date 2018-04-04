@@ -1,5 +1,9 @@
-<h5 class="card-header" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'institution-' + institution?.data.id" (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
- <a routerLink="/institutions/{{institution?.data.attributes.slug}}/edit" placement="top" ngbTooltip="Edit Institution"><i class="fa fa-edit align-top" style="width: auto; height: .5em;"></i></a> 
+<h5 class="card-header" [attr.aria-expanded]="!isCollapsed" 
+  [attr.aria-controls]="'institution-' + institution?.data.id" 
+  (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
+ <a routerLink="/institutions/{{institution?.data.attributes.slug}}/edit" placement="top" 
+   ngbTooltip="Edit Institution"><i class="fa fa-edit align-top" style="width: auto; height: .5em;">
+ </i></a> 
   {{attributes?.name}}
 
   <span *ngIf="!institution?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
@@ -7,9 +11,12 @@
   <br/>
 </h5>
 <div class="collapse" id="'institution-' + $institution?.data.id" [ngbCollapse]="!institution?.isCollapsed">
-  <div class="card-body">
-
-    <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) <a routerLink="/institutions/{{attributes?.slug}}/workshops/new" placement="top" ngbTooltip="Add Workshop"><i class="fa fa-plus-circle"></i></a></h6>
+  <div *ngIf="institution?.isCollapsed" class="card-body">
+    <h6>Workshops ({{ institution?.data.relationships.workshops.data.length }}) 
+      <a routerLink="/institutions/{{attributes?.slug}}/workshops/new" placement="top" 
+        ngbTooltip="Add Workshop"><i class="fa fa-plus-circle"></i>
+      </a>
+    </h6>
     
     <div *ngIf="institution?.data.relationships.workshops.data.length !== 0; else noWorkshops">
       <div *ngFor="let workshop of institution?.data.relationships.workshops.data">

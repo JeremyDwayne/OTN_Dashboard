@@ -6,7 +6,7 @@
         <span *ngIf="!workshop?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
         <span *ngIf="workshop?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
       </h5>
-      <div id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
+      <div *ngIf="workshop?.isCollapsed" id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
         <p class="card-text">
           <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i><br/>
           {{workshop.data.attributes?.description}}<br/>

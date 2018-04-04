@@ -2,11 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { Http, HttpModule } from '@angular/http';
 import { Angular2TokenService } from 'angular2-token';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
+
+import { NgxHttpBatcherModule, HttpBatchConfiguration, 
+         HttpBatchConfigurationCollection, HttpBatcher } from 'ngx-http-batcher';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -30,6 +33,17 @@ import { DashboardService } from './dashboard/dashboard.service';
 import { SharedModule } from './shared/shared.module';
 import { Filter } from './shared/filter.pipe';
 
+// Exported function so that HttpBatchConfigurationCollection can be used as in DI.
+// Having this as an exported function enabled AOT complication as well :-)
+export function httpBatchConfigurationFactory() {
+  return new HttpBatchConfigurationCollection([
+    // this is a basic configuration object see [Configuration Object Options]
+    // for more information on all the options
+    new HttpBatchConfiguration({
+      rootEndpointUrl: "http://localhost:3000/api/v1/",
+      batchEndpointUrl: "http://localhost:3000/api/v1/batch_sequential"
+    })]);
+};
 
 @NgModule({
   declarations: [
@@ -54,14 +68,17 @@ import { Filter } from './shared/filter.pipe';
     AuthenticationModule,
     WorkshopModule,
     InstitutionModule,
-    ConsortiumModule
+    ConsortiumModule,
+    // NgxHttpBatcherModule
   ],
   providers: [ 
     DashboardService,
     UserService,
     Angular2TokenService, 
     BreadcrumbService,
-    AuthenticationService
+    AuthenticationService,
+    // { provide: HttpBatchConfigurationCollection, useFactory: httpBatchConfigurationFactory },
+    // { provide: Http, useClass: HttpBatcher }
   ],
   bootstrap: [AppComponent]
 })

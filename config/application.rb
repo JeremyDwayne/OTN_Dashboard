@@ -29,7 +29,11 @@ module Dashboard
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
-    # config.session_store :cookie_store, key: "_otn_dashboard_#{Rails.env}", domain: :all
+    config.session_store :cookie_store, key: "_otn_dashboard_#{Rails.env}", domain: :all
+    config.middleware.use ActionDispatch::Cookies # Required for all session management
+    config.middleware.use ActionDispatch::Session::CookieStore, config.session_options
+    require "./lib/middleware/catch_json_parse_errors.rb"
+    config.middleware.insert_before Rack::Head, CatchJsonParseErrors
 
     config.middleware.use Rack::Cors do
       allow do
@@ -40,5 +44,6 @@ module Dashboard
           :methods => [:get, :post, :options, :delete, :put]
       end
     end
+
   end
 end
