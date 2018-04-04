@@ -16,7 +16,7 @@ export class DashboardComponent implements OnInit {
     private router: Router,
   ) { }
 
-  @Input() dashboard: Dashboard;
+  @Input() dashboard: any;
 
   ngOnInit() {
     this.getDashboard();

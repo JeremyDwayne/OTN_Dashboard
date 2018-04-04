@@ -10,6 +10,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class SelectFieldComponent {
   @Input() attribute: string;
   @Input() label: string;
+  @Input() icon: string;
   @Input() append_icon: string;
   @Input() link: string;
   @Input() class: string;

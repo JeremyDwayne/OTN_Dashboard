@@ -13,7 +13,7 @@ import { UserService } from '../user/user.service';
 })
 export class ConsortiumEditComponent implements OnInit {
   submitted: boolean = false;
-  admins: any[];
+  admins: any;
   consortiumForm: FormGroup;
   consortium: any;
   id: number;

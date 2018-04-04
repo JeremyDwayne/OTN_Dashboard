@@ -12,7 +12,6 @@ import { InstitutionModule } from '../institution/institution.module';
 import { ConsortiumListComponent } from './consortium-list.component';
 import { ConsortiumShowComponent } from './consortium-show.component';
 import { ConsortiumNewComponent  } from './consortium-new.component';
-import { ConsortiumFormComponent  } from './consortium-form.component';
 import { ConsortiumEditComponent  } from './consortium-edit.component';
 import { ConsortiumService       } from './consortium.service';
 
@@ -36,7 +35,6 @@ import { SharedModule } from '../shared/shared.module';
     ConsortiumShowComponent,
     ConsortiumNewComponent,
     ConsortiumEditComponent,
-    ConsortiumFormComponent
   ],
   providers: [
     ConsortiumService

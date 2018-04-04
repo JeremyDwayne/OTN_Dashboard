@@ -7,7 +7,6 @@ import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
 import { InstitutionService } from '../institution/institution.service';
 import { BreadcrumbService } from 'ng5-breadcrumb';
-import { WorkshopFormComponent } from './workshop-form.component';
 
 @Component({
   selector: 'app-workshop-new',
@@ -20,7 +19,12 @@ export class WorkshopNewComponent implements OnInit {
   submitted: boolean = false;
   starts_at_date: Date = new Date(Date.now()); 
   institution_slug: string;
-  facilitators: any[];
+  facilitators: any;
+  currencies = [
+    { id: 'USD',  attributes: { name: 'USD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'CAD',  attributes: { name: 'CAD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'Euro', attributes: { name: 'Euro', icon: 'fa-euro-sign'   }}
+  ]
 
   workshopForm: FormGroup;
 

@@ -18,6 +18,11 @@ export class InstitutionNewComponent implements OnInit {
   consortium_slug: string;
   consortium_id: number;
   institutionForm: FormGroup;
+  currencies = [
+    { id: 'USD',  attributes: { name: 'USD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'CAD',  attributes: { name: 'CAD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'Euro', attributes: { name: 'Euro', icon: 'fa-euro-sign'   }}
+  ]
 
   constructor(
     private institutionService: InstitutionService,

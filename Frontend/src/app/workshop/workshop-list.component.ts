@@ -11,7 +11,7 @@ import { BreadcrumbService } from 'ng5-breadcrumb';
   styleUrls: ['./workshop.component.sass']
 })
 export class WorkshopListComponent implements OnInit {
-  workshops: Workshop[];
+  workshops: any;
 
   constructor(
     private workshopService: WorkshopService, 

@@ -10,7 +10,7 @@ import { ConsortiumService } from './consortium.service';
   styleUrls: ['./consortium.component.sass']
 })
 export class ConsortiumListComponent implements OnInit {
-  consortia: Consortium[];
+  consortia: any;
 
   constructor(
     private consortiumService: ConsortiumService, 

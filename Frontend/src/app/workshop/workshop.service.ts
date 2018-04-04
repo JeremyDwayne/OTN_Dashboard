@@ -28,8 +28,8 @@ export class WorkshopService {
     this.options = new RequestOptions({headers: this.headers});
   }
 
-  getWorkshops(): Observable<Workshop[]> {
-    return this.http.get(this.workshopsUrl, this.options).map((response: Response) => <Workshop[]>response.json())
+  getWorkshops(): Observable<any> {
+    return this.http.get(this.workshopsUrl, this.options).map((response: Response) => <any>response.json())
   }
 
   getWorkshop(slug: string, id: number) {

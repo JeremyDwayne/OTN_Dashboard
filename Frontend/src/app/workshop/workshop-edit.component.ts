@@ -8,7 +8,6 @@ import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
 import { InstitutionService } from '../institution/institution.service';
 import { BreadcrumbService } from 'ng5-breadcrumb';
-import { WorkshopFormComponent } from './workshop-form.component';
 
 @Component({
   selector: 'app-workshop-edit',
@@ -18,11 +17,16 @@ import { WorkshopFormComponent } from './workshop-form.component';
 export class WorkshopEditComponent implements OnInit {
   workshop: any;
   institution: any;
-  facilitators: any[];
+  facilitators: any;
   submitted: boolean = false;
   starts_at_date: Date = new Date(Date.now()); 
   institution_id: number;
   @Input() id: number;
+  currencies = [
+    { id: 'USD',  attributes: { name: 'USD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'CAD',  attributes: { name: 'CAD',  icon: 'fa-dollar-sign' }}, 
+    { id: 'Euro', attributes: { name: 'Euro', icon: 'fa-euro-sign'   }}
+  ]
 
   workshopForm: FormGroup;
 

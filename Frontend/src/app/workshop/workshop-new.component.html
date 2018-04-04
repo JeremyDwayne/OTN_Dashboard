@@ -4,7 +4,101 @@
     <app-error-label [control]="workshopForm" [submitted]="submitted"></app-error-label>
 
       <h5>Create Workshop For {{institution?.data.attributes.name}}</h5>
-      <app-workshop-form [workshopForm]="workshopForm" [facilitators]="facilitators" [institution_slug]="institution_slug"></app-workshop-form>
+
+      <app-input-field [attribute]="'name'"
+        [label]="'Name'" 
+        [type]="'text'"
+        [placeholder]="'Name'"
+        [icon]="''"
+        [control]="workshopForm?.controls['name']"
+        [submitted]="'submitted'">
+      </app-input-field>
+
+      <app-textarea-field [attribute]="'description'"
+        [label]="'Workshop Description'" 
+        [rows]="'2'"
+        [control]="workshopForm?.controls['description']"
+        [submitted]="submitted">
+      </app-textarea-field>
+
+      <app-textarea-field [attribute]="'additional_location_info'"
+        [label]="'Additional Location Information'" 
+        [rows]="'2'"
+        [control]="workshopForm?.controls['additional_location_info']"
+        [submitted]="submitted">
+      </app-textarea-field>
+
+      <app-select-field [attribute]="'facilitator_id'"
+        [label]="'Facilitator'" 
+        [options]="facilitators?.data"
+        [control]="workshopForm?.controls['facilitator_id']"
+        [submitted]="submitted">
+      </app-select-field>
+      <!-- Link will take you to form to create new facilitator if the one you want doesn't exist. -->
+      <!-- [append_icon]="'fa-plus'" -->
+      <!-- [class]="'fa'" -->
+      <!-- [link]="'/institutions/' + $institution?.data.attributes.slug +'/facilitators/new'" -->
+
+      <div class="form-group">
+        <label for="starts_at">Starts At</label>
+        <div class="input-group">
+          <input [owlDateTime]="starts_at" id="starts_at" class="form-control" required name="starts_at" [owlDateTimeTrigger]="starts_at" [formControl]="workshopForm?.controls['starts_at']" [placeholder]="workshopForm?.controls['starts_at'].value | date:'short'">
+          <div class="input-group-append">
+            <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="starts_at"><i class="fa fa-calendar"></i></span>
+          </div>
+          <owl-date-time #starts_at [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
+        </div>
+        <app-error-label [control]="workshopForm?.controls['starts_at']" [submitted]="submitted"></app-error-label>
+      </div>
+
+      <app-input-field [attribute]="'duration'"
+        [label]="'Duration'" 
+        [type]="'number'"
+        [placeholder]="'2'"
+        [icon]="''"
+        [control]="workshopForm?.controls['duration']"
+        [submitted]="'submitted'">
+      </app-input-field>
+
+      <div class="form-group">
+        <label for="sign_up_deadline">Sign Up Deadline</label>
+        <div class="input-group">
+          <input [owlDateTime]="sign_up_deadline" id="sign_up_deadline" class="form-control" name="sign_up_deadline" [owlDateTimeTrigger]="sign_up_deadline" [formControl]="workshopForm?.controls['sign_up_deadline']" [placeholder]="workshopForm?.controls['sign_up_deadline'].value | date:'short'">
+          <div class="input-group-append">
+            <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="sign_up_deadline"><i class="fa fa-calendar"></i></span>
+          </div>
+          <owl-date-time #sign_up_deadline [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
+        </div>
+        <app-error-label [control]="workshopForm?.controls['sign_up_deadline']" [submitted]="submitted"></app-error-label>
+      </div>
+
+      <div class="form-group">
+        <label for="review_deadline">Review Deadline</label>
+        <div class="input-group">
+          <input [owlDateTime]="review_deadline" id="review_deadline" class="form-control" name="review_deadline" [owlDateTimeTrigger]="review_deadline" [formControl]="workshopForm?.controls['review_deadline']" [placeholder]="workshopForm?.controls['review_deadline'].value | date:'short'">
+          <div class="input-group-append">
+            <span class="btn btn-outline-secondary" [owlDateTimeTrigger]="review_deadline"><i class="fa fa-calendar"></i></span>
+          </div>
+          <owl-date-time #review_deadline [startAt]="starts_at_date" [hour12Timer]="true" [stepMinute]='15'></owl-date-time>
+        </div>
+        <app-error-label [control]="workshopForm?.controls['review_deadline']" [submitted]="submitted"></app-error-label>
+      </div>
+
+      <app-select-field [attribute]="'stipend_currency'"
+        [label]="'Stipend Currency'" 
+        [options]="currencies"
+        [control]="workshopForm?.controls['stipend_currency']"
+        [submitted]="submitted">
+      </app-select-field>
+
+      <app-input-field [attribute]="'stipend_cents'"
+        [label]="'Stipend'" 
+        [type]="'number'"
+        [icon]="'fa fa-dollar-sign'"
+        [step]="'any'"
+        [control]="workshopForm?.controls['stipend_cents']"
+        [submitted]="'submitted'">
+      </app-input-field>
 
       <button type="submit" class="btn btn-primary">Create Workshop</button>
 

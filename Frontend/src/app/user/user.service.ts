@@ -27,23 +27,23 @@ export class UserService {
     this.options = new RequestOptions({headers: this.headers});
   }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get(this.usersUrl, this.options).map((response: Response) => <User[]>response.json())
+  getUsers(): Observable<any> {
+    return this.http.get(this.usersUrl, this.options).map((response: Response) => <any>response.json())
   }
 
-  getAdmins(): Observable<User[]> {
-    return this.http.get('http://localhost:3000/api/v1/admins', this.options).map((response: Response) => <User[]>response.json())
+  getAdmins(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/v1/admins', this.options).map((response: Response) => <any>response.json())
   }
 
-  getAttendees(workshop_id: number): Observable<User[]> {
-    return this.http.get(this.workshopsUrl + '/' + workshop_id + '/attendees', this.options).map((response: Response) => <User[]>response.json())
+  getAttendees(workshop_id: number): Observable<any> {
+    return this.http.get(this.workshopsUrl + '/' + workshop_id + '/attendees', this.options).map((response: Response) => <any>response.json())
   }
 
   getUser(id: number) {
     return this.http.get(this.usersUrl + '/' + id + '.json', this.options)
   }
 
-  createUser(user: User): Observable<User> {
+  createUser(user: User): Observable<any> {
     console.log(user)
     return this.http.post(this.usersUrl, JSON.stringify(user), this.options).map((res: Response) => res.json());
   }

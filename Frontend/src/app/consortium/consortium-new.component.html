@@ -2,7 +2,30 @@
   <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
     <h5>Create New Consortium</h5>
     <form [formGroup]="consortiumForm" (ngSubmit)="createConsortium($event)">
-      <app-consortium-form [consortiumForm]="consortiumForm" [admins]="admins"></app-consortium-form>
+      <app-error-label [control]="consortiumForm" [submitted]="submitted"></app-error-label>
+
+      <app-input-field [attribute]="'name'"
+         [label]="'Name'" 
+         [type]="'text'"
+         [icon]="''"
+         [control]="consortiumForm.controls['name']"
+         [submitted]="'submitted'">
+      </app-input-field>
+
+      <app-input-field [attribute]="'state'"
+         [label]="'State'" 
+         [type]="'text'"
+         [icon]="''"
+         [control]="consortiumForm.controls['state']"
+         [submitted]="'submitted'">
+      </app-input-field>
+
+      <app-select-field [attribute]="'admin_id'"
+         [label]="'Admin'"
+         [options]="admins?.data"
+         [control]="consortiumForm.controls['admin_id']"
+         [submitted]="'submitted'">
+      </app-select-field>
       <button type="submit" class="btn btn-primary">Create Consortium</button>
 
     </form>

@@ -16,6 +16,7 @@ export class InstitutionShowComponent implements OnInit {
   routeId: any;
   attributes: any;
   workshopCount: number;
+  isCollapsed: boolean = true;
 
   constructor(
     private http: Http,

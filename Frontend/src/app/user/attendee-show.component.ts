@@ -17,7 +17,7 @@ export class AttendeeShowComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  @Input() attendee: User;
+  @Input() attendee: any;
   @Input() id: number;
 
   ngOnInit() {

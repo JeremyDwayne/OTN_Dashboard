@@ -28,8 +28,8 @@ export class ConsortiumService {
     this.options = new RequestOptions({headers: this.headers});
   }
 
-  getConsortia(): Observable<Consortium[]> {
-    return this.http.get(this.consortiaUrl, this.options).map((response: Response) => <Consortium[]>response.json())
+  getConsortia(): Observable<any> {
+    return this.http.get(this.consortiaUrl, this.options).map((response: Response) => <any>response.json())
   }
 
   getConsortium(slug: string, id: number) {

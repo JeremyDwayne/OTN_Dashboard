@@ -11,7 +11,7 @@ import { Institution } from '../../institution/institution';
 export class SignupComponent implements OnInit {
   submitted: boolean;
   signupForm: FormGroup;
-  institutions: any[];
+  institutions: any;
 
   constructor(
     private authService: AuthenticationService,
@@ -53,7 +53,7 @@ export class SignupComponent implements OnInit {
     this.signupForm.setErrors(parsed_errors);
   }
 
-  getInstitutions() {
+  getInstitutions(): any {
     this.institutionService.getInstitutions().subscribe(institutions => this.institutions = institutions);
   }
 

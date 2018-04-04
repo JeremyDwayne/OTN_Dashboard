@@ -23,7 +23,6 @@ import { AuthenticationLinksComponent } from './authentication/authentication-li
 import { AuthenticationModule } from './authentication/authentication.module';
 
 
-import { UserComponent } from './user/user.component';
 import { UserService } from './user/user.service';
 
 
@@ -48,7 +47,6 @@ export function httpBatchConfigurationFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    UserComponent,
     AuthenticationLinksComponent,
     DashboardComponent,
     Filter
