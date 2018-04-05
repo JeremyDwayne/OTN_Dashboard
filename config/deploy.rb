@@ -113,17 +113,14 @@ namespace :deploy do
     end
   end
 
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), :except => { :no_release => true } do
-      within "#{fetch(:deploy_to)}/current/" do
-        with RAILS_ENV: fetch(:environment) do
-          execute :rake, "db:migrate"
-        end
-        execute "touch #{current_path}/tmp/restart.txt"
-      end
-    end
-  end
+  # desc 'Restart application'
+  # task :restart do
+  #   on roles(:app), :except => { :no_release => true } do
+  #     within "#{fetch(:deploy_to)}/current/" do
+  #       execute "touch #{current_path}/tmp/restart.txt"
+  #     end
+  #   end
+  # end
 
   task :install_bundler do
     on roles :all do

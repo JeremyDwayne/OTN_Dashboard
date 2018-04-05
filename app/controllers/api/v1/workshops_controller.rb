@@ -2,7 +2,7 @@ class Api::V1::WorkshopsController < ApplicationController
   include Devise::Controllers::Helpers
   before_action :set_workshop, only: [:show, :register, :update, :destroy]
   # before_action :set_institution, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :register, :create, :update, :destroy]
+  before_action :authenticate_user!, only: [:index, :attendees, :register, :create, :update, :destroy]
 
   def index
     puts @current_user.inspect
@@ -15,8 +15,7 @@ class Api::V1::WorkshopsController < ApplicationController
   end
 
   def attendees
-    @workshop = Workshop.friendly.find(params[:workshop_id])
-    @attendees = User.where(id: @workshop.attendees.map{|a| a.faculty_id})
+    @attendees = @workshop.attendees.map{|a| a.faculty}
     render json: @attendees
   end
 

@@ -9,8 +9,6 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.5'
 # gem 'sqlite3'
-# Use Puma as the app server
-gem 'puma', '~> 3.7'
 # Use mysql as the database for Active Record
 gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -48,13 +46,15 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails'
 
+  # Use Puma as the app server
+  gem 'puma', '~> 3.7'
   gem "capistrano", "~> 3.10", require: false
   gem 'rvm1-capistrano3', require: false
   gem 'capistrano-rails'
   gem 'sshkit-sudo'
   gem 'capistrano-figaro-yml', '~> 1.0.2'
   gem 'capistrano-rails-console', require: false
-  # gem 'capistrano-bundler', '~> 1.3'
+  gem 'capistrano-passenger'
 end
 
 group :development do
@@ -62,7 +62,7 @@ group :development do
 end
 
 group :production do
-  # gem 'passenger'
+  gem 'passenger'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

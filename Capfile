@@ -12,6 +12,7 @@ require 'capistrano/rails/console'
 require 'capistrano/figaro_yml'
 # require 'capistrano/bundler'
 require 'rvm1/capistrano3'
+require 'capistrano/passenger'
 
 require 'sshkit/sudo'
 
