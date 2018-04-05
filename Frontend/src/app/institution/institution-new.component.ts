@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
 import { ConsortiumService } from '../consortium/consortium.service';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-institution-new',
@@ -29,7 +30,8 @@ export class InstitutionNewComponent implements OnInit {
     private consortiumService: ConsortiumService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
   
   ngOnInit() {
@@ -52,22 +54,21 @@ export class InstitutionNewComponent implements OnInit {
 
   createInstitution(event) {
     this.submitted = true;
-    // console.log(this.consortium);
     this.institutionForm.value.consortium_id = this.consortium.data.id;
     this.institution = this.institutionForm.value
-    console.log(this.institution)
-    this.institutionService.createInstitution(this.institution)
-      .subscribe(
-        data => { this.redirectAfterCreate(data) }, 
-        error => { 
-          console.log("Error creating institution" + error);
-          return Observable.throw(error);
-        });
+    this.institutionService.createInstitution(this.institution).subscribe(
+      data => { 
+        this.redirectAfterCreate(data);
+        this.alertService.success(["Successfully created institution!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error);
+      });
   }
 
 
   redirectAfterCreate(institution: Institution): void {
-    console.log(institution);
     this.router.navigate(['/institutions/' + institution.slug]) ;
   }
 

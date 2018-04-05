@@ -8,6 +8,9 @@ import { SelectFieldComponent } from './select-field.component';
 import { TextareaFieldComponent } from './textarea-field.component';
 import { ErrorLabelComponent } from './error-label.component';
 
+import { Alert, AlertType } from './alert';
+import { AlertComponent } from './alert.component';
+
 import { ErrorMessagesPipe }   from './error-messages.pipe';
 
 @NgModule({
@@ -16,7 +19,8 @@ import { ErrorMessagesPipe }   from './error-messages.pipe';
       SelectFieldComponent,
       TextareaFieldComponent,
       ErrorLabelComponent,
-      ErrorMessagesPipe
+      ErrorMessagesPipe,
+      AlertComponent
     ],
     imports: [
       BrowserModule,
@@ -28,7 +32,8 @@ import { ErrorMessagesPipe }   from './error-messages.pipe';
       InputFieldComponent,
       SelectFieldComponent,
       TextareaFieldComponent,
-      ErrorLabelComponent
+      ErrorLabelComponent,
+      AlertComponent
     ]
 })
 export class SharedModule {}

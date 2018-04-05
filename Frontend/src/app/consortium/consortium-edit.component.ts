@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Consortium } from './consortium';
 import { ConsortiumService } from './consortium.service';
 import { UserService } from '../user/user.service';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-consortium-edit',
@@ -23,7 +24,8 @@ export class ConsortiumEditComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
   
   ngOnInit() {
@@ -47,20 +49,20 @@ export class ConsortiumEditComponent implements OnInit {
 
   updateConsortium(consortium: Consortium) {
     this.submitted = true;
-    console.log(consortium);
     this.consortiumForm.value.id = this.id;
-    this.consortiumService.updateConsortium(this.consortiumForm.value)
-      .subscribe(
-        data => { this.redirectAfterCreate(data) }, 
-        error => { 
-          console.log("Error updating consortium" + error);
-          return Observable.throw(error);
-        });
+    this.consortiumService.updateConsortium(this.consortiumForm.value).subscribe(
+      data => { 
+        this.redirectAfterUpdate(data);
+        this.alertService.success(["Successfully updated consortium!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error);
+      });
   }
 
 
-  redirectAfterCreate(consortium: Consortium): void {
-    console.log(consortium);
+  redirectAfterUpdate(consortium: Consortium): void {
     this.router.navigate(['/consortia/' + consortium.slug]) ;
   }
 

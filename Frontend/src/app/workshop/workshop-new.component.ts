@@ -7,6 +7,7 @@ import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
 import { InstitutionService } from '../institution/institution.service';
 import { BreadcrumbService } from 'ng5-breadcrumb';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-workshop-new',
@@ -34,6 +35,7 @@ export class WorkshopNewComponent implements OnInit {
     private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
     private router: Router,
+    private alertService: AlertService,
     private formBuilder: FormBuilder
   ) {
     breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
@@ -65,16 +67,18 @@ export class WorkshopNewComponent implements OnInit {
   }
 
   createWorkshop(workshop: Workshop) {
-    // console.log(event);
     this.submitted = true;
     this.workshopForm.value.institution_id = this.institution.data.id;
-    this.workshopService.createWorkshop(this.workshopForm.value)
-      .subscribe(
-        data => { this.redirectAfterCreate(data)}, 
-        error => { 
-          console.log("Error creating workshop" + error);
-          return Observable.throw(error);
-        });
+    this.workshopService.createWorkshop(this.workshopForm.value).subscribe(
+      data => { 
+        this.redirectAfterCreate(data);
+        this.alertService.success(["Successfully created workshop!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error); 
+      }
+    );
   }
 
   redirectAfterCreate(workshop: Workshop): void {

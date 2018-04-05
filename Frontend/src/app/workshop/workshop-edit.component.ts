@@ -8,6 +8,7 @@ import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
 import { InstitutionService } from '../institution/institution.service';
 import { BreadcrumbService } from 'ng5-breadcrumb';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-workshop-edit',
@@ -37,6 +38,7 @@ export class WorkshopEditComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) {
     breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
   }
@@ -65,7 +67,6 @@ export class WorkshopEditComponent implements OnInit {
     workshopRequest.subscribe(response => {
       this.workshop = response.json().data;
       this.id = this.workshop.id
-      console.log(this.workshop);
       this.institution_id = this.workshop.attributes.institution_id;
       this.getFacilitators();
       this.workshopForm.patchValue(this.workshop.attributes);
@@ -79,17 +80,18 @@ export class WorkshopEditComponent implements OnInit {
     console.log(this.workshopForm);
     this.submitted = true;
     this.workshopForm.value.id = this.id;
-    this.workshopService.updateWorkshop(this.workshopForm.value)
-      .subscribe(
-        data => { this.redirectAfterCreate(data)}, 
-        error => { 
-          console.log("Error updating workshop" + error);
-          return Observable.throw(error);
-        });
+    this.workshopService.updateWorkshop(this.workshopForm.value).subscribe(
+      data => { 
+        this.redirectAfterUpdate(data);
+        this.alertService.success(["Successfully updated workshop!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error);
+      });
   }
 
-  redirectAfterCreate(workshop: Workshop): void {
-    console.log(workshop);
+  redirectAfterUpdate(workshop: Workshop): void {
     this.router.navigate(['/workshops/' + workshop.slug]) ;
   }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthenticationService } from '../authentication.service';
+import { AlertService } from '../../shared/alert.service';
 
 @Component({
   templateUrl: './login.component.html',
@@ -12,7 +14,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private authService: AuthenticationService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
 
   ngOnInit() {
@@ -27,19 +30,15 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (!this.loginForm.valid) {return;}
     this.authService.logIn(value.email, value.password).subscribe(
-      this.authService.redirectAfterLogin.bind(this.authService),
-      // this.afterFailedLogin.bind(this)
-    );
-  }
-
-  afterFailedLogin(errors: any){
-    let parsed_errors = JSON.parse(errors._body).errors;
-    for(let attribute in this.loginForm.controls) {
-      if (parsed_errors[attribute]) {
-        this.loginForm.controls[attribute].setErrors(parsed_errors[attribute]);
+      data => { 
+        this.authService.redirectAfterLogin.bind(this.authService),
+        this.alertService.success(["Successfully created institution!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error);
       }
-    }
-    this.loginForm.setErrors(parsed_errors);
+    );
   }
 
 }

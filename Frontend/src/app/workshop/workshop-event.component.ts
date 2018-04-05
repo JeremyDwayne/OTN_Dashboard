@@ -1,11 +1,16 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
+
 import { Workshop } from './workshop';
+import { User } from '../user/user';
+
+import { AttendeeShowComponent } from '../user/attendee-show.component';
+
 import { WorkshopService } from './workshop.service';
 import { InstitutionService } from '../institution/institution.service';
-import { User } from '../user/user';
-import { AttendeeShowComponent } from '../user/attendee-show.component';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-workshop-event',
@@ -16,12 +21,14 @@ export class WorkshopEventComponent implements OnInit {
   slug: string;
   routeId: any;
   ends_at: number;
+  response: Response;
 
   constructor(
     private http: Http,
     private route: ActivatedRoute,
     private workshopService: WorkshopService,
-    private institutionService: InstitutionService
+    private institutionService: InstitutionService,
+    private alertService: AlertService
   ) { }
 
   @Input() workshop: any;
@@ -48,6 +55,18 @@ export class WorkshopEventComponent implements OnInit {
       });
     });
 
+  }
+
+  registerAttendee(slug: string) {
+    this.workshopService.registerAttendee(slug).subscribe(
+      data => { 
+        this.alertService.success(["Successfully signed up for workshop!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error); 
+      }
+    );
   }
 
 }

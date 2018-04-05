@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Consortium } from './consortium';
 import { ConsortiumService } from './consortium.service';
 import { UserService } from '../user/user.service';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-consortium-new',
@@ -21,7 +22,8 @@ export class ConsortiumNewComponent implements OnInit {
     private userService: UserService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
   
   ngOnInit() {
@@ -38,18 +40,19 @@ export class ConsortiumNewComponent implements OnInit {
   createConsortium(consortium: Consortium) {
     this.submitted = true;
     console.log(consortium);
-    this.consortiumService.createConsortium(this.consortiumForm.value)
-      .subscribe(
-        data => { this.redirectAfterCreate(data) }, 
-        error => { 
-          console.log("Error creating consortium" + error);
-          return Observable.throw(error);
-        });
+    this.consortiumService.createConsortium(this.consortiumForm.value).subscribe(
+      data => { 
+        this.redirectAfterCreate(data);
+        this.alertService.success(["Successfully created consoritum!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error);
+      });
   }
 
 
   redirectAfterCreate(consortium: Consortium): void {
-    console.log(consortium);
     this.router.navigate(['/consortia/' + consortium.slug]) ;
   }
 

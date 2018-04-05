@@ -14,13 +14,14 @@ Rails.application.routes.draw do
         resources :workshops
       end
       resources :workshops do
+        post :register
         get :attendees
       end
-
       resources :users
+      resources :institutions
+
       get "/admins", to: "users#admins"
       get "/institutions/:institution_id/facilitators", to: "institutions#facilitators"
-      resources :institutions
     end
   end
 end

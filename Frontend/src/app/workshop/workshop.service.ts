@@ -40,6 +40,10 @@ export class WorkshopService {
   createWorkshop(workshop: Workshop): Observable<Workshop> {
     return this.http.post(this.workshopsUrl, workshop, this.options).map((res: Response) => res.json());
   }
+  
+  registerAttendee(slug: string): Observable<any> {
+    return this.http.post(this.workshopsUrl + '/' + slug + '/register', null, this.options).map((res: Response) => res.json());
+  }
 
   updateWorkshop(workshop: Workshop): Observable<Workshop> {
     return this.http.put(this.workshopsUrl + '/' + workshop.id + '.json', workshop, this.options).map((res: Response) => res.json());

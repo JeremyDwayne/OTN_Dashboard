@@ -49,12 +49,14 @@ test:
 #
 production:
   <<: *default
-  database: otn_dashboard_production
-  username: otn_dashboard
-  password: <%= ENV['DASHBOARD_PRODUCTION_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
+  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
+  database: <%= ENV['PRODUCTION_DB'] %>
+  host:     <%= ENV['PRODUCTION_DB_HOST'] %>
 
 staging:
   <<: *default
-  database: otn_dashboard_staging
-  username: otn_dashboard
-  password: <%= ENV['DASHBOARD_STAGING_DATABASE_PASSWORD'] %>
+  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
+  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
+  database: <%= ENV['STAGING_DB'] %>
+  host:     <%= ENV['STAGING_DB_HOST'] %>

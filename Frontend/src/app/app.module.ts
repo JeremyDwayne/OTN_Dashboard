@@ -30,6 +30,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DashboardService } from './dashboard/dashboard.service';
 
 import { SharedModule } from './shared/shared.module';
+import { AlertService } from './shared/alert.service';
 import { Filter } from './shared/filter.pipe';
 
 // Exported function so that HttpBatchConfigurationCollection can be used as in DI.
@@ -75,6 +76,7 @@ export function httpBatchConfigurationFactory() {
     Angular2TokenService, 
     BreadcrumbService,
     AuthenticationService,
+    AlertService
     // { provide: HttpBatchConfigurationCollection, useFactory: httpBatchConfigurationFactory },
     // { provide: Http, useClass: HttpBatcher }
   ],

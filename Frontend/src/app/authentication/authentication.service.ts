@@ -35,6 +35,7 @@ export class AuthenticationService {
   logOut(): void {
     this.redirectUrl = undefined;
     this._tokenService.signOut();
+    // TODO: add landing page and redirect to that from here
     this.router.navigate(['/workshops']);
   }
 

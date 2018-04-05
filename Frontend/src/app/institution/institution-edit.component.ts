@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Institution } from './institution';
 import { InstitutionService } from './institution.service';
+import { AlertService } from '../shared/alert.service';
 
 @Component({
   selector: 'app-institution-edit',
@@ -20,7 +21,8 @@ export class InstitutionEditComponent implements OnInit {
     private institutionService: InstitutionService,
     private route: ActivatedRoute,
     private router: Router,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private alertService: AlertService
   ) { }
   
   ngOnInit() {
@@ -48,19 +50,21 @@ export class InstitutionEditComponent implements OnInit {
 
   updateInstitution(event) {
     this.submitted = true;
-
     this.institutionForm.value.id = this.id;
-    this.institutionService.updateInstitution(this.institutionForm.value)
-      .subscribe(
-        data => { this.redirectAfterCreate(data) }, 
-        error => { 
-          console.log("Error updating institution" + error);
-          return Observable.throw(error);
-        });
+    this.institutionService.updateInstitution(this.institutionForm.value).subscribe(
+      data => { 
+        this.redirectAfterUpdate(data);
+        this.alertService.success(["Successfully updated institution!"]);
+      }, 
+      error => { 
+        this.alertService.error(JSON.parse(error._body).errors);
+        return Observable.throw(error); 
+      }
+    );
   }
 
 
-  redirectAfterCreate(institution: Institution): void {
+  redirectAfterUpdate(institution: Institution): void {
     console.log(institution);
     this.router.navigate(['/institutions/' + institution.slug]) ;
   }
