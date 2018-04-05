@@ -13,13 +13,27 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
-  socket: /tmp/mysql.sock
+
+production:
+  <<: *default
+  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
+  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
+  host:     <%= ENV['PRODUCTION_DB_HOST'] %>
+  database: <%= ENV['PRODUCTION_DB'] %>
+
+staging:
+  <<: *default
+  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
+  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
+  host:     <%= ENV['STAGING_DB_HOST'] %>
+  database: <%= ENV['STAGING_DB'] %>
 
 development:
   <<: *default
   username: root
   password:
   database: Dashboard_development
+  socket: /tmp/mysql.sock
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -47,16 +61,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
-  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
-  database: <%= ENV['PRODUCTION_DB'] %>
-  host:     <%= ENV['PRODUCTION_DB_HOST'] %>
-
-staging:
-  <<: *default
-  username: <%= ENV['DASHBOARD_DB_USERNAME'] %>
-  password: <%= ENV['DASHBOARD_DB_PASSWORD'] %>
-  database: <%= ENV['STAGING_DB'] %>
-  host:     <%= ENV['STAGING_DB_HOST'] %>
