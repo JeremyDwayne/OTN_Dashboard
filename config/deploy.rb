@@ -13,6 +13,12 @@ set :rvm1_map_bins, %w{rake gem bundle ruby}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
 
+set :passenger_rvm_ruby_version, "#{fetch :rvm1_ruby_version}"
+
+# set :passenger_environment_variables, {
+#   PASSENGER_INSTANCE_REGISTRY_DIR: "/var/run/passenger"
+# }
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
