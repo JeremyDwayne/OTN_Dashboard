@@ -125,7 +125,6 @@ namespace :deploy do
     end
   end
 
-  before :starting,     :install_bundler
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
