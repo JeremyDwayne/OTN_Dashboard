@@ -38,7 +38,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.1]
       t.string :last_name, null: false, default: ""
       t.string :email
 
-      t.references :institution
+      t.references :institution, null: true
 
       t.integer :role, default: 0
       t.string :type

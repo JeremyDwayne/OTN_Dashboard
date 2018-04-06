@@ -8,9 +8,10 @@ set :repo_url, "git@github.com:JeremyDwayne/OTN_Dashboard.git"
 set :use_sudo, false
 
 set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
-set :rvm1_map_bins, %w{rake gem bundle ruby}
+set :rvm1_map_bins, %w{rake gem bundle ruby puma pumactl}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
+# set :rvm_map_bins, [ 'rake', 'gem', 'bundle', 'ruby', 'puma', 'pumactl' ]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch :application}"
@@ -38,7 +39,7 @@ set :pty, true
 append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "node_modules"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "Frontend/node_modules"
 
 # append :linked_dirs, '.bundle'
 
@@ -98,21 +99,20 @@ namespace :figaro do
 end
 after "deploy:starting", "figaro:setup"
 
-namespace :angular do
-  task :build do
-    on roles :all, in: :sequence, wait: 5 do
-      puts "Building Angular for production"
-      execute "cd #{fetch :deploy_to}/current/Frontend"
-      execute "yarn install"
-      execute "ng build --prod --build-optimizer"
-      puts "Symlinking Angular to public folder..."
-      execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/* #{fetch :deploy_to}/current/public/"
-    end
-  end
-end
-after "deploy:cleanup", "angular:build"
+# namespace :angular do
+#   task :build do
+#     on roles :all, in: :sequence, wait: 5 do
+#       puts "Building Angular for production"
+#       execute "cd #{fetch :deploy_to}/current/Frontend"
+#       execute "yarn install"
+#       execute "ng build --prod --build-optimizer"
+#       puts "Symlinking Angular to public folder..."
+#       execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/* #{fetch :deploy_to}/current/public/"
+#     end
+#   end
+# end
+# before :deploy, "angular:build"
 
-set :bundle_bins, fetch(:bundle_bins, [])
 namespace :deploy do
   namespace :assets do
     Rake::Task["precompile"].clear_actions
