@@ -7,22 +7,13 @@ set :repo_url, "git@github.com:JeremyDwayne/OTN_Dashboard.git"
 
 set :use_sudo, false
 
-set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
-set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
+set :rvm1_ruby_version, "#{fetch :ruby_version}@otn_dashboard"
 set :rvm1_map_bins, %w{rake gem bundle ruby}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch :application}"
-
-# set :passenger_rvm_ruby_version, "#{fetch :rvm1_ruby_version}"
-# set :passenger_restart_command, "passenger-config restart-app"
-# set :passenger_restart_with_touch, true
-set :passenger_roles, :app
-set :passenger_restart_wait, 5
-set :passenger_restart_limit, 2
-set :passenger_restart_with_sudo, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
@@ -107,6 +98,18 @@ namespace :figaro do
 end
 after "deploy:starting", "figaro:setup"
 
+# after "deploy:cleanup", "angular:build"
+# namespace :angular do
+#   task :build do
+#     on roles :all do
+#       puts "Building Angular Production and symlinking..."
+#       execute "cd /var/www/otn-dashboard/current/Frontend"
+#       execute "yarn install"
+#       execute "ng build --prod --build-optimizer"
+#       execute "ln -s /var/www/otn-dashboard/current/Frontend/dist/* /var/www/otn-dashboard/current/public/"
+#     end
+#   end
+# end
 
 set :bundle_bins, fetch(:bundle_bins, [])
 namespace :deploy do
