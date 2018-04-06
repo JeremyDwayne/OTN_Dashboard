@@ -3,5 +3,5 @@ class Consortium < ApplicationRecord
   friendly_id :name, use: :slugged
 
   has_many :institutions
-  belongs_to :admin, foreign_key: "admin_id", primary_key: "id"
+  belongs_to :admin, foreign_key: "admin_id", primary_key: "id", optional: true
 end

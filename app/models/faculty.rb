@@ -1,5 +1,5 @@
 class Faculty < User
-  belongs_to :institution
+  belongs_to :institution, optional: true
   has_many :attendees
   has_many :workshops, through: :attendees
 
