@@ -13,17 +13,19 @@ set :rvm1_map_bins, %w{rake gem bundle ruby}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
 
-set :passenger_rvm_ruby_version, "#{fetch :rvm1_ruby_version}"
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/var/www/#{fetch :application}"
 
-# set :passenger_environment_variables, {
-#   PASSENGER_INSTANCE_REGISTRY_DIR: "/var/run/passenger"
-# }
+# set :passenger_rvm_ruby_version, "#{fetch :rvm1_ruby_version}"
+# set :passenger_restart_command, "passenger-config restart-app"
+# set :passenger_restart_with_touch, true
+set :passenger_roles, :app
+set :passenger_restart_wait, 5
+set :passenger_restart_limit, 2
+set :passenger_restart_with_sudo, true
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
-
-# Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, "/var/www/#{fetch :application}"
 
 # Default value for :format is :airbrussh.
 set :format, :airbrussh

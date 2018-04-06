@@ -1,4 +1,4 @@
-server "cehd-openlib-prd-app.oit.umn.edu", user: "jwinterb", roles: %w{app db web}
+server "cehd-openlib-prd-app.oit.umn.edu", user: "deploy", roles: %w{app db web}
 
 
 # server-based syntax
