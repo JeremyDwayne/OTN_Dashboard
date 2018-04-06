@@ -7,7 +7,7 @@ set :repo_url, "git@github.com:JeremyDwayne/OTN_Dashboard.git"
 
 set :use_sudo, false
 
-set :rvm1_ruby_version, "#{fetch :ruby_version}@otn_dashboard"
+set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
 set :rvm1_map_bins, %w{rake gem bundle ruby}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
@@ -38,7 +38,7 @@ set :pty, true
 append :linked_files, "config/database.yml", "config/secrets.yml"
 
 # Default value for linked_dirs is []
-append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system", "node_modules"
 
 # append :linked_dirs, '.bundle'
 
@@ -98,18 +98,19 @@ namespace :figaro do
 end
 after "deploy:starting", "figaro:setup"
 
-# after "deploy:cleanup", "angular:build"
-# namespace :angular do
-#   task :build do
-#     on roles :all do
-#       puts "Building Angular Production and symlinking..."
-#       execute "cd /var/www/otn-dashboard/current/Frontend"
-#       execute "yarn install"
-#       execute "ng build --prod --build-optimizer"
-#       execute "ln -s /var/www/otn-dashboard/current/Frontend/dist/* /var/www/otn-dashboard/current/public/"
-#     end
-#   end
-# end
+namespace :angular do
+  task :build do
+    on roles :all, in: :sequence, wait: 5 do
+      puts "Building Angular for production"
+      execute "cd #{fetch :deploy_to}/current/Frontend"
+      execute "yarn install"
+      execute "ng build --prod --build-optimizer"
+      puts "Symlinking Angular to public folder..."
+      execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/* #{fetch :deploy_to}/current/public/"
+    end
+  end
+end
+after "deploy:cleanup", "angular:build"
 
 set :bundle_bins, fetch(:bundle_bins, [])
 namespace :deploy do
@@ -121,21 +122,6 @@ namespace :deploy do
     Rake::Task["backup_manifest"].clear_actions
     task :backup_manifest do
         puts "DON'T BACKUP MANIFEST ======================================================="
-    end
-  end
-
-  # desc 'Restart application'
-  # task :restart do
-  #   on roles(:app), :except => { :no_release => true } do
-  #     within "#{fetch(:deploy_to)}/current/" do
-  #       execute "touch #{current_path}/tmp/restart.txt"
-  #     end
-  #   end
-  # end
-
-  task :install_bundler do
-    on roles :all do
-      execute :rvm, "all do gem install bundler"
     end
   end
 

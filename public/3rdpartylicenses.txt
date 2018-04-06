@@ -1,1 +1,0 @@
-Frontend/dist/3rdpartylicenses.txt
