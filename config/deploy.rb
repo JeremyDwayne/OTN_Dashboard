@@ -11,7 +11,6 @@ set :rvm1_ruby_version, "#{fetch :ruby_version}@#{fetch :application}"
 set :rvm1_map_bins, %w{rake gem bundle ruby puma pumactl}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
-# set :rvm_map_bins, [ 'rake', 'gem', 'bundle', 'ruby', 'puma', 'pumactl' ]
 
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch :application}"
@@ -68,6 +67,7 @@ before 'deploy', 'rvm1:install:ruby'
 before "rvm1:install:rvm", "app:update_rvm_key"
 # after "rvm1:install:rvm", "deploy:install_bundler"
 
+after "deploy:starting", "figaro:setup"
 namespace :figaro do
   desc "SCP transfer figaro configuration to the shared folder"
   task :setup do
@@ -97,21 +97,22 @@ namespace :figaro do
     end
   end
 end
-after "deploy:starting", "figaro:setup"
 
-# namespace :angular do
-#   task :build do
-#     on roles :all, in: :sequence, wait: 5 do
-#       puts "Building Angular for production"
-#       execute "cd #{fetch :deploy_to}/current/Frontend"
-#       execute "yarn install"
-#       execute "ng build --prod --build-optimizer" --env=prod
-#       puts "Symlinking Angular to public folder..."
-#       execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/* #{fetch :deploy_to}/current/public/"
-#     end
-#   end
-# end
-# before :deploy, "angular:build"
+after :restart, "angular:build"
+namespace :angular do
+  on roles :all, in: :sequence, wait: 5 do
+    task :yarn_install do
+      puts "Building Angular for production"
+      execute "cd #{fetch :deploy_to}/current/Frontend"
+      execute "yarn install"
+    end
+    task :build, wait: 60 do
+      execute "ng build --prod --build-optimizer" --env=prod
+      puts "Symlinking Angular to public folder..."
+      execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/ #{fetch :deploy_to}/current/public/"
+    end
+  end
+end
 
 namespace :deploy do
   namespace :assets do
