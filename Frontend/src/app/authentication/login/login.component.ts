@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.authService.logIn(value.email, value.password).subscribe(
       data => { 
         this.authService.redirectAfterLogin.bind(this.authService),
-        this.alertService.success(["Successfully created institution!"]);
+        this.alertService.success(["Successfully logged in!"]);
       }, 
       error => { 
         this.alertService.error(JSON.parse(error._body).errors);

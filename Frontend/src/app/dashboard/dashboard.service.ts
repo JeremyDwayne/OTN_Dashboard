@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +10,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class DashboardService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private dashboardUrl = "http://localhost:3000/api/v1/";
+  private dashboardUrl = environment.API_URL;
 
   constructor(
     private http: Http,

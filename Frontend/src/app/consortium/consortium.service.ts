@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -10,8 +11,8 @@ import { Angular2TokenService } from 'angular2-token';
 export class ConsortiumService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private consortiaUrl = "http://localhost:3000/api/v1/consortia";
-  private institutionsUrl = "http://localhost:3000/api/v1/institutions";
+  private consortiaUrl = environment.API_URL + "consortia";
+  private institutionsUrl = environment.API_URL + "institutions";
 
   constructor(
     private http: Http,

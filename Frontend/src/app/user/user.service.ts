@@ -1,3 +1,4 @@
+import { environment } from '../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
@@ -9,8 +10,9 @@ import { Angular2TokenService } from 'angular2-token';
 export class UserService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private usersUrl = "http://localhost:3000/api/v1/users";
-  private workshopsUrl = "http://localhost:3000/api/v1/workshops";
+  private usersUrl = environment.API_URL + "users";
+  private workshopsUrl = environment.API_URL + "workshops";
+  private adminsUrl = environment.API_URL + "admins";
 
   constructor(
     private http: Http,
@@ -32,7 +34,7 @@ export class UserService {
   }
 
   getAdmins(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/v1/admins', this.options).map((response: Response) => <any>response.json())
+    return this.http.get(this.adminsUrl, this.options).map((response: Response) => <any>response.json())
   }
 
   getAttendees(workshop_id: number): Observable<any> {

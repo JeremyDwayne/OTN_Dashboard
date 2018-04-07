@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
     this.authService.signUp(value.first_name, value.last_name, value.email, value.password, value.institution_id).subscribe(
       data => { 
         this.authService.redirectAfterLogin.bind(this.authService),
-        this.alertService.success(["Successfully created institution!"]);
+        this.alertService.success(["Successfully signed up!"]);
       }, 
       error => { 
         this.alertService.error(JSON.parse(error._body).errors);

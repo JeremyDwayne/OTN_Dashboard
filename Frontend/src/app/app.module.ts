@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
@@ -40,8 +41,8 @@ export function httpBatchConfigurationFactory() {
     // this is a basic configuration object see [Configuration Object Options]
     // for more information on all the options
     new HttpBatchConfiguration({
-      rootEndpointUrl: "http://localhost:3000/api/v1/",
-      batchEndpointUrl: "http://localhost:3000/api/v1/batch_sequential"
+      rootEndpointUrl: environment.API_URL,
+      batchEndpointUrl: environment.API_URL + "batch_sequential"
     })]);
 };
 

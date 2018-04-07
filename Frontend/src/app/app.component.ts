@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import { Component } from '@angular/core';
 import { Angular2TokenService } from 'angular2-token';
 
@@ -9,7 +10,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class AppComponent {
   constructor(private _tokenService: Angular2TokenService){
     this._tokenService.init({
-      apiBase: 'http://localhost:3000',
+      apiBase: environment.API_URL,
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
