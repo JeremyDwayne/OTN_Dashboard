@@ -105,7 +105,7 @@ after "deploy:starting", "figaro:setup"
 #       puts "Building Angular for production"
 #       execute "cd #{fetch :deploy_to}/current/Frontend"
 #       execute "yarn install"
-#       execute "ng build --prod --build-optimizer"
+#       execute "ng build --prod --build-optimizer" --env=prod
 #       puts "Symlinking Angular to public folder..."
 #       execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/* #{fetch :deploy_to}/current/public/"
 #     end

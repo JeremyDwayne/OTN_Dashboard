@@ -11,7 +11,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class InstitutionService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private institutionsUrl = environment.API_URL + "institutions";
+  private institutionsUrl = environment.API_URL + "/institutions";
 
   constructor(
     private http: Http,

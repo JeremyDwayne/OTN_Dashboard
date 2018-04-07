@@ -11,8 +11,8 @@ import { Angular2TokenService } from 'angular2-token';
 export class ConsortiumService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private consortiaUrl = environment.API_URL + "consortia";
-  private institutionsUrl = environment.API_URL + "institutions";
+  private consortiaUrl = environment.API_URL + "/consortia";
+  private institutionsUrl = environment.API_URL + "/institutions";
 
   constructor(
     private http: Http,

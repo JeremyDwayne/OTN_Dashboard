@@ -10,7 +10,7 @@ import { Angular2TokenService } from 'angular2-token';
 export class DashboardService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private dashboardUrl = environment.API_URL;
+  private dashboardUrl = environment.API_URL + "/";
 
   constructor(
     private http: Http,

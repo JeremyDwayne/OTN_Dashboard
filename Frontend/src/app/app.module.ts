@@ -42,7 +42,7 @@ export function httpBatchConfigurationFactory() {
     // for more information on all the options
     new HttpBatchConfiguration({
       rootEndpointUrl: environment.API_URL,
-      batchEndpointUrl: environment.API_URL + "batch_sequential"
+      batchEndpointUrl: environment.API_URL + "/batch_sequential"
     })]);
 };
 
