@@ -98,21 +98,24 @@ namespace :figaro do
   end
 end
 
-after :restart, "angular:build"
-namespace :angular do
-  on roles :all, in: :sequence, wait: 5 do
-    task :yarn_install do
-      puts "Building Angular for production"
-      execute "cd #{fetch :deploy_to}/current/Frontend"
-      execute "yarn install"
-    end
-    task :build, wait: 60 do
-      execute "ng build --prod --build-optimizer" --env=prod
-      puts "Symlinking Angular to public folder..."
-      execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/ #{fetch :deploy_to}/current/public/"
-    end
-  end
-end
+# namespace :angular do
+#   task :yarn_install do
+#     on roles :all do
+#       puts "Building Angular for production"
+#       execute "cd #{fetch :deploy_to}/current/Frontend"
+#       execute "yarn install"
+#     end
+#   end
+#   task :build do
+#     on roles :all do
+#       execute "ng build --prod --build-optimizer" --env=prod
+#       puts "Symlinking Angular to public folder..."
+#       execute "ln -s #{fetch :deploy_to}/current/Frontend/dist/ #{fetch :deploy_to}/current/public/"
+#     end
+#   end
+#   after :yarn_install, :build
+# end
+# after "deploy:restart", "angular:yarn_install"
 
 namespace :deploy do
   namespace :assets do
