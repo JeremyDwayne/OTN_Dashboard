@@ -39,9 +39,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/cli@~1.7.1":
-  version "1.7.3"
-  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-1.7.3.tgz#ac917b69240bb1b340421e9f985135890e0d53b4"
+"@angular/cli@~1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@angular/cli/-/cli-1.7.4.tgz#b6c31b5fc6f8ea07e55b1b01a26422f5358a4ea6"
   dependencies:
     "@angular-devkit/build-optimizer" "0.3.2"
     "@angular-devkit/core" "0.3.2"
@@ -119,13 +119,13 @@
     reflect-metadata "^0.1.2"
     tsickle "^0.27.2"
 
-"@angular/compiler@^5.0.0", "@angular/compiler@^5.2.9":
+"@angular/compiler@^5.2.9":
   version "5.2.9"
   resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-5.2.9.tgz#1d03bc1e8b38c259bc58114d691c2140d244f8f5"
   dependencies:
     tslib "^1.7.1"
 
-"@angular/core@^5.0.0", "@angular/core@^5.2.9":
+"@angular/core@^5.2.9":
   version "5.2.9"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.9.tgz#3daf13ef9aa754b9954ed21da3eb322e8b20f667"
   dependencies:
@@ -137,7 +137,7 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/http@^5.0.0", "@angular/http@^5.2.9":
+"@angular/http@^5.2.9":
   version "5.2.9"
   resolved "https://registry.yarnpkg.com/@angular/http/-/http-5.2.9.tgz#2ffea536e181bc97e2867593d57425ea7853285b"
   dependencies:
@@ -5270,16 +5270,6 @@ ngrok@*:
     request-promise-native "^1.0.5"
     uuid "^3.0.0"
 
-ngx-http-batcher@^5.0.1:
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/ngx-http-batcher/-/ngx-http-batcher-5.0.1.tgz#03c3e6a28d7f4ecc728b0916558c11cc3d37eea1"
-  dependencies:
-    "@angular/compiler" "^5.0.0"
-    "@angular/core" "^5.0.0"
-    "@angular/http" "^5.0.0"
-    rxjs "^5.5.2"
-    zone.js "^0.8.18"
-
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -7121,7 +7111,7 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-rxjs@^5.5.2, rxjs@^5.5.6:
+rxjs@^5.5.6:
   version "5.5.8"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-5.5.8.tgz#b2b0809a57614ad6254c03d7446dea0d83ca3791"
   dependencies:
@@ -8982,6 +8972,6 @@ zip-stream@^1.1.0:
     lodash "^4.8.0"
     readable-stream "^2.0.0"
 
-zone.js@^0.8.18, zone.js@^0.8.19:
+zone.js@^0.8.19:
   version "0.8.24"
   resolved "https://registry.yarnpkg.com/zone.js/-/zone.js-0.8.24.tgz#f12a733d564dae589843d2e199fba132212203b8"

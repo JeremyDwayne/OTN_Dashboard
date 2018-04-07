@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "/(*redirect_path)", to: "dashboard#index"
   # devise_for :user
   mount_devise_token_auth_for 'User', at: 'auth'
   namespace :api do

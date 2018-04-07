@@ -9,8 +9,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
 
-import { NgxHttpBatcherModule, HttpBatchConfiguration, 
-         HttpBatchConfigurationCollection, HttpBatcher } from 'ngx-http-batcher';
+// import { NgxHttpBatcherModule, HttpBatchConfiguration, 
+//          HttpBatchConfigurationCollection, HttpBatcher } from 'ngx-http-batcher';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -36,15 +36,15 @@ import { Filter } from './shared/filter.pipe';
 
 // Exported function so that HttpBatchConfigurationCollection can be used as in DI.
 // Having this as an exported function enabled AOT complication as well :-)
-export function httpBatchConfigurationFactory() {
-  return new HttpBatchConfigurationCollection([
-    // this is a basic configuration object see [Configuration Object Options]
-    // for more information on all the options
-    new HttpBatchConfiguration({
-      rootEndpointUrl: environment.API_URL,
-      batchEndpointUrl: environment.API_URL + "/batch_sequential"
-    })]);
-};
+// export function httpBatchConfigurationFactory() {
+//   return new HttpBatchConfigurationCollection([
+//     // this is a basic configuration object see [Configuration Object Options]
+//     // for more information on all the options
+//     new HttpBatchConfiguration({
+//       rootEndpointUrl: environment.API_URL,
+//       batchEndpointUrl: environment.API_URL + "/batch_sequential"
+//     })]);
+// };
 
 @NgModule({
   declarations: [

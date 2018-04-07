@@ -30,7 +30,6 @@
     "moment": "^2.20.1",
     "ng-pick-datetime": "^5.1.7",
     "ng5-breadcrumb": "^0.0.6",
-    "ngx-http-batcher": "^5.0.1",
     "popper": "^1.0.1",
     "popper.js": "^1.14.2",
     "rxjs": "^5.5.6",
