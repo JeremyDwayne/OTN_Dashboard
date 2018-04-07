@@ -4,7 +4,7 @@ class Api::V1::DashboardController < ApplicationController
   def index
     # TODO: devise_token_auth current_user and authenticate_user!
     if current_user.super_admin?
-      @consortia = Consortia.all
+      @consortia = Consortium.all
     else
       @consortia = current_user.consortia
     end
