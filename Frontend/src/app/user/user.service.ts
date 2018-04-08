@@ -10,9 +10,9 @@ import { Angular2TokenService } from 'angular2-token';
 export class UserService {
   headers: Headers = new Headers();
   options: RequestOptions;
-  private usersUrl = environment.API_URL + "/users";
-  private workshopsUrl = environment.API_URL + "/workshops";
-  private adminsUrl = environment.API_URL + "/admins";
+  private usersUrl = environment.API + "/users";
+  private workshopsUrl = environment.API + "/workshops";
+  private adminsUrl = environment.API + "/admins";
 
   constructor(
     private http: Http,
