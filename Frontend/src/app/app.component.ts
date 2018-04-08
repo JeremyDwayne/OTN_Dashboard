@@ -11,6 +11,7 @@ export class AppComponent {
   constructor(private _tokenService: Angular2TokenService){
     this._tokenService.init({
       apiBase: environment.API_BASE,
+      apiPath: environment.API_BASE,
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
