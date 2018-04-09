@@ -12,6 +12,8 @@ set :rvm1_map_bins, %w{rake gem bundle ruby puma pumactl}
 set :rvm1_type, :user
 set :rvm1_binary, '~/.rvm/bin/rvm'
 
+set :puma_bind, %w(tcp://0.0.0.0:3000)
+
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/var/www/#{fetch :application}"
 
