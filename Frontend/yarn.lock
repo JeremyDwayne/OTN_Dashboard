@@ -5256,10 +5256,6 @@ ng-pick-datetime@^5.1.7:
   dependencies:
     "@angular/cdk" "^5.2.0"
 
-ng5-breadcrumb@^0.0.6:
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/ng5-breadcrumb/-/ng5-breadcrumb-0.0.6.tgz#2effc67025456d8fcf25eaf4900a4a11e8f4561b"
-
 ngrok@*:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngrok/-/ngrok-3.0.1.tgz#1be0fb5a02c618da5458aa68b83494b561a84af2"

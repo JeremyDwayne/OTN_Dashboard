@@ -1,9 +1,11 @@
 <div *ngFor="let consortium of dashboard?.data"> 
-  <h4>{{consortium?.attributes.name}}<a routerLink="/consortia/{{consortium?.attributes.slug}}/edit"
-      placement="top" ngbTooltip="Edit Consortium"> <i class="fa fa-edit align-top" 
-      style="width: auto; height: .5em;"></i></a> 
-    <a routerLink="/consortia/{{consortium?.attributes.slug}}/institutions/new" 
-      placement="top" ngbTooltip="Add Institution"><i class="fa fa-plus-circle"></i></a>
+  <h4>{{consortium?.attributes.name}}
+
+      <a routerLink="/consortia/{{consortium?.attributes.slug}}/edit"
+        placement="top" ngbTooltip="Edit Consortium"> <i class="fa fa-edit align-top"></i></a> 
+
+      <a routerLink="/consortia/{{consortium?.attributes.slug}}/institutions/new" 
+        placement="top" ngbTooltip="Add Institution"><i class="fa fa-plus-circle"></i></a>
   </h4>
 
   <div id="'consortium-' + $consortium?.attributes.id">
@@ -13,3 +15,5 @@
   </div>
   <br/>
 </div>
+<br/>
+<button class="btn btn-primary" routerLink="/consortium/new">Add Consortium</button>

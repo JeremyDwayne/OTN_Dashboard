@@ -10,7 +10,9 @@ import { Angular2TokenService } from 'angular2-token';
 export class AppComponent {
   constructor(private _tokenService: Angular2TokenService){
     this._tokenService.init({
+      signInStoredUrlStorageKey: 'redirectTo',
       apiBase: environment.API_BASE,
+      signInRedirect: '/login',
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
@@ -20,4 +22,5 @@ export class AppComponent {
       }
     });
   }
+
 }

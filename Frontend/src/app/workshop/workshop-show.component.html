@@ -3,21 +3,21 @@
     <div class="card-body">
       <h5 class="card-title" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'workshop-' + workshop.data?.id" (click)="workshop.isCollapsed = !workshop.isCollapsed" style="cursor: pointer; margin-bottom: 0;">
         {{workshop.data.attributes?.name}}
-        <span *ngIf="!workshop?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
-        <span *ngIf="workshop?.isCollapsed"><i class="float-right fas fa-minus"></i></span>
+        <a class="btn btn-outline-primary btn-sm" id="edit_link" *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}">Event Page</a>
+        <ng-template #idLink>
+          <a class="btn btn-outline-primary btn-sm" id="edit_link" routerLink="/workshops/{{workshop.data.id}}">Event Page</a>
+        </ng-template>
+        <a class="btn btn-outline-success btn-sm" *ngIf="workshop.data.attributes.slug; else editIdLink" routerLink="/workshops/{{workshop.data.attributes.slug}}/edit">Edit Workshop</a>
+        <ng-template #editIdLink>
+          <a class="btn btn-outline-success btn-sm" routerLink="/workshops/{{workshop.data.id}}/edit">Edit Workshop</a>
+        </ng-template>
+        <span *ngIf="!workshop?.isCollapsed"><i class="fas fa-plus"></i></span>
+        <span *ngIf="workshop?.isCollapsed"><i class="fas fa-minus"></i></span>
       </h5>
       <div *ngIf="workshop?.isCollapsed" id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
         <p class="card-text">
           <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i><br/>
           {{workshop.data.attributes?.description}}<br/>
-          <a class="btn btn-outline-primary" *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}">Event Page</a>
-          <ng-template #idLink>
-            <a class="btn btn-outline-primary" routerLink="/workshops/{{workshop.data.id}}">Event Page</a>
-          </ng-template>
-          <a class="btn btn-outline-success" *ngIf="workshop.data.attributes.slug; else editIdLink" routerLink="/workshops/{{workshop.data.attributes.slug}}/edit">Edit Workshop</a>
-          <ng-template #editIdLink>
-            <a class="btn btn-outline-success" routerLink="/workshops/{{workshop.data.id}}/edit">Edit Workshop</a>
-          </ng-template>
         </p>
 
         <div *ngIf="workshop.data.relationships.faculty?.data.length !== 0; else noAttendees">

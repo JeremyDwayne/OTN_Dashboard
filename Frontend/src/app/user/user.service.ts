@@ -46,7 +46,6 @@ export class UserService {
   }
 
   createUser(user: User): Observable<any> {
-    console.log(user)
     return this.http.post(this.usersUrl, JSON.stringify(user), this.options).map((res: Response) => res.json());
   }
 }

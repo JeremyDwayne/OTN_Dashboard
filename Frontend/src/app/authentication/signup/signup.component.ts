@@ -40,16 +40,7 @@ export class SignupComponent implements OnInit {
   submit(value: any){
     this.submitted = true;
     if (!this.signupForm.valid) {return;}
-    this.authService.signUp(value.first_name, value.last_name, value.email, value.password, value.institution_id).subscribe(
-      data => { 
-        this.authService.redirectAfterLogin.bind(this.authService),
-        this.alertService.success(["Successfully signed up!"]);
-      }, 
-      error => { 
-        this.alertService.error(JSON.parse(error._body).errors);
-        return Observable.throw(error);
-      }
-    );
+    this.authService.signUp(value.first_name, value.last_name, value.email, value.password, value.institution_id);
   }
 
   getInstitutions(): any {

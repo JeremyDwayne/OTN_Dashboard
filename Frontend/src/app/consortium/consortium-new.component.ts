@@ -39,7 +39,6 @@ export class ConsortiumNewComponent implements OnInit {
 
   createConsortium(consortium: Consortium) {
     this.submitted = true;
-    console.log(consortium);
     this.consortiumService.createConsortium(this.consortiumForm.value).subscribe(
       data => { 
         this.redirectAfterCreate(data);

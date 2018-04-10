@@ -1,10 +1,10 @@
 <h5 class="card-header" [attr.aria-expanded]="!isCollapsed" 
   [attr.aria-controls]="'institution-' + institution?.data.id" 
   (click)="institution.isCollapsed = !institution.isCollapsed" style="cursor: pointer;">
- <a routerLink="/institutions/{{institution?.data.attributes.slug}}/edit" placement="top" 
-   ngbTooltip="Edit Institution"><i class="fa fa-edit align-top" style="width: auto; height: .5em;">
- </i></a> 
   {{attributes?.name}}
+  <a id="edit_link" routerLink="/institutions/{{institution?.data.attributes.slug}}/edit" placement="top" 
+    ngbTooltip="Edit Institution"><i class="fa fa-edit">
+  </i></a>
 
   <span *ngIf="!institution?.isCollapsed"><i class="float-right fas fa-plus"></i></span>
   <span *ngIf="institution?.isCollapsed"><i class="float-right fas fa-minus"></i></span>

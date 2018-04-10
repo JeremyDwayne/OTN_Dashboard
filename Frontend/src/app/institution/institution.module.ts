@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { Ng5BreadcrumbModule, BreadcrumbService } from 'ng5-breadcrumb';
 
 import { InstitutionRoutingModule } from './institution-routing.module';
 
@@ -24,7 +23,6 @@ import { SharedModule } from '../shared/shared.module';
     FormsModule,
     OwlDateTimeModule, 
     OwlNativeDateTimeModule,
-    Ng5BreadcrumbModule.forRoot(),
     NgbModule.forRoot(),
     ReactiveFormsModule,
     InstitutionRoutingModule,

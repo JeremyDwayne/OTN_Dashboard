@@ -42,7 +42,6 @@ export class InstitutionEditComponent implements OnInit {
       this.institutionService.getInstitution(params['slug'], this.id));
     institutionRequest.subscribe(response => {
       this.institution = response.json().data;
-      console.log(this.institution);
       this.id = this.institution.id
       this.institutionForm.patchValue(this.institution.attributes);
     });
@@ -65,7 +64,6 @@ export class InstitutionEditComponent implements OnInit {
 
 
   redirectAfterUpdate(institution: Institution): void {
-    console.log(institution);
     this.router.navigate(['/institutions/' + institution.slug]) ;
   }
 

@@ -24,21 +24,13 @@ export class LoginComponent implements OnInit {
       email: ['', Validators.required],
       password: ['', Validators.required]
     });
+    console.log(localStorage);
   }
 
   submit(value: any){
     this.submitted = true;
     if (!this.loginForm.valid) {return;}
-    this.authService.logIn(value.email, value.password).subscribe(
-      data => { 
-        this.authService.redirectAfterLogin.bind(this.authService),
-        this.alertService.success(["Successfully logged in!"]);
-      }, 
-      error => { 
-        this.alertService.error(JSON.parse(error._body).errors);
-        return Observable.throw(error);
-      }
-    );
+    this.authService.logIn(value.email, value.password);
   }
-
 }
+

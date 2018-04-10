@@ -39,7 +39,6 @@ export class ConsortiumService {
   }
 
   createConsortium(consortium: Consortium): Observable<Consortium> {
-    console.log(consortium)
     return this.http.post(this.consortiaUrl, consortium, this.options).map((res: Response) => res.json());
   }
 

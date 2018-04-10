@@ -34,7 +34,6 @@ export class InstitutionService {
   
   getFacilitators(slug: string, id: number): Observable<any>{
     let inst_id = id ? id : slug;
-    console.log(inst_id);
     return this.http.get(this.institutionsUrl + '/' + inst_id + '/facilitators', this.options).map((response: Response) => <User[]>response.json())
   }
 

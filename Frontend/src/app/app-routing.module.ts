@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { Angular2TokenService } from 'angular2-token';
 
-import { ConsortiumListComponent } from './consortium/consortium-list.component';
-import { ConsortiumShowComponent } from './consortium/consortium-show.component';
-import { ConsortiumNewComponent } from './consortium/consortium-new.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LandingComponent } from './landing/landing.component';
+
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  { path: 'dashboard', component: DashboardComponent },
+  { path: '', component: LandingComponent, pathMatch: 'full' },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [Angular2TokenService] }
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule { }

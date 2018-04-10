@@ -6,7 +6,6 @@ import { Workshop } from './workshop';
 import { WorkshopService } from './workshop.service';
 import { Institution } from '../institution/institution';
 import { InstitutionService } from '../institution/institution.service';
-import { BreadcrumbService } from 'ng5-breadcrumb';
 import { AlertService } from '../shared/alert.service';
 
 @Component({
@@ -32,14 +31,11 @@ export class WorkshopNewComponent implements OnInit {
   constructor(
     private workshopService: WorkshopService, 
     private institutionService: InstitutionService,
-    private breadcrumbService: BreadcrumbService,
     private route: ActivatedRoute,
     private router: Router,
     private alertService: AlertService,
     private formBuilder: FormBuilder
-  ) {
-    breadcrumbService.addFriendlyNameForRoute('/workshop', 'workshops');
-  }
+  ) { }
   
   ngOnInit() {
     this.submitted = false;
@@ -82,7 +78,6 @@ export class WorkshopNewComponent implements OnInit {
   }
 
   redirectAfterCreate(workshop: Workshop): void {
-    console.log(workshop);
     this.router.navigate(['/workshops/' + workshop.slug]) ;
   }
 

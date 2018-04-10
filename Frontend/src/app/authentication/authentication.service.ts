@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+
 import { Response} from '@angular/http';
 
 import { Angular2TokenService } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';
+
+import { AlertService } from '../shared/alert.service';
 
 @Injectable()
 export class AuthenticationService {
@@ -11,41 +14,52 @@ export class AuthenticationService {
 
   constructor(
     private _tokenService: Angular2TokenService,
-    private router: Router
+    private router: Router,
+    private alertService: AlertService
   ) { }
 
-  logIn(email: string, password: string): Observable<Response> {
-    return this._tokenService.signIn({
+  logIn(email: string, password: string) {
+    this._tokenService.signIn({
       email: email,
       password: password
-    });
+    }).subscribe(
+      res => {
+        this.router.navigateByUrl(localStorage.getItem('redirectTo'));
+        this.alertService.success(["Successfully logged in!"]);
+      },
+      error => this.alertService.error(JSON.parse(error._body).errors)
+    );
   }
 
-  signUp(first_name: string, last_name: string, email: string, password: string, institution_id: string): Observable<Response> {
-    return this._tokenService.registerAccount({
+  signUp(first_name: string, last_name: string, email: string, password: string, institution_id: string) {
+    this._tokenService.registerAccount({
       first_name: first_name,
       last_name: last_name,
       email: email,
       password: password,
       passwordConfirmation: password,
       institution_id: institution_id
-    });
+    }).subscribe(
+      res => {
+        this.router.navigate(['/']);
+        this.alertService.success(["Successfully signed up!"]);
+      },
+      error => this.alertService.error(JSON.parse(error._body).errors)
+    );
   }
 
   logOut(): void {
     this.redirectUrl = undefined;
-    this._tokenService.signOut();
-    // TODO: add landing page and redirect to that from here
-    this.router.navigate(['/workshops']);
+    this._tokenService.signOut().subscribe(
+      res => {
+        this.router.navigate(['/']);
+        this.alertService.success(["Successfully signed out!"]);
+      },
+      error => this.alertService.error(JSON.parse(error._body).errors)
+    );
   }
 
   isLoggedIn(): boolean {
     return this._tokenService.userSignedIn();
-  }
-
-  redirectAfterLogin(): void {
-    let redirectTo = this.redirectUrl ? this.redirectUrl : '/workshops';
-    this.redirectUrl = undefined;
-    this.router.navigate([redirectTo]);
   }
 }
