@@ -10,6 +10,6 @@ export class User {
     public created_at?: string,
     public updated_at?: string,
     public password?: string,
-    public password_confirmation?: string
+    public password_confirmation?: string,
   ){}
 }

@@ -1,7 +1,7 @@
 class Api::V1::UserInvitationsController < Devise::InvitationsController
   include InvitableMethods
   before_action :authenticate_user!, only: :create
-  # before_action :resource_from_invitation_token, only: [:edit, :update]
+  before_action :resource_from_invitation_token, only: [:edit, :update]
   before_action :update_sanitized_params, only: [:edit, :update]
 
   def new
