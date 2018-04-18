@@ -20,7 +20,7 @@ import { AuthenticationService } from './authentication.service';
 })
 export class AuthenticationLinksComponent {
   constructor(
-    private _tokenService: Angular2TokenService,
+    public _tokenService: Angular2TokenService,
     private authService: AuthenticationService
   ){}
 

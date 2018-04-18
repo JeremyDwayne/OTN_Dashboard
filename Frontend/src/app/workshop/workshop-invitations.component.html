@@ -8,7 +8,7 @@
       <app-error-label [control]="invitationForm" [submitted]="submitted"></app-error-label>
 
       <div formArrayName="invitees">
-        <div *ngFor="let invitee of invitationForm.controls.invitees.controls; let i=index">
+        <div *ngFor="let invitee of invitationForm?.controls.invitees['controls']; let i=index">
           <div class="card">
             <div class="card-body">
               <button *ngIf="invitationForm.controls.invitees.controls.length > 1" 

@@ -14,8 +14,8 @@ import { InstitutionService } from '../institution/institution.service';
 export class WorkshopInvitationsComponent implements OnInit {
   invitationForm: FormGroup;
   submitted: boolean = false;
-  workshopId: number;
-  institutionSlug: string;
+  workshopId: any;
+  institutionSlug: any;
   workshop: any;
   institution: any;
 
