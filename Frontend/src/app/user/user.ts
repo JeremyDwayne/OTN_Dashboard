@@ -11,5 +11,6 @@ export class User {
     public updated_at?: string,
     public password?: string,
     public password_confirmation?: string,
+    public invited_workshop_id?: number
   ){}
 }

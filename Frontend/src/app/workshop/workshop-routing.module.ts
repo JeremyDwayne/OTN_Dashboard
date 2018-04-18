@@ -6,6 +6,7 @@ import { WorkshopShowComponent } from './workshop-show.component';
 import { WorkshopEventComponent } from './workshop-event.component';
 import { WorkshopNewComponent  } from './workshop-new.component';
 import { WorkshopEditComponent  } from './workshop-edit.component';
+import { WorkshopInvitationsComponent  } from './workshop-invitations.component';
 import { WorkshopService       } from './workshop.service';
 
 const routes: Routes = [
@@ -13,9 +14,11 @@ const routes: Routes = [
   { path: 'workshops', component: WorkshopListComponent },
   { path: 'workshops/:slug', component: WorkshopEventComponent },
   { path: 'workshops/:slug/edit', component: WorkshopEditComponent },
+  { path: 'workshops/:slug/invitations', component: WorkshopInvitationsComponent },
   // { path: 'workshop/new', component: WorkshopNewComponent },
   { path: 'institutions/:slug/workshops/new', component: WorkshopNewComponent, pathMatch: 'full' },
-  { path: 'institutions/:slug/workshops/:id/edit', component: WorkshopEditComponent, pathMatch: 'full' }
+  { path: 'institutions/:slug/workshops/:id/edit', component: WorkshopEditComponent, pathMatch: 'full' },
+  { path: 'institutions/:slug/workshops/:id/invitations', component: WorkshopInvitationsComponent }
 ]
 
 @NgModule({

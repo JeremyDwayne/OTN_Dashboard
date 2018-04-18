@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       resources :users
       resources :institutions
 
+      post '/sendinvites', to: 'workshops#send_invites'
       get '/invited/*invitation_token', to: 'users#invited'
       get "/admins", to: "users#admins"
       get "/institutions/:institution_id/facilitators", to: "institutions#facilitators"

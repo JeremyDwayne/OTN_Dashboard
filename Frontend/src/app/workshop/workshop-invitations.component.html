@@ -1,0 +1,37 @@
+<h5>Invite Faculty</h5>
+<h6>
+  {{workshop?.data.attributes.name}} <small>at {{institution?.data.attributes.name}}</small>
+</h6>
+<div class="row">
+  <div class="col-sm-12">
+    <form [formGroup]="invitationForm" (ngSubmit)="sendInvite(invitationForm)">
+      <app-error-label [control]="invitationForm" [submitted]="submitted"></app-error-label>
+
+      <div formArrayName="invitees">
+        <div *ngFor="let invitee of invitationForm.controls.invitees.controls; let i=index">
+          <div class="card">
+            <div class="card-body">
+              <button *ngIf="invitationForm.controls.invitees.controls.length > 1" 
+                 (click)="removeInvitee(i)" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+
+              <div [formGroupName]="i">
+                <invitee [group]="invitationForm.controls.invitees.controls[i]"></invitee>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <span class="btn btn-primary" (click)="addInvitee()">Add another invitee</span>
+      </div>
+
+
+      <div class="form-group">
+        <button type="submit" [disabled]="!invitationForm.valid" class="btn btn-primary">Send Invites</button>
+      </div>
+    </form>
+  </div>
+</div>

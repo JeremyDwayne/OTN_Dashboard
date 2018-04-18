@@ -1,0 +1,33 @@
+<div [formGroup]="inviteeForm">
+  <div class="row">
+    <div class="col-sm-4">
+      <app-input-field [attribute]="'first_name'"
+        [label]="'First Name'" 
+         [type]="'text'"
+         [placeholder]="'Jane'"
+         [control]="inviteeForm.controls['first_name']"
+         [submitted]="submitted">
+      </app-input-field>
+    </div>
+
+    <div class="col-sm-4">
+      <app-input-field [attribute]="'last_name'"
+        [label]="'Last Name'" 
+         [type]="'text'"
+         [placeholder]="'Smith'"
+         [control]="inviteeForm.controls['last_name']"
+         [submitted]="submitted">
+      </app-input-field>
+    </div>
+
+    <div class="col-sm-4">
+      <app-input-field [attribute]="'email'"
+        [label]="'Email'" 
+         [type]="'email'"
+         [placeholder]="'jsmith@email.com'"
+         [control]="inviteeForm.controls['email']"
+         [submitted]="submitted">
+      </app-input-field>
+    </div>
+  </div>
+</div>

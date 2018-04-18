@@ -1,15 +1,15 @@
 class Api::V1::WorkshopsController < ApplicationController
   include Devise::Controllers::Helpers
   before_action :set_workshop, only: [:show, :register, :update, :destroy]
-  # before_action :set_institution, only: [:show, :update, :destroy]
-  before_action :authenticate_inviter!, only: [:index, :attendees, :register, :create, :update, :destroy]
+  before_action :set_institution, only: [:send_invites]
+  before_action :authenticate_inviter!, only: [:index, :attendees, :register, :send_invites, :create, :update, :destroy]
 
   def resource_name
     :user
   end
 
   def index
-    @workshops = @current_user.workshops
+    @workshops = Workshop.where(institution_id: @current_user.institution_id)
     render json: WorkshopSerializer.new(@workshops).serialized_json
   end
 
@@ -29,6 +29,14 @@ class Api::V1::WorkshopsController < ApplicationController
       render json: @attendee, status: :created
     else
       render json: @attendee.errors.full_messages, status: :unprocessable_entity
+    end
+  end
+
+  def send_invites
+    params[:invitees].each do |invitee|
+      User.invite!(first_name: invitee['first_name'], last_name: invitee['last_name'], 
+                   email: invitee['email'], institution_id: @institution.id, 
+                   invited_workshop_id: params[:workshop_id])
     end
   end
 
@@ -60,7 +68,7 @@ class Api::V1::WorkshopsController < ApplicationController
   end
 
   def set_institution
-    @institution = Institution.friendly.find(params[:institution_id])
+    @institution = Institution.friendly.find(params[:institution_slug])
   end
 
   def workshop_params

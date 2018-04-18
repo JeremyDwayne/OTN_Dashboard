@@ -49,4 +49,8 @@ export class WorkshopService {
   updateWorkshop(workshop: Workshop): Observable<Workshop> {
     return this.http.put(this.workshopsUrl + '/' + workshop.id + '.json', workshop, this.options).map((res: Response) => res.json());
   }
+
+  sendInvites(values: any): Observable<any>{
+    return this.http.post(environment.API + '/sendinvites', values, this.options).map((res: Response) => res.json());
+  }
 }

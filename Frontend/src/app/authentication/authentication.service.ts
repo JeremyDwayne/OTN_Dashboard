@@ -38,7 +38,7 @@ export class AuthenticationService {
       password: password
     }).subscribe(
       res => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/workshops/' + user.invited_workshop_id]);
         this.alertService.success(["Welcome to OTN " + user.first_name + " " + user.last_name + "!"]);
       },
       error => this.alertService.error(JSON.parse(error._body).errors)

@@ -1,7 +1,6 @@
 class Api::V1::UserInvitationsController < Devise::InvitationsController
   include InvitableMethods
   before_action :authenticate_user!, only: :create
-  before_action :resource_from_invitation_token, only: [:edit, :update]
   before_action :update_sanitized_params, only: [:edit, :update]
 
   def new
@@ -32,7 +31,7 @@ class Api::V1::UserInvitationsController < Devise::InvitationsController
   private
   
   def update_sanitized_params
-    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :invitation_token])
+    devise_parameter_sanitizer.permit(:accept_invitation, keys: [:first_name, :last_name, :email, :password, :password_confirmation, :invitation_token, :institution_id, :invited_workshop_id])
   end
 
 end

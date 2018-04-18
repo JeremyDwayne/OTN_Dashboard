@@ -15,6 +15,7 @@ import { AlertService } from '../shared/alert.service';
   styleUrls: ['./workshop.component.sass']
 })
 export class WorkshopEditComponent implements OnInit {
+  workshopForm: FormGroup;
   workshop: any;
   institution: any;
   facilitators: any;
@@ -28,7 +29,6 @@ export class WorkshopEditComponent implements OnInit {
     { id: 'Euro', attributes: { name: 'Euro', icon: 'fa-euro-sign'   }}
   ]
 
-  workshopForm: FormGroup;
 
   constructor(
     private workshopService: WorkshopService, 
@@ -40,8 +40,6 @@ export class WorkshopEditComponent implements OnInit {
   ) { }
   
   ngOnInit() {
-    this.submitted = false;
-
     this.workshopForm = this.formBuilder.group({
       id: [''],
       name: ['', Validators.required],

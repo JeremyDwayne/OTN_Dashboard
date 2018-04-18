@@ -41,7 +41,7 @@ import { UserInvitationsComponent } from './user/user-invitations.component';
     DashboardComponent,
     Filter,
     LandingComponent,
-    UserInvitationsComponent
+    UserInvitationsComponent,
   ],
   imports: [
     BrowserModule,

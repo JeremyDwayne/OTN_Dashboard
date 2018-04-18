@@ -14,8 +14,10 @@ import { WorkshopShowComponent } from './workshop-show.component';
 import { WorkshopEventComponent } from './workshop-event.component';
 import { WorkshopNewComponent  } from './workshop-new.component';
 import { WorkshopEditComponent  } from './workshop-edit.component';
+import { WorkshopInvitationsComponent  } from './workshop-invitations.component';
 import { WorkshopService       } from './workshop.service';
 
+import { InviteeComponent } from './invitee.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -35,7 +37,9 @@ import { SharedModule } from '../shared/shared.module';
     WorkshopEventComponent,
     WorkshopNewComponent,
     WorkshopEditComponent,
-    AttendeeShowComponent
+    WorkshopInvitationsComponent,
+    AttendeeShowComponent,
+    InviteeComponent
   ],
   providers: [
     WorkshopService
