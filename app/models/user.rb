@@ -3,13 +3,13 @@ class User < ApplicationRecord
 
   # Include default devise modules.
   devise :database_authenticatable, :registerable,
-          :recoverable, :rememberable, :trackable, :validatable,
-          :confirmable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
 
   before_save -> { skip_confirmation! }
 
-  devise :omniauthable, omniauth_providers: [:facebook, :google, :twitter]
+  devise :invitable, :omniauthable, omniauth_providers: [:facebook, :google, :twitter]
 
   enum role: [:Faculty, :Facilitator, :Admin, :SuperAdmin]
   after_create :set_role

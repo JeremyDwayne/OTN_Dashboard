@@ -1,0 +1,43 @@
+<div class="text-center">
+  <!-- {{ user | json }} -->
+  <h4>Welcome to the Open Textbook Network {{user?.first_name}} {{user?.last_name}}!</h4>
+  <p>
+    You've been invited to participate in a workshop to learn more about open source textbooks!
+    <br/>Please create a password to finish setting up your account.
+  </p>
+</div>
+
+<br/>
+<div class="row">
+  <div class="col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+    <form [formGroup]="invitedForm" (ngSubmit)="acceptInvite(user)">
+      <app-error-label [control]="invitedForm" [submitted]="submitted"></app-error-label>
+
+      <app-input-field [attribute]="'password'"
+       [label]="'Password'" 
+       [type]="'password'"
+       [placeholder]="'Password'"
+       [icon]="'fa fa-lock'"
+       [control]="invitedForm.controls['password']"
+       [minlength]="'8'"
+       [submitted]="submitted">
+      </app-input-field>
+
+      <app-input-field [attribute]="'password_confirmation'"
+       [label]="'Password Confirmation'" 
+       [type]="'password'"
+       [placeholder]="'Password'"
+       [icon]="'fa fa-lock'"
+       [control]="invitedForm.controls['password_confirmation']"
+       [minlength]="'8'"
+       [submitted]="submitted">
+      </app-input-field>
+
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Set Password</button>
+      </div>
+
+      Have an account? <a routerLink="/login">Login</a>
+    </form>
+  </div>
+</div>

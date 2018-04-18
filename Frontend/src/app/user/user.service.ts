@@ -11,8 +11,9 @@ export class UserService {
   headers: Headers = new Headers();
   options: RequestOptions;
   private usersUrl = environment.API + "/users";
-  private workshopsUrl = environment.API + "/workshops";
   private adminsUrl = environment.API + "/admins";
+  private workshopsUrl = environment.API + "/workshops";
+  private inviteUrl = environment.API + "/auth/invitation";
 
   constructor(
     private http: Http,
@@ -43,6 +44,14 @@ export class UserService {
 
   getUser(id: number) {
     return this.http.get(this.usersUrl + '/' + id + '.json', this.options)
+  }
+
+  acceptInvite(id: number, user: any): Observable<User>{
+    return this.http.put(this.inviteUrl + '.json', user, this.options).map((res: Response) => res.json());
+  }
+
+  getInvitedUser(invitation_token: string) {
+    return this.http.get(environment.API + '/invited/' + invitation_token, this.options)
   }
 
   createUser(user: User): Observable<any> {

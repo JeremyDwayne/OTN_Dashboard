@@ -31,6 +31,7 @@ import { SharedModule } from './shared/shared.module';
 import { AlertService } from './shared/alert.service';
 import { Filter } from './shared/filter.pipe';
 import { LandingComponent } from './landing/landing.component';
+import { UserInvitationsComponent } from './user/user-invitations.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { LandingComponent } from './landing/landing.component';
     AuthenticationLinksComponent,
     DashboardComponent,
     Filter,
-    LandingComponent
+    LandingComponent,
+    UserInvitationsComponent
   ],
   imports: [
     BrowserModule,

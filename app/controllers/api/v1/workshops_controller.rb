@@ -2,7 +2,11 @@ class Api::V1::WorkshopsController < ApplicationController
   include Devise::Controllers::Helpers
   before_action :set_workshop, only: [:show, :register, :update, :destroy]
   # before_action :set_institution, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, only: [:index, :attendees, :register, :create, :update, :destroy]
+  before_action :authenticate_inviter!, only: [:index, :attendees, :register, :create, :update, :destroy]
+
+  def resource_name
+    :user
+  end
 
   def index
     @workshops = @current_user.workshops

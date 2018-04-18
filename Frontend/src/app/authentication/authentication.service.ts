@@ -7,6 +7,7 @@ import { Angular2TokenService } from 'angular2-token';
 import { Observable } from 'rxjs/Observable';
 
 import { AlertService } from '../shared/alert.service';
+import { User } from '../user/user';
 
 @Injectable()
 export class AuthenticationService {
@@ -26,6 +27,19 @@ export class AuthenticationService {
       res => {
         this.router.navigateByUrl(localStorage.getItem('redirectTo'));
         this.alertService.success(["Successfully logged in!"]);
+      },
+      error => this.alertService.error(JSON.parse(error._body).errors)
+    );
+  }
+
+  inviteLogIn(user: User, password: string) {
+    this._tokenService.signIn({
+      email: user.email,
+      password: password
+    }).subscribe(
+      res => {
+        this.router.navigate(['/']);
+        this.alertService.success(["Welcome to OTN " + user.first_name + " " + user.last_name + "!"]);
       },
       error => this.alertService.error(JSON.parse(error._body).errors)
     );

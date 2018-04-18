@@ -1,6 +1,10 @@
 class Api::V1::UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:invited]
+
+  def resource_name
+    :user
+  end
 
   def index
     @users = User.all
@@ -15,6 +19,11 @@ class Api::V1::UsersController < ApplicationController
     render json: @user
   end
 
+  def invited
+    puts params.inspect
+    render json: User.find_by_invitation_token(params[:invitation_token], true)
+  end
+
   def create
     @user = User.new
 
@@ -26,7 +35,8 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def update
-    if @user.update(user_params)
+    puts "PARAMS #{params.inspect}"
+    if @user.update_attributes(user_params)
       render json: @user, status: :ok
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -43,7 +53,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def user_params
-    devise_parameter_sanitizer.permit(:email, :first_name, :last_name, :password, :role, :institution_id)
+    devise_parameter_sanitizer.permit(:update, keys: [:email, :first_name, :last_name, :password, :password_confirmation, :role, :institution_id])
   end
 
 end
