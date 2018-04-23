@@ -56,16 +56,28 @@ nav
 
 // Typography
 //-------------------------
-
-h1, h2, h3, h4, h5, h6
-  font-weight: 600
+h1
+  font-weight: 300
   color: $otn-gray
   text-transform: uppercase
+  a
+    color: $otn-orange
+
+h2, h3, h4, h5, h6
+  font-weight: 300
+  color: $otn-purple
+  text-transform: uppercase
+
+h4
+  color: $otn-magenta
 
 p
   font-weight: 400
 
 a
-  color: $otn-gray
+  color: $otn-orange
   cursor: pointer
   text-decoration: none
+  &:hover
+    color: $otn-yellow
+    text-decoration: none
