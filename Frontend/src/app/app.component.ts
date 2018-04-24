@@ -8,6 +8,8 @@ import { Angular2TokenService } from 'angular2-token';
   styleUrls: ['./app.component.sass']
 })
 export class AppComponent {
+  public isCollapsed: boolean = true;
+
   constructor(private _tokenService: Angular2TokenService) {
     this._tokenService.init({
       signInStoredUrlStorageKey: 'redirectTo',
