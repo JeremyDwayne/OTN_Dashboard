@@ -5256,6 +5256,12 @@ ng-pick-datetime@^5.1.7:
   dependencies:
     "@angular/cdk" "^5.2.0"
 
+ng-pipes@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/ng-pipes/-/ng-pipes-0.1.5.tgz#998f10b0ff404efb43cc555b90909d70ef20a7e0"
+  dependencies:
+    tslib "^1.7.1"
+
 ngrok@*:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/ngrok/-/ngrok-3.0.1.tgz#1be0fb5a02c618da5458aa68b83494b561a84af2"

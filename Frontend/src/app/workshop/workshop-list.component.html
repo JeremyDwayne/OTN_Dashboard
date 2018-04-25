@@ -1,15 +1,25 @@
 <!-- <a routerLink="/workshop/new"><i class="fa fa-plus-circle" style="height: 50px; width: auto;"></i></a> -->
 <!-- <br/><br/> -->
-<div class="workshop-list" *ngFor="let workshop of workshops?.data">
-  <a (click)="goToShow(workshop.attributes)">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">{{workshop.attributes.name}} | <i>{{workshop.attributes.starts_at | date:'short'}}</i></h5>
-        <p class="card-text">
-          {{workshop.attributes.slug}}
-          {{workshop.attributes.description}}
-        </p>
+<div class="row">
+  <div class="col-md-6 workshop-list" *ngFor="let workshop of workshops?.data">
+    <a (click)="goToShow(workshop.attributes)">
+      <div class="card">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title"><b>{{workshop.attributes.name}}</b></h5>
+          <span class="card-text mb-3">
+            <div class="workshop-text">
+              <i>{{workshop.attributes.starts_at | date:'short'}}</i><br/>
+              {{ workshop.attributes.description | truncate:[195, '...'] }}
+            </div>
+          </span>
+          <div class="btn-group card-buttons mt-auto">
+            <a class="btn btn-sm btn-primary" routerLink="/workshops/{{workshop?.attributes.slug}}">Event Page</a>
+            <!-- TODO: Can't use this functionality quite yet, the current_user data isn't pulled in fast enough to make this ngIf work without a refresh, same with the manage link -->
+            <!-- <button class="btn btn-sm btn-danger" *ngIf="findsAttendee(workshop?.relationships.faculty.data, current_user?.id)">Deregister</button> -->
+            <a class="btn btn-sm btn-warning" routerLink="/workshops/{{workshop?.attributes.slug}}/edit" *ngIf="workshop?.attributes.facilitator_id == current_user.id">Manage</a>
+          </div>
+        </div>
       </div>
-    </div>
-  </a>
+    </a>
+  </div>
 </div>

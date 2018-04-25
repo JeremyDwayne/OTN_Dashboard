@@ -2,7 +2,9 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title" [attr.aria-expanded]="!isCollapsed" [attr.aria-controls]="'workshop-' + workshop.data?.id" (click)="workshop.isCollapsed = !workshop.isCollapsed" style="cursor: pointer; margin-bottom: 0;">
-        {{workshop.data.attributes?.name}}
+        <div class="col-md-9">
+          {{workshop.data.attributes?.name}}
+        </div>
 
         <a class="btn btn-outline-primary btn-sm" id="edit_link" routerLink="/institutions/{{workshop?.data.relationships.institution.data.id}}/workshops/{{workshop?.data.id}}/invitations">Invite</a>
         <a class="btn btn-outline-primary btn-sm" *ngIf="workshop.data.attributes.slug; else idLink" routerLink="/workshops/{{workshop.data.attributes.slug}}">Event Page</a>
@@ -16,6 +18,7 @@
         <span *ngIf="!workshop?.isCollapsed"><i class="fas fa-plus"></i></span>
         <span *ngIf="workshop?.isCollapsed"><i class="fas fa-minus"></i></span>
       </h5>
+
       <div *ngIf="workshop?.isCollapsed" id="'workshop-' + workshop.data?.id" [ngbCollapse]="!workshop.isCollapsed">
         <p class="card-text">
           <i *ngIf="workshop.data.attributes?.starts_at">{{workshop.data.attributes.starts_at | date:'short'}} - {{ ends_at | date:'shortTime'}}</i><br/>

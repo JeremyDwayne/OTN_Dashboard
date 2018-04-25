@@ -36,7 +36,14 @@ class Api::V1::InstitutionsController < ApplicationController
 
   def facilitators
     @institution = Institution.friendly.find(params[:institution_id])
-    render json: FacilitatorSerializer.new(@institution.facilitators).serialized_json
+    facilitators = @institution.facilitators
+    admin = @institution.consortium.admin
+    if admin.nil? && facilitators.empty?
+      facilitators = SuperAdmin.all
+    else
+      facilitators << admin
+    end
+    render json: FacilitatorSerializer.new(facilitators).serialized_json
   end
 
   private

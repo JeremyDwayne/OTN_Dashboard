@@ -9,8 +9,12 @@ class Api::V1::WorkshopsController < ApplicationController
   end
 
   def index
-    @workshops = Workshop.where(institution_id: @current_user.institution_id)
-    render json: WorkshopSerializer.new(@workshops).serialized_json
+    # @workshops = Workshop.where(institution_id: @current_user.institution_id)
+    facilitating = Workshop.where(facilitator_id: @current_user.id).order(starts_at: :desc)
+    attendees = Workshop.joins(:attendees).where("attendees.faculty_id = ?", @current_user.id).order(starts_at: :desc)
+    # workshops = Workshop.joins(:attendees).where("attendees.faculty_id = ? or facilitator_id = ?", @current_user.id, @current_user.id).order(starts_at: :desc)
+    workshops = attendees + facilitating
+    render json: WorkshopSerializer.new(workshops).serialized_json
   end
 
   def show

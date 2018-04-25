@@ -3,19 +3,7 @@
 @import "~ng-pick-datetime/assets/style/picker.min.css";
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
 
-// Variables
-//-------------------------
-
-// Text Highlights/Callouts
-$otn-purple: #92278F
-$otn-magenta: #EC008C
-$otn-orange: #F1592A
-$otn-yellow: #FCB040
-
-// Body Copy
-$otn-gray: #404041
-$white: #FFFFFF
-$black: #000000
+@import 'var'
 
 // Layout
 //-------------------------
@@ -81,3 +69,8 @@ a
   &:hover
     color: $otn-yellow
     text-decoration: none
+
+.card
+  border: 2px solid $otn-purple;
+  &:hover
+    border: 2px solid $otn-magenta;

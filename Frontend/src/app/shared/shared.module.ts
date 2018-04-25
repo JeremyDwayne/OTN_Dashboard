@@ -12,6 +12,8 @@ import { Alert, AlertType } from './alert';
 import { AlertComponent } from './alert.component';
 
 import { ErrorMessagesPipe }   from './error-messages.pipe';
+import { Filter }   from './filter.pipe';
+import { TruncatePipe }   from './truncate.pipe';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { ErrorMessagesPipe }   from './error-messages.pipe';
       TextareaFieldComponent,
       ErrorLabelComponent,
       ErrorMessagesPipe,
-      AlertComponent
+      AlertComponent,
+      TruncatePipe,
+      Filter
     ],
     imports: [
       BrowserModule,
@@ -33,7 +37,9 @@ import { ErrorMessagesPipe }   from './error-messages.pipe';
       SelectFieldComponent,
       TextareaFieldComponent,
       ErrorLabelComponent,
-      AlertComponent
+      AlertComponent,
+      TruncatePipe,
+      Filter
     ]
 })
 export class SharedModule {}

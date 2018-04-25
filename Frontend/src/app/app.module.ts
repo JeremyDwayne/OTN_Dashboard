@@ -29,9 +29,9 @@ import { DashboardService } from './dashboard/dashboard.service';
 
 import { SharedModule } from './shared/shared.module';
 import { AlertService } from './shared/alert.service';
-import { Filter } from './shared/filter.pipe';
 import { LandingComponent } from './landing/landing.component';
 import { UserInvitationsComponent } from './user/user-invitations.component';
+import { NgPipesModule } from 'ng-pipes';
 
 
 @NgModule({
@@ -39,7 +39,6 @@ import { UserInvitationsComponent } from './user/user-invitations.component';
     AppComponent,
     AuthenticationLinksComponent,
     DashboardComponent,
-    Filter,
     LandingComponent,
     UserInvitationsComponent,
   ],
@@ -58,6 +57,7 @@ import { UserInvitationsComponent } from './user/user-invitations.component';
     WorkshopModule,
     InstitutionModule,
     ConsortiumModule,
+    NgPipesModule
   ],
   providers: [ 
     DashboardService,
